@@ -34,28 +34,39 @@ import java.util.HashMap;
 
 public class GameImpl implements Game {
 
-  private static Position blueCityPos, redCityPos, mountainsPos, hillsPos, oceanPos;
+  private static Position blueCityPos, redCityPos, mountainsPos, hillsPos, oceanPos, redArcherPos, blueLegionPos, redSettlerPos;
   private static City redCity, blueCity;
+  private static Unit redArcher, blueLegion, redSettler;
   private int timePassed;
   private int age = -4000;
   private TileImpl mountainsTile, hillsTile, oceanTile;
   int turnCounter = 0; // Variable that determines whose turn it is
   Map<Position, City> cityMap = new HashMap<>(); // Hashmap to store cities and their positions
   Map<Position, Tile> tileMap = new HashMap<>(); // Hashmap to store tiles and their positions
+  Map<Position, Unit> unitMap = new HashMap<>(); // Hashmap to store units and their positions
 
   // A method that calls the method makeAndAddCities
   public GameImpl(){
     makeAndAddCities();
     makeAndAddTiles();
+    makeAndAddUnits();
   }
 
-
-  public Unit getUnitAt( Position p ) { return null; }
-
-
-  // Method that returns a city at a given position
+  public Unit getUnitAt( Position p ) { return unitMap.get(p); }
   public City getCityAt( Position p ) { return cityMap.get(p); }
   public String getTileAt( Position p ) { return tileMap.get(p).getTypeString(); }
+
+  public void makeAndAddUnits(){
+    redArcherPos = new Position(2, 0);
+    redArcher = new UnitImpl("archer", Player.RED);
+    blueLegionPos = new Position(3, 2);
+    blueLegion = new UnitImpl("legion", Player.BLUE);
+    redSettlerPos = new Position(4, 3);
+    redSettler = new UnitImpl("settler", Player.RED);
+    unitMap.put(redArcherPos, redArcher);
+    unitMap.put(blueLegionPos, blueLegion);
+    unitMap.put(redSettlerPos, redSettler);
+  }
 
   // creates cities and their positions
   public void makeAndAddCities(){

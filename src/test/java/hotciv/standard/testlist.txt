@@ -22,16 +22,30 @@
 
 **OK** there are mountains at (2, 2)
 
+**OK** Red has one archer at (2, 0)
+
+**OK** Blue has one legion (3, 2)
+
+**OK** Red has a settler at (4, 3)
+
 
 **Incompleted test and implementations**
 
 After each endOfTurn call that player gains 6 production
 
-Red's unit attack and destroy Blue's units
+Red's unit attack and destroy Blue's unit
+
+Blue's unit attack and destroy Red's unit
 
 units cannot move over mountain
 
 Red cannot move Blue's units
+
+Blue cannot move Red's units
+
+Red city can generate a unit
+
+Blue city can generate a unit
 
 
 **Changes meant to be implemented later on:**

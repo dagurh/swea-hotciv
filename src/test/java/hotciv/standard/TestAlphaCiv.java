@@ -138,5 +138,23 @@ public class TestAlphaCiv {
     assertThat(game.getTileAt(ocean1_0), is(GameConstants.OCEANS));
   }
 
+  @Test
+  public void RedHasArcherAt2_0(){
+    Position RedArcher2_0 = new Position(2, 0);
+    assertThat(game.getUnitAt(RedArcher2_0).getOwner(), is(Player.RED));
+  }
+
+  @Test
+  public void BlueHasLegionAt3_2(){
+    Position BlueLegion3_2 = new Position(3, 2);
+    assertThat(game.getUnitAt(BlueLegion3_2).getOwner(), is(Player.BLUE));
+  }
+
+  @Test
+  public void RedHasSettlerAt4_3(){
+    Position RedSettler4_3 = new Position(4, 3);
+    assertThat(game.getUnitAt(RedSettler4_3).getOwner(), is(Player.RED));
+  }
+
 
 }
