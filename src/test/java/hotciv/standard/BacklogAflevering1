@@ -1,0 +1,6 @@
+I GameImpl mangler vi at implementere:
+* units og ALLE dens funktioner
+* en by får produktion efter ejerens tur er slut fordi vi har faked for
+rød by
+I PosImpl har vi ikke implementered getOffset()
+I CityImpl har vi ikke implementered produktionen af units

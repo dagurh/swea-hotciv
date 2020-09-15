@@ -1,0 +1,44 @@
+**OK** Red is the first player in turn
+
+**OK** Red's city is at (1,1)
+
+**OK** there is ocean at (1,0)
+
+**OK** cities produce 6 `production' after a round has ended
+
+**OK** cities' population size is always 1
+
+**OK** after Red it is Blue that is in turn
+
+**OK** Red wins in year 3000 BC
+
+**OK** Blue has a city at (4,1)
+
+**OK** Cities production should be cumulative
+
+**OK** Nobody wins if year is not 3000BC
+
+**OK** There are hills at (0, 1)
+
+**OK** there are mountains at (2, 2)
+
+
+**Incompleted test and implementations**
+
+After each endOfTurn call that player gains 6 production
+
+Red's unit attack and destroy Blue's units
+
+units cannot move over mountain
+
+Red cannot move Blue's units
+
+
+**Changes meant to be implemented later on:**
+
+There can be more than two players
+
+Cities' population should be changeable
+
+
+
