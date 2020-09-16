@@ -108,7 +108,7 @@ public class GameImpl implements Game {
             && colDiff <= 1
             && !getTileAt(to).equals(GameConstants.OCEANS)
             && !getTileAt(to).equals(GameConstants.MOUNTAINS)){
-      UnitImpl newUnit = new UnitImpl("archer", Player.RED);
+      Unit newUnit = getUnitAt(from);
       unitMap.remove(from);
       unitMap.put(to, newUnit);
       return true;
