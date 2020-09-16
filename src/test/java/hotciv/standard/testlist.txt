@@ -28,6 +28,10 @@
 
 **OK** Red has a settler at (4, 3)
 
+**OK** Units cannot move over mountains
+
+**OK** Units cannot move more than one tile in any direction
+
 
 **Incompleted tests and implementations**
 
@@ -36,8 +40,6 @@ After each endOfTurn call that player gains 6 production
 Red's unit attacks and destroys Blue's unit
 
 Blue's unit attacks and destroys Red's unit
-
-Units cannot move over mountains
 
 Red cannot move Blue's units
 

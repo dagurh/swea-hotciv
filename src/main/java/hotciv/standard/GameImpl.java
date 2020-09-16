@@ -78,6 +78,26 @@ public class GameImpl implements Game {
     cityMap.put(blueCityPos, blueCity);
   }
 
+  // creates tiles and their position
+  public void makeAndAddTiles() {
+    for (int i = 0; i < GameConstants.WORLDSIZE; i++) {
+      for (int j = 0; j < GameConstants.WORLDSIZE; j++) {
+        tileMap.put(new Position(i, j), new TileImpl(GameConstants.PLAINS));
+      }
+      mountainsPos = new Position(2, 2);
+      mountainsTile = new TileImpl(GameConstants.MOUNTAINS);
+      tileMap.put(mountainsPos, mountainsTile);
+
+      hillsPos = new Position(0, 1);
+      hillsTile = new TileImpl(GameConstants.HILLS);
+      tileMap.put(hillsPos, hillsTile);
+
+      oceanPos = new Position(1, 0);
+      oceanTile = new TileImpl(GameConstants.OCEANS);
+      tileMap.put(oceanPos, oceanTile);
+    }
+  }
+
   // determines who's turn it is by using the timeCounter variable
   public Player getPlayerInTurn() {
     if (turnCounter == 0) {
@@ -122,25 +142,6 @@ public class GameImpl implements Game {
     if(turnCounter == 2){
       turnCounter = 0;
       timePassed += 100;
-    }
-  }
-
-  public void makeAndAddTiles() {
-    for (int i = 0; i < GameConstants.WORLDSIZE; i++) {
-      for (int j = 0; j < GameConstants.WORLDSIZE; j++) {
-        tileMap.put(new Position(i, j), new TileImpl(GameConstants.PLAINS));
-      }
-      mountainsPos = new Position(2, 2);
-      mountainsTile = new TileImpl(GameConstants.MOUNTAINS);
-      tileMap.put(mountainsPos, mountainsTile);
-
-      hillsPos = new Position(0, 1);
-      hillsTile = new TileImpl(GameConstants.HILLS);
-      tileMap.put(hillsPos, hillsTile);
-
-      oceanPos = new Position(1, 0);
-      oceanTile = new TileImpl(GameConstants.OCEANS);
-      tileMap.put(oceanPos, oceanTile);
     }
   }
 

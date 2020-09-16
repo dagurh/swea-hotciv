@@ -7,6 +7,7 @@ import org.junit.jupiter.api.*;
 import static hotciv.framework.Player.RED;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.awt.*;
@@ -164,4 +165,19 @@ public class TestAlphaCiv {
     game.moveUnit(pos4_3, pos4_4);
     assertThat(game.getUnitAt(pos4_4).getOwner(), is(Player.RED));
   }
+
+  @Test
+  public void UnitCannotMoveOverMountains() {
+    Position pos3_2 = new Position(3,2);
+    Position pos2_2 = new Position(2,2);
+    assertFalse(game.moveUnit(pos3_2, pos2_2));
+  }
+
+  @Test
+  public void UnitCannotMoveMoreThanOneTileAnyDirection() {
+    Position pos3_2 = new Position(3,2);
+    Position pos2_0 = new Position(2,0);
+    assertFalse(game.moveUnit(pos3_2, pos2_0));
+  }
+
 }
