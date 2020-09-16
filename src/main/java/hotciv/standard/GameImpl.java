@@ -102,10 +102,15 @@ public class GameImpl implements Game {
   public boolean moveUnit( Position from, Position to ) {
     int rowDiff = to.getRow()-from.getRow();
     int colDiff = to.getColumn()- from.getColumn();
-    if (rowDiff >= -1 && rowDiff <= 1 && colDiff >= -1 && colDiff <= 1 && getTileAt(to).equals(GameConstants.PLAINS) && getTileAt(to).equals(GameConstants.HILLS) && getTileAt(to).equals(GameConstants.FOREST)){
+    if (rowDiff >= -1
+            && rowDiff <= 1
+            && colDiff >= -1
+            && colDiff <= 1
+            && !getTileAt(to).equals(GameConstants.OCEANS)
+            && !getTileAt(to).equals(GameConstants.MOUNTAINS)){
       UnitImpl newUnit = new UnitImpl("archer", Player.RED);
-      unitMap.put(to, newUnit);
       unitMap.remove(from);
+      unitMap.put(to, newUnit);
       return true;
     }
     return false;
