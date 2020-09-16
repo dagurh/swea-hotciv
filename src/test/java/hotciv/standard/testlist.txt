@@ -29,7 +29,7 @@
 **OK** Red has a settler at (4, 3)
 
 
-**Incompleted test and implementations**
+**Incompleted tests and implementations**
 
 After each endOfTurn call that player gains 6 production
 

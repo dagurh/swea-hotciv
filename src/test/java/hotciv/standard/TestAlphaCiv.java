@@ -156,5 +156,8 @@ public class TestAlphaCiv {
     assertThat(game.getUnitAt(RedSettler4_3).getOwner(), is(Player.RED));
   }
 
+  @Test
+  public void RedAttacksAndDestroysBlueUnit(){
 
+  }
 }
