@@ -32,6 +32,10 @@
 
 **OK** Units cannot move more than one tile in any direction
 
+**OK** Red cannot move Blue's units
+
+**OK** Blue cannot move Red's units
+
 
 **Incompleted tests and implementations**
 
@@ -40,10 +44,6 @@ After each endOfTurn call that player gains 6 production
 Red's unit attacks and destroys Blue's unit
 
 Blue's unit attacks and destroys Red's unit
-
-Red cannot move Blue's units
-
-Blue cannot move Red's units
 
 Red city can generate a unit
 

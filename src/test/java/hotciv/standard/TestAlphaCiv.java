@@ -180,4 +180,19 @@ public class TestAlphaCiv {
     assertFalse(game.moveUnit(pos3_2, pos2_0));
   }
 
+  @Test
+  public void RedCannotMoveBluesUnit(){
+    Position pos3_2 = new Position(3,2);
+    Position pos2_2 = new Position(2, 2);
+    assertFalse(game.moveUnit(pos3_2, pos2_2));
+  }
+
+  @Test
+  public void BlueCannotMoveRedsUnit(){
+    Position pos4_3 = new Position(4,3);
+    Position pos4_4 = new Position(4, 4);
+    game.endOfTurn();
+    assertFalse(game.moveUnit(pos4_3, pos4_4));
+  }
+
 }

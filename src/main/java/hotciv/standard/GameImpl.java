@@ -127,7 +127,9 @@ public class GameImpl implements Game {
             && colDiff >= -1
             && colDiff <= 1
             && !getTileAt(to).equals(GameConstants.OCEANS)
-            && !getTileAt(to).equals(GameConstants.MOUNTAINS)){
+            && !getTileAt(to).equals(GameConstants.MOUNTAINS)
+            && getPlayerInTurn().equals(getUnitAt(from).getOwner())
+    ) {
       Unit newUnit = getUnitAt(from);
       unitMap.remove(from);
       unitMap.put(to, newUnit);
