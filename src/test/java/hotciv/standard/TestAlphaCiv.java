@@ -9,6 +9,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import java.awt.*;
 import java.util.*;
 import java.util.zip.ZipEntry;
 
@@ -139,25 +140,28 @@ public class TestAlphaCiv {
   }
 
   @Test
-  public void RedHasArcherAt2_0(){
+  public void RedHasArcherAt2_0() {
     Position RedArcher2_0 = new Position(2, 0);
     assertThat(game.getUnitAt(RedArcher2_0).getOwner(), is(Player.RED));
   }
 
   @Test
-  public void BlueHasLegionAt3_2(){
+  public void BlueHasLegionAt3_2() {
     Position BlueLegion3_2 = new Position(3, 2);
     assertThat(game.getUnitAt(BlueLegion3_2).getOwner(), is(Player.BLUE));
   }
 
   @Test
-  public void RedHasSettlerAt4_3(){
+  public void RedHasSettlerAt4_3() {
     Position RedSettler4_3 = new Position(4, 3);
     assertThat(game.getUnitAt(RedSettler4_3).getOwner(), is(Player.RED));
   }
 
   @Test
-  public void RedAttacksAndDestroysBlueUnit(){
-
+  public void UnitCanMove() {
+    Position pos4_4 = new Position(4,4);
+    Position pos4_3 = new Position(4,3);
+    game.moveUnit(pos4_3, pos4_4);
+    assertThat(game.getUnitAt(pos4_4).getOwner(), is(Player.RED));
   }
 }

@@ -94,14 +94,20 @@ public class GameImpl implements Game {
     return null;
   }
 
-
-
   // returns the current century
   public int getAge() {
     return age+timePassed;
   }
 
   public boolean moveUnit( Position from, Position to ) {
+    int rowDiff = to.getRow()-from.getRow();
+    int colDiff = to.getColumn()- from.getColumn();
+    if (rowDiff >= -1 && rowDiff <= 1 && colDiff >= -1 && colDiff <= 1 && getTileAt(to).equals(GameConstants.PLAINS) && getTileAt(to).equals(GameConstants.HILLS) && getTileAt(to).equals(GameConstants.FOREST)){
+      UnitImpl newUnit = new UnitImpl("archer", Player.RED);
+      unitMap.put(to, newUnit);
+      unitMap.remove(from);
+      return true;
+    }
     return false;
   }
 

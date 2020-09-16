@@ -33,11 +33,11 @@
 
 After each endOfTurn call that player gains 6 production
 
-Red's unit attack and destroy Blue's unit
+Red's unit attacks and destroys Blue's unit
 
-Blue's unit attack and destroy Red's unit
+Blue's unit attacks and destroys Red's unit
 
-units cannot move over mountain
+Units cannot move over mountains
 
 Red cannot move Blue's units
 
