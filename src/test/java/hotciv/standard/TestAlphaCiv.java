@@ -91,18 +91,23 @@ public class TestAlphaCiv {
   // test: a city should produce 6 treasuries after each round (not after each turn)
   @Test
   public void shouldProduceSixAfterEndRound() {
-    CityImpl cityProd = new CityImpl(Player.RED);
+    Position redCityPos = new Position(1,1);
     game.endOfTurn();
     game.endOfTurn();
-    assertThat(cityProd.getTreasury(), is(6));
+    assertThat(game.getCityAt(redCityPos).getTreasury(), is(6));
   }
 
   // test: a city's production should be cumulative
   @Test
   public void ProductionShouldBeCumulative() {
-    CityImpl cityProd1 = new CityImpl(Player.RED);
-    assertThat(cityProd1.getTreasury(), is(6));
-    assertThat(cityProd1.getTreasury(), is(12));
+    Position redCityPos = new Position(1,1);
+    assertThat(game.getCityAt(redCityPos).getTreasury(), is(0));
+    game.endOfTurn();
+    game.endOfTurn();
+    assertThat(game.getCityAt(redCityPos).getTreasury(), is(6));
+    game.endOfTurn();
+    game.endOfTurn();
+    assertThat(game.getCityAt(redCityPos).getTreasury(), is(12));
   }
 
   @Test
@@ -199,16 +204,14 @@ public class TestAlphaCiv {
 
   @Test
   public void AfterEachTurnPlayerGainsSixProduction(){
-    CityImpl cityRed = new CityImpl(Player.RED);
-    CityImpl cityBlue = new CityImpl(Player.BLUE);
+    Position redCityPos = new Position(1,1);
+    Position blueCityPos = new Position(1,4);
+    assertThat(game.getCityAt(redCityPos).getTreasury(), is(0));
+    assertThat(game.getCityAt(blueCityPos).getTreasury(), is(0));
     game.endOfTurn();
     game.endOfTurn();
-    assertThat(cityRed.getTreasury(), is(6));
-    assertThat(cityBlue.getTreasury(), is(6));
-    game.endOfTurn();
-    game.endOfTurn();
-    assertThat(cityRed.getTreasury(), is(12));
-    assertThat(cityBlue.getTreasury(), is(12));
+    assertThat(game.getCityAt(redCityPos).getTreasury(), is(6));
+    assertThat(game.getCityAt(blueCityPos).getTreasury(), is(6));
   }
 
 }

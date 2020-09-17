@@ -147,7 +147,9 @@ public class GameImpl implements Game {
 
   public void endOfRound() {
     CityImpl redCity = (CityImpl) cityMap.get(GameImpl.redCityPos);
+    CityImpl blueCity = (CityImpl) cityMap.get(GameImpl.blueCityPos);
     redCity.addTreasury(6);
+    blueCity.addTreasury(6);
     timePassed += 100;
   }
 

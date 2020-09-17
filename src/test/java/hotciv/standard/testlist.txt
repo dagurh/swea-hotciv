@@ -38,10 +38,10 @@
 
 **OK** A Player can move a Unit
 
+**OK** After each endOfTurn call that player gains 6 production
+
 
 **Incompleted tests and implementations**
-
-After each endOfTurn call that player gains 6 production
 
 Red's unit attacks and destroys Blue's unit
 
