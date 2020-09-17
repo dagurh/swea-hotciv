@@ -34,9 +34,9 @@ import java.util.HashMap;
 
 public class GameImpl implements Game {
 
-  private static Position blueCityPos, redCityPos, mountainsPos, hillsPos, oceanPos, redArcherPos, blueLegionPos, redSettlerPos;
+  private static Position blueCityPos, redCityPos, mountainsPos, hillsPos, oceanPos, redArcherPos, blueLegionPos, redSettlerPos, redLegionPos;
   private static City redCity, blueCity;
-  private static Unit redArcher, blueLegion, redSettler;
+  private static Unit redArcher, blueLegion, redSettler, redLegion;
   private int timePassed;
   private int age = -4000;
   private TileImpl mountainsTile, hillsTile, oceanTile;
@@ -126,6 +126,7 @@ public class GameImpl implements Game {
             && !getTileAt(to).equals(GameConstants.OCEANS)
             && !getTileAt(to).equals(GameConstants.MOUNTAINS)
             && getPlayerInTurn().equals(getUnitAt(from).getOwner())
+            && getUnitAt(to) == null
     ) {
       Unit newUnit = getUnitAt(from);
       unitMap.remove(from);

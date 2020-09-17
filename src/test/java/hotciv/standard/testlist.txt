@@ -40,6 +40,8 @@
 
 **OK** After each endOfTurn call that player gains 6 production
 
+**OK** two units cannot stand on the same tile
+
 
 **Incompleted tests and implementations**
 
@@ -51,12 +53,6 @@ Red city can generate a unit
 
 Blue city can generate a unit
 
-
-**Changes meant to be implemented later on:**
-
-There can be more than two players
-
-Cities' population should be changeable
-
+players can select which unit to produce
 
 

@@ -214,4 +214,15 @@ public class TestAlphaCiv {
     assertThat(game.getCityAt(blueCityPos).getTreasury(), is(6));
   }
 
+  @Test
+  public void TwoUnitsCannotStandOnTheSameTile(){
+    Position pos20 = new Position(2,0); //Position that contains a red archer
+    Position pos31 = new Position(3,1);
+    Position pos42 = new Position(4,2);
+    Position pos43 = new Position(4,3); //Position that contains a red settler
+    game.moveUnit(pos20, pos31);
+    game.moveUnit(pos31, pos42);
+    assertFalse(game.moveUnit(pos42, pos43));
+  }
+
 }
