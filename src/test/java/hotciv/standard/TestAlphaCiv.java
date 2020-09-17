@@ -92,6 +92,8 @@ public class TestAlphaCiv {
   @Test
   public void shouldProduceSixAfterEndRound() {
     CityImpl cityProd = new CityImpl(Player.RED);
+    game.endOfTurn();
+    game.endOfTurn();
     assertThat(cityProd.getTreasury(), is(6));
   }
 
@@ -193,6 +195,20 @@ public class TestAlphaCiv {
     Position pos4_4 = new Position(4, 4);
     game.endOfTurn();
     assertFalse(game.moveUnit(pos4_3, pos4_4));
+  }
+
+  @Test
+  public void AfterEachTurnPlayerGainsSixProduction(){
+    CityImpl cityRed = new CityImpl(Player.RED);
+    CityImpl cityBlue = new CityImpl(Player.BLUE);
+    game.endOfTurn();
+    game.endOfTurn();
+    assertThat(cityRed.getTreasury(), is(6));
+    assertThat(cityBlue.getTreasury(), is(6));
+    game.endOfTurn();
+    game.endOfTurn();
+    assertThat(cityRed.getTreasury(), is(12));
+    assertThat(cityBlue.getTreasury(), is(12));
   }
 
 }

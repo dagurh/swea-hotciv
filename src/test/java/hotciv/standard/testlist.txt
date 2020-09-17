@@ -36,6 +36,8 @@
 
 **OK** Blue cannot move Red's units
 
+**OK** A Player can move a Unit
+
 
 **Incompleted tests and implementations**
 

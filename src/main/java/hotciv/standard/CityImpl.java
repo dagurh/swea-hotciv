@@ -26,8 +26,11 @@ public class CityImpl implements City {
     @Override
     public int getTreasury()
     {
-        money += 6;
         return money;
+    }
+
+    public void addTreasury(int amount){
+        money += amount;
     }
 
     @Override

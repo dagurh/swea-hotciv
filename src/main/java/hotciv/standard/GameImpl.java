@@ -40,7 +40,7 @@ public class GameImpl implements Game {
   private int timePassed;
   private int age = -4000;
   private TileImpl mountainsTile, hillsTile, oceanTile;
-  int turnCounter = 0; // Variable that determines whose turn it is
+  private Player playerInTurn = Player.RED; // Variable that determines whose turn it is
   Map<Position, City> cityMap = new HashMap<>(); // Hashmap to store cities and their positions
   Map<Position, Tile> tileMap = new HashMap<>(); // Hashmap to store tiles and their positions
   Map<Position, Unit> unitMap = new HashMap<>(); // Hashmap to store units and their positions
@@ -100,12 +100,9 @@ public class GameImpl implements Game {
 
   // determines who's turn it is by using the timeCounter variable
   public Player getPlayerInTurn() {
-    if (turnCounter == 0) {
-      return Player.RED;
-    } else {
-      return Player.BLUE;
+    return playerInTurn;
     }
-  }
+
 
   public Player getWinner(){
     if(getAge() == -3000){
@@ -140,12 +137,21 @@ public class GameImpl implements Game {
 
   // Called when a player has ended their turn, if both players have ended their turn a new century begins
   public void endOfTurn() {
-    turnCounter++;
-    if(turnCounter == 2){
-      turnCounter = 0;
-      timePassed += 100;
+    if(playerInTurn == Player.RED){
+      playerInTurn = Player.BLUE; }
+     else {
+       playerInTurn = Player.RED;
+       endOfRound();
     }
+    }
+
+  public void endOfRound() {
+    CityImpl redCity = (CityImpl) cityMap.get(GameImpl.redCityPos);
+    redCity.addTreasury(6);
+    timePassed += 100;
   }
+
+
 
 
   public void changeWorkForceFocusInCityAt( Position p, String balance ) {}
