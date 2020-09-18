@@ -1,6 +1,8 @@
 package hotciv.standard;
 
 import hotciv.framework.*;
+import hotciv.utility.Utility;
+
 import java.util.*;
 import java.util.HashMap;
 
@@ -58,11 +60,11 @@ public class GameImpl implements Game {
 
   public void makeAndAddUnits(){
     redArcherPos = new Position(2, 0);
-    redArcher = new UnitImpl("archer", Player.RED, 3, 2, 10);
+    redArcher = new UnitImpl("archer", Player.RED);
     blueLegionPos = new Position(3, 2);
-    blueLegion = new UnitImpl("legion", Player.BLUE, 2, 4, 15);
+    blueLegion = new UnitImpl("legion", Player.BLUE);
     redSettlerPos = new Position(4, 3);
-    redSettler = new UnitImpl("settler", Player.RED, 3, 0, 30);
+    redSettler = new UnitImpl("settler", Player.RED);
     unitMap.put(redArcherPos, redArcher);
     unitMap.put(blueLegionPos, blueLegion);
     unitMap.put(redSettlerPos, redSettler);
@@ -155,10 +157,10 @@ public class GameImpl implements Game {
     redCity.addTreasury(6);
     blueCity.addTreasury(6);
     if(redCity.canProduceUnit()) {
-      produceUnit();
+      produceUnit(redCity.getProduction(), redCityPos);
     }
     if (blueCity.canProduceUnit()) {
-      produceUnit();
+      produceUnit(blueCity.getProduction(), blueCityPos);
     }
   }
 
@@ -176,8 +178,16 @@ public class GameImpl implements Game {
     blueCity.changeProduction(unitType);
   }
 
-  public void produceUnit(){
-
+  public void produceUnit(String unitType, Position cityPosition){
+    for(Position p : Utility.get8neighborhoodOf(cityPosition)){
+      if(     getUnitAt(p) == null
+              && !getTileAt(p).equals(GameConstants.OCEANS)
+              && !getTileAt(p).equals(GameConstants.MOUNTAINS))
+      {
+        UnitImpl newUnit = new UnitImpl(unitType, getCityAt(cityPosition).getOwner());
+        unitMap.put(p, newUnit);
+      }
+    }
   }
 
   public void performUnitActionAt( Position p ) {}

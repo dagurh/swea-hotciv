@@ -8,7 +8,7 @@ public class CityImpl implements City {
 
     private final Player owner;
     int money = 0; // variable money
-    private String production;
+    private String production = "archer";
     private String workForce;
 
     public CityImpl(Player owner) {
@@ -54,18 +54,22 @@ public class CityImpl implements City {
     }
 
     public boolean canProduceUnit() {
-        if(getProduction().equals(GameConstants.ARCHER)){
-        if(getTreasury() >= GameConstants.ARCHERCOST){
-            return true;
-        }
-        } else if (getProduction().equals(GameConstants.LEGION)){
-            if(getTreasury() >= GameConstants.LEGIONCOST){
-                return true;
-            }
-        } else if (getProduction().equals(GameConstants.SETTLER)){
-            if(getTreasury() >= GameConstants.SETTLERCOST){
-                return true;
-            }
+        switch (getProduction()) {
+            case GameConstants.ARCHER:
+                if (getTreasury() >= GameConstants.ARCHERCOST) {
+                    return true;
+                }
+                break;
+            case GameConstants.LEGION:
+                if (getTreasury() >= GameConstants.LEGIONCOST) {
+                    return true;
+                }
+                break;
+            case GameConstants.SETTLER:
+                if (getTreasury() >= GameConstants.SETTLERCOST) {
+                    return true;
+                }
+                break;
         }
         return false;
     }

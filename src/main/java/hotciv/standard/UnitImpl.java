@@ -1,5 +1,6 @@
 package hotciv.standard;
 
+import hotciv.framework.GameConstants;
 import hotciv.framework.Player;
 import hotciv.framework.Unit;
 
@@ -7,15 +8,38 @@ public class UnitImpl implements Unit {
 
     private final Player owner;
     private final String unitType;
-    private final int defensiveStrength, attackingStrength, cost;
+    private int defensiveStrength;
+    private int attackingStrength;
+    private int cost;
 
 
-    public UnitImpl(String unitType, Player owner, int defensiveStrength, int attackingStrength, int cost) {
+    public UnitImpl(String unitType, Player owner) {
         this.owner = owner;
         this.unitType = unitType;
-        this.defensiveStrength = defensiveStrength;
-        this.attackingStrength = attackingStrength;
-        this.cost = cost;
+        setDefenceAndAttack();
+    }
+
+    public void setDefenceAndAttack(){
+        switch (getTypeString()) {
+            case GameConstants.ARCHER: {
+                attackingStrength = 2;
+                defensiveStrength = 3;
+                cost = 10;
+                }
+                break;
+            case GameConstants.LEGION: {
+                attackingStrength = 4;
+                defensiveStrength = 2;
+                cost = 15;
+                }
+                break;
+            case GameConstants.SETTLER: {
+                attackingStrength = 0;
+                defensiveStrength = 3;
+                cost = 30;
+                }
+                break;
+        }
     }
 
     @Override

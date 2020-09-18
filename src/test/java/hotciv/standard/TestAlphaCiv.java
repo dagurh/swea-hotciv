@@ -335,7 +335,12 @@ public class TestAlphaCiv {
 
   @Test
   public void RedCityCanGenerateAUnit(){
-
+    Position pos0_1 = new Position(0, 1);
+    game.endOfTurn();
+    game.endOfTurn();
+    game.endOfTurn();
+    game.endOfTurn();
+    assertThat(game.getUnitAt(pos0_1).getOwner(), is(Player.RED));
   }
 
 }
