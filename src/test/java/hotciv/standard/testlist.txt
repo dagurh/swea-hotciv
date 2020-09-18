@@ -46,6 +46,14 @@
 
 **OK** Blue's unit attacks and destroys Red's unit
 
+**OK** Red City can change its production
+
+**OK** Blue City can change its production
+
+**OK** Red City can change its workForceFocus
+
+**OK** Blue City can change its workForceFocus
+
 
 **Incompleted tests and implementations**
 

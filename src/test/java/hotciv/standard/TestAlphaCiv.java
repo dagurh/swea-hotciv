@@ -91,7 +91,7 @@ public class TestAlphaCiv {
   // test: a city should produce 6 treasuries after each round (not after each turn)
   @Test
   public void shouldProduceSixAfterEndRound() {
-    Position redCityPos = new Position(1,1);
+    Position redCityPos = new Position(1, 1);
     game.endOfTurn();
     game.endOfTurn();
     assertThat(game.getCityAt(redCityPos).getTreasury(), is(6));
@@ -100,7 +100,7 @@ public class TestAlphaCiv {
   // test: a city's production should be cumulative
   @Test
   public void ProductionShouldBeCumulative() {
-    Position redCityPos = new Position(1,1);
+    Position redCityPos = new Position(1, 1);
     assertThat(game.getCityAt(redCityPos).getTreasury(), is(0));
     game.endOfTurn();
     game.endOfTurn();
@@ -166,53 +166,53 @@ public class TestAlphaCiv {
   }
 
   @Test
-  public void unitCanMove(){
-    Position pos4_4 = new Position(4,4);
-    Position pos4_3 = new Position(4,3);
-    game.moveUnit(pos4_3,pos4_4);
+  public void unitCanMove() {
+    Position pos4_4 = new Position(4, 4);
+    Position pos4_3 = new Position(4, 3);
+    game.moveUnit(pos4_3, pos4_4);
     assertThat(game.getUnitAt(pos4_4).getOwner(), is(Player.RED));
   }
 
   @Test
   public void UnitCannotMoveMoreThanOneTileAnyDirection() {
-    Position pos3_2 = new Position(3,2);
-    Position pos2_0 = new Position(2,0);
+    Position pos3_2 = new Position(3, 2);
+    Position pos2_0 = new Position(2, 0);
     assertFalse(game.moveUnit(pos3_2, pos2_0));
   }
 
   @Test
-  public void unitCannotMoveMoreThan1TileInAnyDirection(){
-    Position pos3_2 = new Position(3,2);
-    Position pos2_0 = new Position(2,0);
+  public void unitCannotMoveMoreThan1TileInAnyDirection() {
+    Position pos3_2 = new Position(3, 2);
+    Position pos2_0 = new Position(2, 0);
     assertFalse(game.moveUnit(pos3_2, pos2_0));
   }
 
   @Test
   public void UnitCannotMoveOverMountains() {
-    Position pos3_2 = new Position(3,2);
-    Position pos2_2 = new Position(2,2);
-    assertFalse(game.moveUnit(pos3_2, pos2_2));
-  }
-
-  @Test
-  public void RedCannotMoveBluesUnit(){
-    Position pos3_2 = new Position(3,2);
+    Position pos3_2 = new Position(3, 2);
     Position pos2_2 = new Position(2, 2);
     assertFalse(game.moveUnit(pos3_2, pos2_2));
   }
 
   @Test
-  public void BlueCannotMoveRedsUnit(){
-    Position pos4_3 = new Position(4,3);
+  public void RedCannotMoveBluesUnit() {
+    Position pos3_2 = new Position(3, 2);
+    Position pos2_2 = new Position(2, 2);
+    assertFalse(game.moveUnit(pos3_2, pos2_2));
+  }
+
+  @Test
+  public void BlueCannotMoveRedsUnit() {
+    Position pos4_3 = new Position(4, 3);
     Position pos4_4 = new Position(4, 4);
     game.endOfTurn();
     assertFalse(game.moveUnit(pos4_3, pos4_4));
   }
 
   @Test
-  public void AfterEachTurnPlayerGainsSixProduction(){
-    Position redCityPos = new Position(1,1);
-    Position blueCityPos = new Position(1,4);
+  public void AfterEachTurnPlayerGainsSixProduction() {
+    Position redCityPos = new Position(1, 1);
+    Position blueCityPos = new Position(1, 4);
     assertThat(game.getCityAt(redCityPos).getTreasury(), is(0));
     assertThat(game.getCityAt(blueCityPos).getTreasury(), is(0));
     game.endOfTurn();
@@ -222,45 +222,58 @@ public class TestAlphaCiv {
   }
 
   @Test
-  public void TwoUnitsCannotStandOnTheSameTile(){
-    Position pos20 = new Position(2,0); //Position that contains a red archer
-    Position pos31 = new Position(3,1);
-    Position pos42 = new Position(4,2);
-    Position pos43 = new Position(4,3); //Position that contains a red settler
+  public void TwoUnitsCannotStandOnTheSameTile() {
+    Position pos20 = new Position(2, 0); //Position that contains a red archer
+    Position pos31 = new Position(3, 1);
+    Position pos42 = new Position(4, 2);
+    Position pos43 = new Position(4, 3); //Position that contains a red settler
     game.moveUnit(pos20, pos31);
     game.moveUnit(pos31, pos42);
     assertFalse(game.moveUnit(pos42, pos43));
   }
 
   @Test
-  public void RedsUnitAttacksAndDestroysBluesUnit(){
-    Position pos3_2 = new Position(3,2); //Position that contains a blue legion
-    Position pos4_3 = new Position(4,3); //Position that contains a red settler
-    game.moveUnit(pos4_3,pos3_2);
+  public void RedsUnitAttacksAndDestroysBluesUnit() {
+    Position pos3_2 = new Position(3, 2); //Position that contains a blue legion
+    Position pos4_3 = new Position(4, 3); //Position that contains a red settler
+    game.moveUnit(pos4_3, pos3_2);
     assertThat(game.getUnitAt(pos3_2).getOwner(), is(Player.RED));
   }
 
   @Test
-  public void BluesUnitAttacksAndDestroysRedsUnit(){
-    Position pos3_2 = new Position(3,2); //Position that contains a blue legion
-    Position pos4_3 = new Position(4,3); //Position that contains a red settler
+  public void BluesUnitAttacksAndDestroysRedsUnit() {
+    Position pos3_2 = new Position(3, 2); //Position that contains a blue legion
+    Position pos4_3 = new Position(4, 3); //Position that contains a red settler
     game.endOfTurn();
-    game.moveUnit(pos3_2,pos4_3);
+    game.moveUnit(pos3_2, pos4_3);
     assertThat(game.getUnitAt(pos4_3).getOwner(), is(Player.BLUE));
   }
 
   @Test
-  public void redCityCanChangeTypeOfUnitProduction(){
-    Position redCityPos = new Position(1,1);
+  public void redCityCanChangeTypeOfUnitProduction() {
+    Position redCityPos = new Position(1, 1);
     game.changeProductionInCityAt(redCityPos, "legion");
-    assertThat(game.getCityAt(redCityPos).getProduction(),is("legion"));
+    assertThat(game.getCityAt(redCityPos).getProduction(), is("legion"));
   }
 
   @Test
-  public void redCityCanChangeWorkForceFocus(){
-    Position redCityPos = new Position(1,1);
+  public void redCityCanChangeWorkForceFocus() {
+    Position redCityPos = new Position(1, 1);
     game.changeWorkForceFocusInCityAt(redCityPos, "hammer");
-    assertThat(game.getCityAt(redCityPos).getWorkforceFocus(),is("hammer"));
+    assertThat(game.getCityAt(redCityPos).getWorkforceFocus(), is("hammer"));
   }
 
+  @Test
+  public void blueCityCanChangeTypeOfUnitProduction() {
+    Position blueCityPos = new Position(1, 4);
+    game.changeProductionInCityAt(blueCityPos, "legion");
+    assertThat(game.getCityAt(blueCityPos).getProduction(), is("legion"));
+  }
+
+  @Test
+  public void blueCityCanChangeWorkForceFocus() {
+    Position blueCityPos = new Position(1, 4);
+    game.changeWorkForceFocusInCityAt(blueCityPos, "hammer");
+    assertThat(game.getCityAt(blueCityPos).getWorkforceFocus(), is("hammer"));
+  }
 }
