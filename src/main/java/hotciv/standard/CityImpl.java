@@ -1,6 +1,7 @@
 package hotciv.standard;
 
 import hotciv.framework.City;
+import hotciv.framework.GameConstants;
 import hotciv.framework.Player;
 
 public class CityImpl implements City {
@@ -52,10 +53,20 @@ public class CityImpl implements City {
         workForce = balance;
     }
 
-   /* public boolean produceUnit(){
-        if(money >= )
+    public boolean canProduceUnit() {
+        if(getProduction().equals(GameConstants.ARCHER)){
+        if(getTreasury() >= GameConstants.ARCHERCOST){
+            return true;
+        }
+        } else if (getProduction().equals(GameConstants.LEGION)){
+            if(getTreasury() >= GameConstants.LEGIONCOST){
+                return true;
+            }
+        } else if (getProduction().equals(GameConstants.SETTLER)){
+            if(getTreasury() >= GameConstants.SETTLERCOST){
+                return true;
+            }
+        }
         return false;
     }
-    */
-
 }

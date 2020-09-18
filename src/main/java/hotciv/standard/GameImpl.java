@@ -151,9 +151,15 @@ public class GameImpl implements Game {
   public void endOfRound() {
     CityImpl redCity = (CityImpl) cityMap.get(GameImpl.redCityPos);
     CityImpl blueCity = (CityImpl) cityMap.get(GameImpl.blueCityPos);
+    timePassed += 100;
     redCity.addTreasury(6);
     blueCity.addTreasury(6);
-    timePassed += 100;
+    if(redCity.canProduceUnit()) {
+      produceUnit();
+    }
+    if (blueCity.canProduceUnit()) {
+      produceUnit();
+    }
   }
 
   public void changeWorkForceFocusInCityAt( Position p, String balance ) {
@@ -168,6 +174,10 @@ public class GameImpl implements Game {
     CityImpl blueCity = (CityImpl) cityMap.get(GameImpl.blueCityPos);
     redCity.changeProduction(unitType);
     blueCity.changeProduction(unitType);
+  }
+
+  public void produceUnit(){
+
   }
 
   public void performUnitActionAt( Position p ) {}

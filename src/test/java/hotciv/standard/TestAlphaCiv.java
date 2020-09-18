@@ -333,10 +333,9 @@ public class TestAlphaCiv {
     assertThat(redSettler.getCost(), is(30));
   }
 
-  /*@Test
+  @Test
   public void RedCityCanGenerateAUnit(){
-    Position redCityPos = new Position(1,1);
-    assertTrue(game.getCityAt(redCityPos).produceUnit());
+
   }
-*/
+
 }

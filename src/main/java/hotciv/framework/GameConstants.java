@@ -36,6 +36,10 @@ public class GameConstants {
   public static final String ARCHER    = "archer";
   public static final String LEGION    = "legion";
   public static final String SETTLER   = "settler";
+  // Unit prices
+  public static final int ARCHERCOST = 10;
+  public static final int LEGIONCOST = 15;
+  public static final int SETTLERCOST = 30;
   // Valid terrain types
   public static final String PLAINS    = "plains";
   public static final String OCEANS    = "ocean";
