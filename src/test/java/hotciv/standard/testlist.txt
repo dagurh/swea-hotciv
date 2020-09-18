@@ -66,13 +66,17 @@
 
 **OK** Settler has attack value of 0
 
+**OK** Archer has a cost of 10
+
+**OK** Legion has a cost of 15
+
+**OK** Settler has a cost of 30
+
 
 **Incompleted tests and implementations**
 
 Red city can generate a unit
 
 Blue city can generate a unit
-
-players can select which unit to produce
 
 
