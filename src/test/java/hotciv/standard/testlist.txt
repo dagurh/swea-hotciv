@@ -76,12 +76,12 @@
 
 **OK** Blue city can generate a unit
 
+**OK** Red city can generate a unit
+
+**OK** Blue city can generate a unit
 
 
 **Incompleted tests and implementations**
 
-Red city can generate a unit
-
-Blue city can generate a unit
 
 
