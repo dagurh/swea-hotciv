@@ -7,8 +7,7 @@ import org.junit.jupiter.api.*;
 import static hotciv.framework.Player.RED;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.awt.*;
 import java.util.*;
@@ -313,4 +312,31 @@ public class TestAlphaCiv {
     assertThat(game.getUnitAt(pos3_2).getAttackingStrength(), is(4));
   }
 
+  @Test
+  public void ArcherCosts10(){
+    Position pos2_0 = new Position(2, 0); //position of an archer unit
+    UnitImpl redArcher = (UnitImpl) game.getUnitAt(pos2_0);
+    assertThat(redArcher.getCost(), is(10));
+  }
+
+  @Test
+  public void LegionCosts15(){
+    Position pos3_2 = new Position(3, 2); //position of an archer unit
+    UnitImpl blueLegion = (UnitImpl) game.getUnitAt(pos3_2);
+    assertThat(blueLegion.getCost(), is(15));
+  }
+
+  @Test
+  public void SettlerCosts30(){
+    Position pos4_3 = new Position(4, 3); //position of an archer unit
+    UnitImpl redSettler = (UnitImpl) game.getUnitAt(pos4_3);
+    assertThat(redSettler.getCost(), is(30));
+  }
+
+  /*@Test
+  public void RedCityCanGenerateAUnit(){
+    Position redCityPos = new Position(1,1);
+    assertTrue(game.getCityAt(redCityPos).produceUnit());
+  }
+*/
 }

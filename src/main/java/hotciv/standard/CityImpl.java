@@ -52,4 +52,11 @@ public class CityImpl implements City {
     public void changeWorkForce(String balance) {
         workForce = balance;
     }
+
+   /* public boolean produceUnit(){
+        if(money >= )
+        return false;
+    }
+    */
+
 }
