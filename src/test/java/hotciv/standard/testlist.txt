@@ -42,12 +42,12 @@
 
 **OK** two units cannot stand on the same tile
 
+**OK** Red's unit attacks and destroys Blue's unit
+
+**OK** Blue's unit attacks and destroys Red's unit
+
 
 **Incompleted tests and implementations**
-
-Red's unit attacks and destroys Blue's unit
-
-Blue's unit attacks and destroys Red's unit
 
 Red city can generate a unit
 

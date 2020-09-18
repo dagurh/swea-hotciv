@@ -166,15 +166,22 @@ public class TestAlphaCiv {
   }
 
   @Test
-  public void UnitCanMove() {
+  public void unitCanMove(){
     Position pos4_4 = new Position(4,4);
     Position pos4_3 = new Position(4,3);
-    game.moveUnit(pos4_3, pos4_4);
+    game.moveUnit(pos4_3,pos4_4);
     assertThat(game.getUnitAt(pos4_4).getOwner(), is(Player.RED));
   }
 
   @Test
   public void UnitCannotMoveMoreThanOneTileAnyDirection() {
+    Position pos3_2 = new Position(3,2);
+    Position pos2_0 = new Position(2,0);
+    assertFalse(game.moveUnit(pos3_2, pos2_0));
+  }
+
+  @Test
+  public void unitCannotMoveMoreThan1TileInAnyDirection(){
     Position pos3_2 = new Position(3,2);
     Position pos2_0 = new Position(2,0);
     assertFalse(game.moveUnit(pos3_2, pos2_0));
@@ -231,6 +238,15 @@ public class TestAlphaCiv {
     Position pos4_3 = new Position(4,3); //Position that contains a red settler
     game.moveUnit(pos4_3,pos3_2);
     assertThat(game.getUnitAt(pos3_2).getOwner(), is(Player.RED));
+  }
+
+  @Test
+  public void BluesUnitAttacksAndDestroysRedsUnit(){
+    Position pos3_2 = new Position(3,2); //Position that contains a blue legion
+    Position pos4_3 = new Position(4,3); //Position that contains a red settler
+    game.endOfTurn();
+    game.moveUnit(pos3_2,pos4_3);
+    assertThat(game.getUnitAt(pos4_3).getOwner(), is(Player.BLUE));
   }
 
 

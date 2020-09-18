@@ -116,6 +116,7 @@ public class GameImpl implements Game {
     return age+timePassed;
   }
 
+
   public boolean moveUnit( Position from, Position to ) {
     int rowDiff = to.getRow()-from.getRow();
     int colDiff = to.getColumn()- from.getColumn();
@@ -126,7 +127,7 @@ public class GameImpl implements Game {
             && !getTileAt(to).equals(GameConstants.OCEANS)
             && !getTileAt(to).equals(GameConstants.MOUNTAINS)
             && getPlayerInTurn().equals(getUnitAt(from).getOwner())
-            && getUnitAt(to) == null
+            && (getUnitAt(to) == null || getUnitAt(from).getOwner() != getUnitAt(to).getOwner())
     ) {
       Unit newUnit = getUnitAt(from);
       unitMap.remove(from);
@@ -135,6 +136,7 @@ public class GameImpl implements Game {
     }
     return false;
   }
+
 
   // Called when a player has ended their turn, if both players have ended their turn a new century begins
   public void endOfTurn() {
@@ -164,3 +166,49 @@ public class GameImpl implements Game {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /*
+  public boolean moveUnit( Position from, Position to ) {
+    int rowDiff = to.getRow()-from.getRow();
+    int colDiff = to.getColumn()- from.getColumn();
+    if (rowDiff >= -1
+            && rowDiff <= 1
+            && colDiff >= -1
+            && colDiff <= 1
+            && !getTileAt(to).equals(GameConstants.OCEANS)
+            && !getTileAt(to).equals(GameConstants.MOUNTAINS)
+            && getPlayerInTurn().equals(getUnitAt(from).getOwner())
+            && getUnitAt(to) == null
+    ) {
+      Unit newUnit = getUnitAt(from);
+      unitMap.remove(from);
+      unitMap.put(to, newUnit);
+      return true;
+    }
+    return false;
+  }
+  */
