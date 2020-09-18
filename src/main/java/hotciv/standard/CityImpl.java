@@ -7,6 +7,8 @@ public class CityImpl implements City {
 
     private final Player owner;
     int money = 0; // variable money
+    private String production;
+    private String workForce;
 
     public CityImpl(Player owner) {
         this.owner = owner;
@@ -35,11 +37,19 @@ public class CityImpl implements City {
 
     @Override
     public String getProduction() {
-        return null;
+        return production;
+    }
+
+    public void changeProduction(String unitType) {
+        production = unitType;
     }
 
     @Override
     public String getWorkforceFocus() {
-        return null;
+        return workForce;
+    }
+
+    public void changeWorkForce(String balance) {
+        workForce = balance;
     }
 }

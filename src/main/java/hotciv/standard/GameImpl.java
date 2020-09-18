@@ -156,11 +156,16 @@ public class GameImpl implements Game {
     timePassed += 100;
   }
 
+  public void changeWorkForceFocusInCityAt( Position p, String balance ) {
+    CityImpl redCity = (CityImpl) cityMap.get(GameImpl.redCityPos);
+    redCity.changeWorkForce(balance);
+  }
 
+  public void changeProductionInCityAt( Position p, String unitType ) {
+    CityImpl redCity = (CityImpl) cityMap.get(GameImpl.redCityPos);
+    redCity.changeProduction(unitType);
+  }
 
-
-  public void changeWorkForceFocusInCityAt( Position p, String balance ) {}
-  public void changeProductionInCityAt( Position p, String unitType ) {}
   public void performUnitActionAt( Position p ) {}
 
 }

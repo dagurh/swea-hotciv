@@ -249,5 +249,18 @@ public class TestAlphaCiv {
     assertThat(game.getUnitAt(pos4_3).getOwner(), is(Player.BLUE));
   }
 
+  @Test
+  public void redCityCanChangeTypeOfUnitProduction(){
+    Position redCityPos = new Position(1,1);
+    game.changeProductionInCityAt(redCityPos, "legion");
+    assertThat(game.getCityAt(redCityPos).getProduction(),is("legion"));
+  }
+
+  @Test
+  public void redCityCanChangeWorkForceFocus(){
+    Position redCityPos = new Position(1,1);
+    game.changeWorkForceFocusInCityAt(redCityPos, "hammer");
+    assertThat(game.getCityAt(redCityPos).getWorkforceFocus(),is("hammer"));
+  }
 
 }
