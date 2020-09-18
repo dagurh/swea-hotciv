@@ -276,4 +276,41 @@ public class TestAlphaCiv {
     game.changeWorkForceFocusInCityAt(blueCityPos, "hammer");
     assertThat(game.getCityAt(blueCityPos).getWorkforceFocus(), is("hammer"));
   }
+
+  @Test
+  public void ArcherHas3defence(){
+    Position pos2_0 = new Position(2, 0); //position of an archer unit
+    assertThat(game.getUnitAt(pos2_0).getDefensiveStrength(), is(3));
+  }
+
+  @Test
+  public void SettlerHas3defence(){
+    Position pos4_3 = new Position(4, 3); //position of a settler unit
+    assertThat(game.getUnitAt(pos4_3).getDefensiveStrength(), is(3));
+  }
+
+  @Test
+  public void LegionHas2defence(){
+    Position pos3_2 = new Position(3, 2); //position of a legion unit
+    assertThat(game.getUnitAt(pos3_2).getDefensiveStrength(), is(2));
+  }
+
+  @Test
+  public void ArcherHas2attack(){
+    Position pos2_0 = new Position(2, 0); //position of an archer unit
+    assertThat(game.getUnitAt(pos2_0).getAttackingStrength(), is(2));
+  }
+
+  @Test
+  public void SettlerHas0attack(){
+    Position pos4_3 = new Position(4, 3); //position of a settler unit
+    assertThat(game.getUnitAt(pos4_3).getAttackingStrength(), is(0));
+  }
+
+  @Test
+  public void LegionHas4attack(){
+    Position pos3_2 = new Position(3, 2); //position of a legion unit
+    assertThat(game.getUnitAt(pos3_2).getAttackingStrength(), is(4));
+  }
+
 }

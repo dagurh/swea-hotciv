@@ -58,11 +58,11 @@ public class GameImpl implements Game {
 
   public void makeAndAddUnits(){
     redArcherPos = new Position(2, 0);
-    redArcher = new UnitImpl("archer", Player.RED);
+    redArcher = new UnitImpl("archer", Player.RED, 3, 2);
     blueLegionPos = new Position(3, 2);
-    blueLegion = new UnitImpl("legion", Player.BLUE);
+    blueLegion = new UnitImpl("legion", Player.BLUE, 2, 4);
     redSettlerPos = new Position(4, 3);
-    redSettler = new UnitImpl("settler", Player.RED);
+    redSettler = new UnitImpl("settler", Player.RED, 3, 0);
     unitMap.put(redArcherPos, redArcher);
     unitMap.put(blueLegionPos, blueLegion);
     unitMap.put(redSettlerPos, redSettler);

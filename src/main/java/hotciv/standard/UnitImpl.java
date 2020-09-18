@@ -7,11 +7,14 @@ public class UnitImpl implements Unit {
 
     private final Player owner;
     private final String unitType;
+    private final int defensiveStrength, attackingStrength;
 
 
-    public UnitImpl(String unitType, Player owner) {
+    public UnitImpl(String unitType, Player owner, int defensiveStrength, int attackingStrength) {
         this.owner = owner;
         this.unitType = unitType;
+        this.defensiveStrength = defensiveStrength;
+        this.attackingStrength = attackingStrength;
     }
 
     @Override
@@ -31,11 +34,11 @@ public class UnitImpl implements Unit {
 
     @Override
     public int getDefensiveStrength() {
-        return 0;
+        return defensiveStrength;
     }
 
     @Override
     public int getAttackingStrength() {
-        return 1;
+        return attackingStrength;
     }
 }

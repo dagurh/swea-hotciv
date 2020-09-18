@@ -54,6 +54,18 @@
 
 **OK** Blue City can change its workForceFocus
 
+**OK** Archer has defence value of 3
+
+**OK** Legion has defence value of 2
+
+**OK** Settler has defence value of 3
+
+**OK** Archer has attack value of 2
+
+**OK** Legion has attack value of 4
+
+**OK** Settler has attack value of 0
+
 
 **Incompleted tests and implementations**
 
