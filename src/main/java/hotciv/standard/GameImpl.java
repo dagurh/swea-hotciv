@@ -165,17 +165,13 @@ public class GameImpl implements Game {
   }
 
   public void changeWorkForceFocusInCityAt( Position p, String balance ) {
-    CityImpl redCity = (CityImpl) cityMap.get(GameImpl.redCityPos);
-    CityImpl blueCity = (CityImpl) cityMap.get(GameImpl.blueCityPos);
-    redCity.changeWorkForce(balance);
-    blueCity.changeWorkForce(balance);
+    CityImpl City = (CityImpl) getCityAt(p);
+    City.changeWorkForce(balance);
   }
 
   public void changeProductionInCityAt( Position p, String unitType ) {
-    CityImpl redCity = (CityImpl) cityMap.get(GameImpl.redCityPos);
-    CityImpl blueCity = (CityImpl) cityMap.get(GameImpl.blueCityPos);
-    redCity.changeProduction(unitType);
-    blueCity.changeProduction(unitType);
+    CityImpl City = (CityImpl) getCityAt(p);
+    City.changeProduction(unitType);
   }
 
   public void produceUnit(String unitType, Position cityPosition){
