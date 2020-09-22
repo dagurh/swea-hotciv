@@ -11,6 +11,7 @@ public class UnitImpl implements Unit {
     private int defensiveStrength;
     private int attackingStrength;
     private int cost;
+    private int moveCount = 1;
 
 
     public UnitImpl(String unitType, Player owner) {
@@ -54,7 +55,7 @@ public class UnitImpl implements Unit {
 
     @Override
     public int getMoveCount() {
-        return 0;
+        return moveCount;
     }
 
     @Override
@@ -69,5 +70,11 @@ public class UnitImpl implements Unit {
 
     public int getCost() {
         return cost;
+    }
+
+    public void setMoveCount(){moveCount = 1;}
+
+    public void decreaseMoveCount() {
+        moveCount -= 1;
     }
 }

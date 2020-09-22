@@ -130,10 +130,12 @@ public class GameImpl implements Game {
             && !getTileAt(to).equals(GameConstants.MOUNTAINS)
             && getPlayerInTurn().equals(getUnitAt(from).getOwner())
             && (getUnitAt(to) == null || getUnitAt(from).getOwner() != getUnitAt(to).getOwner())
+            && (getUnitAt(from).getMoveCount() > 0)
     ) {
       Unit newUnit = getUnitAt(from);
       unitMap.remove(from);
       unitMap.put(to, newUnit);
+      changeMoveCountForUnitAt(to);
       return true;
     }
     return false;
@@ -156,12 +158,25 @@ public class GameImpl implements Game {
     timePassed += 100;
     redCity.addTreasury(6);
     blueCity.addTreasury(6);
+    resetMoveCount();
     if(redCity.canProduceUnit()) {
       produceUnit(redCity.getProduction(), redCityPos);
     }
     if (blueCity.canProduceUnit()) {
       produceUnit(blueCity.getProduction(), blueCityPos);
     }
+  }
+
+  public void resetMoveCount(){
+    for (Unit u : unitMap.values()){
+      UnitImpl unitTemp = (UnitImpl) u;
+      unitTemp.setMoveCount();
+    }
+  }
+
+  public void changeMoveCountForUnitAt(Position p){
+    UnitImpl Unit = (UnitImpl) getUnitAt(p);
+    Unit.decreaseMoveCount();
   }
 
   public void changeWorkForceFocusInCityAt( Position p, String balance ) {
@@ -175,13 +190,17 @@ public class GameImpl implements Game {
   }
 
   public void produceUnit(String unitType, Position cityPosition){
-    for(Position p : Utility.get8neighborhoodOf(cityPosition)){
-      if(     getUnitAt(p) == null
-              && !getTileAt(p).equals(GameConstants.OCEANS)
-              && !getTileAt(p).equals(GameConstants.MOUNTAINS))
-      {
-        UnitImpl newUnit = new UnitImpl(unitType, getCityAt(cityPosition).getOwner());
-        unitMap.put(p, newUnit);
+    if(getUnitAt(cityPosition) == null) {
+      UnitImpl newUnit = new UnitImpl(unitType, getCityAt(cityPosition).getOwner());
+      unitMap.put(cityPosition, newUnit);
+    } else {
+      for (Position p : Utility.get8neighborhoodOf(cityPosition)) {
+        if (getUnitAt(p) == null
+                && !getTileAt(p).equals(GameConstants.OCEANS)
+                && !getTileAt(p).equals(GameConstants.MOUNTAINS)) {
+          UnitImpl newUnit = new UnitImpl(unitType, getCityAt(cityPosition).getOwner());
+          unitMap.put(p, newUnit);
+        }
       }
     }
   }

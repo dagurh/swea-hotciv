@@ -217,7 +217,11 @@ public class TestAlphaCiv {
   @Test
   public void TwoUnitsCannotStandOnTheSameTile() {
     game.moveUnit(pos2_0, pos3_1);
+    game.endOfTurn();
+    game.endOfTurn();
     game.moveUnit(pos3_1, pos4_2);
+    game.endOfTurn();
+    game.endOfTurn();
     assertFalse(game.moveUnit(pos4_2, pos4_3));
   }
 
@@ -307,19 +311,45 @@ public class TestAlphaCiv {
   }
 
   @Test
-  public void CityCanGenerateAUnit(){
+  public void CityCanGenerateAnArcher(){
     assertThat(game.getCityAt(pos1_1).getProduction(), is("archer"));
-    game.endOfTurn();
-    game.endOfTurn();
-    game.endOfTurn();
-    game.endOfTurn();
-    assertThat(game.getUnitAt(pos0_1).getTypeString(), is("archer"));
+    for (int i = 0; i < 4; i++) {
+      game.endOfTurn();
+    }
+    assertThat(game.getUnitAt(pos1_1).getTypeString(), is("archer"));
     assertThat(game.getCityAt(pos1_1).getTreasury(),is(2));
   }
 
   @Test
-  public void dsfCityCanGenerateAUnit() {
+  public void CityCanGenerateALegion(){
+    game.changeProductionInCityAt(pos1_1, "legion");
+    for (int i = 0; i < 6; i++) {
+      game.endOfTurn();
+    }
+    assertThat(game.getUnitAt(pos1_1).getTypeString(), is("legion"));
+    assertThat(game.getCityAt(pos1_1).getTreasury(),is(3));
+  }
+
+  @Test
+  public void CityCanGenerateASettler(){
+    game.changeProductionInCityAt(pos1_1, "settler");
+    for (int i = 0; i < 10; i++) {
+      game.endOfTurn();
+    }
+    assertThat(game.getUnitAt(pos1_1).getTypeString(), is("settler"));
+    assertThat(game.getCityAt(pos1_1).getTreasury(),is(0));
+  }
+
+  @Test
+  public void CityCanChangeProduction() {
     game.changeProductionInCityAt(pos1_1, "archer");
     assertThat(game.getCityAt(pos1_1).getProduction(), is("archer"));
   }
+
+  @Test
+  public void UnitsCannotMoveTwoTilesPerRound(){
+    game.moveUnit(pos2_0, pos3_1);
+    assertFalse(game.moveUnit(pos3_1, pos2_0));
+  }
+
 }
