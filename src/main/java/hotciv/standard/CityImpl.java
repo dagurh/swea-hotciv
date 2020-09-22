@@ -57,16 +57,19 @@ public class CityImpl implements City {
         switch (getProduction()) {
             case GameConstants.ARCHER:
                 if (getTreasury() >= GameConstants.ARCHERCOST) {
+                    addTreasury(-GameConstants.ARCHERCOST);
                     return true;
                 }
                 break;
             case GameConstants.LEGION:
                 if (getTreasury() >= GameConstants.LEGIONCOST) {
+                    addTreasury(-GameConstants.LEGIONCOST);
                     return true;
                 }
                 break;
             case GameConstants.SETTLER:
                 if (getTreasury() >= GameConstants.SETTLERCOST) {
+                    addTreasury(-GameConstants.SETTLERCOST);
                     return true;
                 }
                 break;

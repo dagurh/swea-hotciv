@@ -108,6 +108,7 @@ public class TestAlphaCiv {
   // test: a city's production should be cumulative
   @Test
   public void ProductionShouldBeCumulative() {
+    game.changeProductionInCityAt(pos1_1, "settler"); // Changed to settler so city doesnt produce archer
     assertThat(game.getCityAt(pos1_1).getTreasury(), is(0));
     game.endOfTurn();
     game.endOfTurn();
@@ -185,6 +186,11 @@ public class TestAlphaCiv {
   @Test
   public void UnitCannotMoveOverMountains() {
     assertFalse(game.moveUnit(pos3_2, pos2_2));
+  }
+
+  @Test
+  public void UnitCannotMoveOverOceans() {
+    assertFalse(game.moveUnit(pos2_0, pos1_0));
   }
 
   @Test
@@ -301,12 +307,19 @@ public class TestAlphaCiv {
   }
 
   @Test
-  public void RedCityCanGenerateAUnit(){
+  public void CityCanGenerateAUnit(){
+    assertThat(game.getCityAt(pos1_1).getProduction(), is("archer"));
     game.endOfTurn();
     game.endOfTurn();
     game.endOfTurn();
     game.endOfTurn();
-    assertThat(game.getUnitAt(pos0_1).getOwner(), is(Player.RED));
+    assertThat(game.getUnitAt(pos0_1).getTypeString(), is("archer"));
+    assertThat(game.getCityAt(pos1_1).getTreasury(),is(2));
   }
 
+  @Test
+  public void dsfCityCanGenerateAUnit() {
+    game.changeProductionInCityAt(pos1_1, "archer");
+    assertThat(game.getCityAt(pos1_1).getProduction(), is("archer"));
+  }
 }

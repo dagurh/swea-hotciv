@@ -30,6 +30,8 @@
 
 **OK** Units cannot move over mountains
 
+**OK** Units cannot move over oceans
+
 **OK** Units cannot move more than one tile in any direction
 
 **OK** Red cannot move Blue's units
@@ -79,6 +81,8 @@
 **OK** Red city can generate a unit
 
 **OK** Blue city can generate a unit
+
+**OK** cities can change unit production
 
 
 **Incompleted tests and implementations**
