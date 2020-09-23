@@ -2,7 +2,8 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 import hotciv.utility.Utility;
-import hotciv.variants.AlphaStrategy;
+import hotciv.variants.AgeStrategy;
+import hotciv.variants.WinnerStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,15 +41,17 @@ public class GameImpl implements Game {
   private static Position blueCityPos;
   private static Position redCityPos;
   private int age = GameConstants.AGE;
-  private AlphaStrategy alphaStrategy;
+  private AgeStrategy ageStrategy;
+  private WinnerStrategy winnerStrategy;
   private Player playerInTurn = Player.RED; // Variable that determines whose turn it is
   Map<Position, City> cityMap = new HashMap<>(); // Hashmap to store cities and their positions
   Map<Position, Tile> tileMap = new HashMap<>(); // Hashmap to store tiles and their positions
   Map<Position, Unit> unitMap = new HashMap<>(); // Hashmap to store units and their positions
 
   // A method that calls the method makeAndAddCities
-  public GameImpl(AlphaStrategy alphaStrategy){
-    this.alphaStrategy = alphaStrategy;
+  public GameImpl(AgeStrategy ageStrategy, WinnerStrategy winnerStrategy){
+    this.ageStrategy = ageStrategy;
+    this.winnerStrategy = winnerStrategy;
     makeAndAddCities();
     makeAndAddTiles();
     makeAndAddUnits();
@@ -107,15 +110,8 @@ public class GameImpl implements Game {
 
 
   public Player getWinner(){
-    return alphaStrategy.determineWinner(age);
+    return winnerStrategy.determineWinner(age);
   }
-
-  /*if(getAge() == -3000){
-      return Player.RED;
-    }
-    return null;
-
-   */
 
   // returns the current century
   public int getAge() {
@@ -187,7 +183,7 @@ public class GameImpl implements Game {
   }
 
   public void advAge(){
-   age = alphaStrategy.advanceAge(age);
+   age = ageStrategy.advanceAge(age);
   }
 
   public void resetMoveCount(){

@@ -2,12 +2,7 @@ package hotciv.variants;
 
 import hotciv.framework.Player;
 
-public class AlphaRules implements AlphaStrategy{
-    @Override
-    public int advanceAge(int currentAge) {
-        int yearsPerRound = 100;
-        return currentAge + yearsPerRound;
-    }
+public class AlphaWinner implements WinnerStrategy{
 
     @Override
     public Player determineWinner(int currentAge) {

@@ -2,17 +2,14 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
-import hotciv.variants.AlphaRules;
+import hotciv.variants.AlphaAging;
+import hotciv.variants.AlphaWinner;
 import org.junit.jupiter.api.*;
 
 import static hotciv.framework.Player.RED;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.awt.*;
-import java.util.*;
-import java.util.zip.ZipEntry;
 
 /** Skeleton class for AlphaCiv test cases
 
@@ -60,7 +57,7 @@ public class TestAlphaCiv {
    */
   @BeforeEach
   public void setUp() {
-    game = new GameImpl(new AlphaRules());
+    game = new GameImpl(new AlphaAging(), new AlphaWinner());
     pos0_1 = new Position(0,1);
     pos1_0 = new Position(1,0);
     pos1_1 = new Position(1,1);
