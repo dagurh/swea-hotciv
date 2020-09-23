@@ -36,12 +36,9 @@ import java.util.HashMap;
 
 public class GameImpl implements Game {
 
-  private static Position blueCityPos, redCityPos, mountainsPos, hillsPos, oceanPos, redArcherPos, blueLegionPos, redSettlerPos, redLegionPos;
-  private static City redCity, blueCity;
-  private static Unit redArcher, blueLegion, redSettler, redLegion;
+  private static Position blueCityPos;
+  private static Position redCityPos;
   private int timePassed;
-  private int age = -4000;
-  private TileImpl mountainsTile, hillsTile, oceanTile;
   private Player playerInTurn = Player.RED; // Variable that determines whose turn it is
   Map<Position, City> cityMap = new HashMap<>(); // Hashmap to store cities and their positions
   Map<Position, Tile> tileMap = new HashMap<>(); // Hashmap to store tiles and their positions
@@ -59,12 +56,12 @@ public class GameImpl implements Game {
   public String getTileAt( Position p ) { return tileMap.get(p).getTypeString(); }
 
   public void makeAndAddUnits(){
-    redArcherPos = new Position(2, 0);
-    redArcher = new UnitImpl("archer", Player.RED);
-    blueLegionPos = new Position(3, 2);
-    blueLegion = new UnitImpl("legion", Player.BLUE);
-    redSettlerPos = new Position(4, 3);
-    redSettler = new UnitImpl("settler", Player.RED);
+    Position redArcherPos = new Position(2, 0);
+    Unit redArcher = new UnitImpl("archer", Player.RED);
+    Position blueLegionPos = new Position(3, 2);
+    Unit blueLegion = new UnitImpl("legion", Player.BLUE);
+    Position redSettlerPos = new Position(4, 3);
+    Unit redSettler = new UnitImpl("settler", Player.RED);
     unitMap.put(redArcherPos, redArcher);
     unitMap.put(blueLegionPos, blueLegion);
     unitMap.put(redSettlerPos, redSettler);
@@ -74,8 +71,8 @@ public class GameImpl implements Game {
   public void makeAndAddCities(){
     redCityPos = new Position(1, 1);
     blueCityPos = new Position(1, 4);
-    redCity = new CityImpl(Player.RED);
-    blueCity = new CityImpl(Player.BLUE);
+    City redCity = new CityImpl(Player.RED);
+    City blueCity = new CityImpl(Player.BLUE);
     cityMap.put(redCityPos, redCity);
     cityMap.put(blueCityPos, blueCity);
   }
@@ -86,16 +83,16 @@ public class GameImpl implements Game {
       for (int j = 0; j < GameConstants.WORLDSIZE; j++) {
         tileMap.put(new Position(i, j), new TileImpl(GameConstants.PLAINS));
       }
-      mountainsPos = new Position(2, 2);
-      mountainsTile = new TileImpl(GameConstants.MOUNTAINS);
+      Position mountainsPos = new Position(2, 2);
+      TileImpl mountainsTile = new TileImpl(GameConstants.MOUNTAINS);
       tileMap.put(mountainsPos, mountainsTile);
 
-      hillsPos = new Position(0, 1);
-      hillsTile = new TileImpl(GameConstants.HILLS);
+      Position hillsPos = new Position(0, 1);
+      TileImpl hillsTile = new TileImpl(GameConstants.HILLS);
       tileMap.put(hillsPos, hillsTile);
 
-      oceanPos = new Position(1, 0);
-      oceanTile = new TileImpl(GameConstants.OCEANS);
+      Position oceanPos = new Position(1, 0);
+      TileImpl oceanTile = new TileImpl(GameConstants.OCEANS);
       tileMap.put(oceanPos, oceanTile);
     }
   }
@@ -115,7 +112,7 @@ public class GameImpl implements Game {
 
   // returns the current century
   public int getAge() {
-    return age+timePassed;
+    return GameConstants.AGE+timePassed;
   }
 
 

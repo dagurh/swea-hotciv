@@ -45,6 +45,13 @@ import java.util.zip.ZipEntry;
 public class TestAlphaCiv {
   private Game game;
   private Position pos0_1, pos1_0, pos1_1, pos1_4, pos2_0, pos2_1, pos2_2, pos3_1, pos3_2, pos4_2, pos4_3, pos4_4;
+  private int x;
+
+  public void callEndOfTurn(int x){
+    for (int i = 0; i < x; i++) {
+      game.endOfTurn();
+    }
+  }
 
   /**
    * Fixture for alphaciv testing.
@@ -87,7 +94,7 @@ public class TestAlphaCiv {
   // test: should be the blue players turn after the red player
   @Test
   public void shouldBeBlueTurnAfterRedTurn() {
-    game.endOfTurn();
+    callEndOfTurn(1);
     assertThat(game.getPlayerInTurn(), is(Player.BLUE));
   }
 
@@ -101,8 +108,7 @@ public class TestAlphaCiv {
   // test: a city should produce 6 treasuries after each round (not after each turn)
   @Test
   public void shouldProduceSixAfterEndRound() {
-    game.endOfTurn();
-    game.endOfTurn();
+    callEndOfTurn(2);
     assertThat(game.getCityAt(pos1_1).getTreasury(), is(6));
   }
 
@@ -111,20 +117,16 @@ public class TestAlphaCiv {
   public void ProductionShouldBeCumulative() {
     game.changeProductionInCityAt(pos1_1, "settler"); // Changed to settler so city doesnt produce archer
     assertThat(game.getCityAt(pos1_1).getTreasury(), is(0));
-    game.endOfTurn();
-    game.endOfTurn();
+    callEndOfTurn(2);
     assertThat(game.getCityAt(pos1_1).getTreasury(), is(6));
-    game.endOfTurn();
-    game.endOfTurn();
+    callEndOfTurn(2);
     assertThat(game.getCityAt(pos1_1).getTreasury(), is(12));
   }
 
   @Test
   public void RedWinsInYear3000BC() {
     // Calls endOfTurn() 20 times since there are two players, so 10 rounds pass and the year is now 3000 BC
-    for (int i = 0; i < 20; i++) {
-      game.endOfTurn();
-    }
+    callEndOfTurn(20);
     assertThat(game.getWinner(), is(Player.RED));
   }
 
@@ -132,9 +134,7 @@ public class TestAlphaCiv {
   @Test
   public void NobodyWinsIfYearIsNot3000BC() {
     // Calls endOfTurn() 18 times since there are two players, so 9 rounds pass and the year is now 3100 BC
-    for (int i = 0; i < 18; i++) {
-      game.endOfTurn();
-    }
+    callEndOfTurn(18);
     assertNull(game.getWinner());
   }
 
@@ -201,7 +201,7 @@ public class TestAlphaCiv {
 
   @Test
   public void BlueCannotMoveRedsUnit() {
-    game.endOfTurn();
+    callEndOfTurn(1);
     assertFalse(game.moveUnit(pos4_3, pos4_4));
   }
 
@@ -209,8 +209,7 @@ public class TestAlphaCiv {
   public void AfterEachTurnPlayerGainsSixProduction() {
     assertThat(game.getCityAt(pos1_1).getTreasury(), is(0));
     assertThat(game.getCityAt(pos1_4).getTreasury(), is(0));
-    game.endOfTurn();
-    game.endOfTurn();
+    callEndOfTurn(2);
     assertThat(game.getCityAt(pos1_1).getTreasury(), is(6));
     assertThat(game.getCityAt(pos1_4).getTreasury(), is(6));
   }
@@ -218,11 +217,9 @@ public class TestAlphaCiv {
   @Test
   public void TwoUnitsCannotStandOnTheSameTile() {
     game.moveUnit(pos2_0, pos3_1);
-    game.endOfTurn();
-    game.endOfTurn();
+    callEndOfTurn(2);
     game.moveUnit(pos3_1, pos4_2);
-    game.endOfTurn();
-    game.endOfTurn();
+    callEndOfTurn(2);
     assertFalse(game.moveUnit(pos4_2, pos4_3));
   }
 
@@ -234,7 +231,7 @@ public class TestAlphaCiv {
 
   @Test
   public void BluesUnitAttacksAndDestroysRedsUnit() {
-    game.endOfTurn();
+    callEndOfTurn(1);
     game.moveUnit(pos3_2, pos4_3);
     assertThat(game.getUnitAt(pos4_3).getOwner(), is(Player.BLUE));
   }
@@ -314,9 +311,7 @@ public class TestAlphaCiv {
   @Test
   public void CityCanGenerateAnArcher(){
     assertThat(game.getCityAt(pos1_1).getProduction(), is("archer"));
-    for (int i = 0; i < 4; i++) {
-      game.endOfTurn();
-    }
+    callEndOfTurn(4);
     assertThat(game.getUnitAt(pos1_1).getTypeString(), is("archer"));
     assertThat(game.getCityAt(pos1_1).getTreasury(),is(2));
   }
@@ -324,9 +319,7 @@ public class TestAlphaCiv {
   @Test
   public void CityCanGenerateALegion(){
     game.changeProductionInCityAt(pos1_1, "legion");
-    for (int i = 0; i < 6; i++) {
-      game.endOfTurn();
-    }
+    callEndOfTurn(6);
     assertThat(game.getUnitAt(pos1_1).getTypeString(), is("legion"));
     assertThat(game.getCityAt(pos1_1).getTreasury(),is(3));
   }
@@ -334,9 +327,7 @@ public class TestAlphaCiv {
   @Test
   public void CityCanGenerateASettler(){
     game.changeProductionInCityAt(pos1_1, "settler");
-    for (int i = 0; i < 10; i++) {
-      game.endOfTurn();
-    }
+    callEndOfTurn(10);
     assertThat(game.getUnitAt(pos1_1).getTypeString(), is("settler"));
     assertThat(game.getCityAt(pos1_1).getTreasury(),is(0));
   }
@@ -356,10 +347,9 @@ public class TestAlphaCiv {
   //if a unit moves into an enemy city and there is no enemy unit standing on the city, the ownership changes
   @Test
   public void UnitsCanConquerCities(){
-    game.endOfTurn();
+    callEndOfTurn(1);
     game.moveUnit(pos3_2, pos2_1);
-    game.endOfTurn();
-    game.endOfTurn();
+    callEndOfTurn(2);
     game.moveUnit(pos2_1, pos1_1);
     assertThat(game.getCityAt(pos1_1).getOwner(), is(Player.BLUE));
   }

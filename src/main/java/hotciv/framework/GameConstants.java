@@ -49,4 +49,6 @@ public class GameConstants {
   // Valid production balance types
   public static final String productionFocus = "hammer";
   public static final String foodFocus = "apple";
+  // The starting age of world
+  public static final int AGE = -4000;
 }
