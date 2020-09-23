@@ -38,7 +38,7 @@ public class GameImpl implements Game {
 
   private static Position blueCityPos;
   private static Position redCityPos;
-  private int timePassed;
+  private int age = GameConstants.AGE;
   private Player playerInTurn = Player.RED; // Variable that determines whose turn it is
   Map<Position, City> cityMap = new HashMap<>(); // Hashmap to store cities and their positions
   Map<Position, Tile> tileMap = new HashMap<>(); // Hashmap to store tiles and their positions
@@ -112,7 +112,7 @@ public class GameImpl implements Game {
 
   // returns the current century
   public int getAge() {
-    return GameConstants.AGE+timePassed;
+    return age;
   }
 
 
@@ -167,7 +167,7 @@ public class GameImpl implements Game {
   public void endOfRound() {
     CityImpl redCity = (CityImpl) cityMap.get(GameImpl.redCityPos);
     CityImpl blueCity = (CityImpl) cityMap.get(GameImpl.blueCityPos);
-    timePassed += 100;
+    advAge();
     redCity.addTreasury(6);
     blueCity.addTreasury(6);
     resetMoveCount();
@@ -177,6 +177,10 @@ public class GameImpl implements Game {
     if (blueCity.canProduceUnit()) {
       produceUnit(blueCity.getProduction(), blueCityPos);
     }
+  }
+
+  public void advAge(){
+    age += 100;
   }
 
   public void resetMoveCount(){
