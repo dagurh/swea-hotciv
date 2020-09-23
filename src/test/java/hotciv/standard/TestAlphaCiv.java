@@ -2,6 +2,7 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
+import hotciv.variants.AlphaRules;
 import org.junit.jupiter.api.*;
 
 import static hotciv.framework.Player.RED;
@@ -43,6 +44,7 @@ import java.util.zip.ZipEntry;
 
 */
 public class TestAlphaCiv {
+
   private Game game;
   private Position pos0_1, pos1_0, pos1_1, pos1_4, pos2_0, pos2_1, pos2_2, pos3_1, pos3_2, pos4_2, pos4_3, pos4_4;
   private int x;
@@ -58,7 +60,7 @@ public class TestAlphaCiv {
    */
   @BeforeEach
   public void setUp() {
-    game = new GameImpl();
+    game = new GameImpl(new AlphaRules());
     pos0_1 = new Position(0,1);
     pos1_0 = new Position(1,0);
     pos1_1 = new Position(1,1);
