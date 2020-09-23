@@ -21,7 +21,7 @@ public class CityImpl implements City {
     }
 
     public void setOwner(Player newOwner){
-        newOwner = owner;
+        owner = newOwner;
     }
 
     @Override
