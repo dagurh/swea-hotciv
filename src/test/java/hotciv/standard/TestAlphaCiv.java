@@ -44,7 +44,7 @@ import java.util.zip.ZipEntry;
 */
 public class TestAlphaCiv {
   private Game game;
-  private Position pos0_1, pos1_0, pos1_1, pos1_4, pos2_0, pos2_2, pos3_1, pos3_2, pos4_2, pos4_3, pos4_4;
+  private Position pos0_1, pos1_0, pos1_1, pos1_4, pos2_0, pos2_1, pos2_2, pos3_1, pos3_2, pos4_2, pos4_3, pos4_4;
 
   /**
    * Fixture for alphaciv testing.
@@ -57,6 +57,7 @@ public class TestAlphaCiv {
     pos1_1 = new Position(1,1);
     pos1_4 = new Position(1,4);
     pos2_0 = new Position(2,0);
+    pos2_1 = new Position(2,1);
     pos2_2 = new Position(2,2);
     pos3_1 = new Position(3,1);
     pos3_2 = new Position(3,2);
@@ -350,6 +351,17 @@ public class TestAlphaCiv {
   public void UnitsCannotMoveTwoTilesPerRound(){
     game.moveUnit(pos2_0, pos3_1);
     assertFalse(game.moveUnit(pos3_1, pos2_0));
+  }
+
+  //if a unit moves into an enemy city and there is no enemy unit standing on the city, the ownership changes
+  @Test
+  public void UnitsCanConquerCities(){
+    game.endOfTurn();
+    game.moveUnit(pos3_2, pos2_1);
+    game.endOfTurn();
+    game.endOfTurn();
+    game.moveUnit(pos2_1, pos1_1);
+    assertThat(game.getCityAt(pos1_1).getOwner(), is(Player.BLUE));
   }
 
 }

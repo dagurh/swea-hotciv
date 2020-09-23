@@ -120,6 +120,18 @@ public class GameImpl implements Game {
 
 
   public boolean moveUnit( Position from, Position to ) {
+    if (moveLegal(from, to) && getCityAt(to) == null){
+      moveUnitToNewPos(from, to);
+      return true;
+    } else if (moveLegal(from, to) && !getUnitAt(from).getOwner().equals(getCityAt(to).getOwner())){
+      changeOwnershipOfCity(to, getUnitAt(from).getOwner());
+      moveUnitToNewPos(from, to);
+      return true;
+    }
+    return false;
+  }
+
+  public boolean moveLegal(Position from, Position to){
     int rowDiff = to.getRow()-from.getRow();
     int colDiff = to.getColumn()- from.getColumn();
     if (rowDiff >= -1
@@ -131,14 +143,17 @@ public class GameImpl implements Game {
             && getPlayerInTurn().equals(getUnitAt(from).getOwner())
             && (getUnitAt(to) == null || getUnitAt(from).getOwner() != getUnitAt(to).getOwner())
             && (getUnitAt(from).getMoveCount() > 0)
-    ) {
-      Unit newUnit = getUnitAt(from);
-      unitMap.remove(from);
-      unitMap.put(to, newUnit);
-      changeMoveCountForUnitAt(to);
+    ){
       return true;
     }
     return false;
+  }
+
+  public void moveUnitToNewPos(Position from, Position to){
+    Unit newUnit = getUnitAt(from);
+    unitMap.remove(from);
+    unitMap.put(to, newUnit);
+    changeMoveCountForUnitAt(to);
   }
 
 
@@ -172,6 +187,11 @@ public class GameImpl implements Game {
       UnitImpl unitTemp = (UnitImpl) u;
       unitTemp.setMoveCount();
     }
+  }
+
+  public void changeOwnershipOfCity(Position p, Player newOwner){
+    CityImpl City = (CityImpl) getCityAt(p);
+    City.setOwner(newOwner);
   }
 
   public void changeMoveCountForUnitAt(Position p){

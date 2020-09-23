@@ -6,7 +6,7 @@ import hotciv.framework.Player;
 
 public class CityImpl implements City {
 
-    private final Player owner;
+    private Player owner;
     int money = 0; // variable money
     private String production = "archer";
     private String workForce;
@@ -18,6 +18,10 @@ public class CityImpl implements City {
     @Override
     public Player getOwner() {
         return owner;
+    }
+
+    public void setOwner(Player newOwner){
+        newOwner = owner;
     }
 
     @Override
