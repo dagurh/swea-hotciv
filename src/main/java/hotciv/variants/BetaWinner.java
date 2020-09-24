@@ -3,7 +3,6 @@ package hotciv.variants;
 import hotciv.framework.City;
 import hotciv.framework.Player;
 import hotciv.framework.Position;
-import hotciv.standard.CityImpl;
 
 import java.util.Map;
 
@@ -14,7 +13,6 @@ public class BetaWinner implements WinnerStrategy {
         int redCityCounter = 0;
         int blueCityCounter = 0;
         for (City c : cityMap.values()) {
-            CityImpl cityTemp = (CityImpl) c;
             if (c.getOwner().equals(Player.RED)) {
                 redCityCounter++;
             } else {

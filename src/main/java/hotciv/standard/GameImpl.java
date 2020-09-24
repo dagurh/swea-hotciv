@@ -134,7 +134,7 @@ public class GameImpl implements Game {
   public boolean moveLegal(Position from, Position to){
     int rowDiff = to.getRow()-from.getRow();
     int colDiff = to.getColumn()- from.getColumn();
-    if (rowDiff >= -1
+    return rowDiff >= -1
             && rowDiff <= 1
             && colDiff >= -1
             && colDiff <= 1
@@ -142,11 +142,7 @@ public class GameImpl implements Game {
             && !getTileAt(to).equals(GameConstants.MOUNTAINS)
             && getPlayerInTurn().equals(getUnitAt(from).getOwner())
             && (getUnitAt(to) == null || getUnitAt(from).getOwner() != getUnitAt(to).getOwner())
-            && (getUnitAt(from).getMoveCount() > 0)
-    ){
-      return true;
-    }
-    return false;
+            && (getUnitAt(from).getMoveCount() > 0);
   }
 
   public void moveUnitToNewPos(Position from, Position to){
