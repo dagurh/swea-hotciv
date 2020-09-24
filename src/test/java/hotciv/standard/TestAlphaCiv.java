@@ -43,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TestAlphaCiv {
 
   private Game game;
-  private Position pos0_1, pos1_0, pos1_1, pos1_4, pos2_0, pos2_1, pos2_2, pos3_1, pos3_2, pos4_2, pos4_3, pos4_4;
+  private Position pos0_1, pos1_0, pos1_1, pos4_1, pos2_0, pos2_1, pos2_2, pos3_1, pos3_2, pos4_2, pos4_3, pos4_4;
   private int x;
 
   public void callEndOfTurn(int x){
@@ -61,12 +61,12 @@ public class TestAlphaCiv {
     pos0_1 = new Position(0,1);
     pos1_0 = new Position(1,0);
     pos1_1 = new Position(1,1);
-    pos1_4 = new Position(1,4);
     pos2_0 = new Position(2,0);
     pos2_1 = new Position(2,1);
     pos2_2 = new Position(2,2);
     pos3_1 = new Position(3,1);
     pos3_2 = new Position(3,2);
+    pos4_1 = new Position(4,1);
     pos4_2 = new Position(4,2);
     pos4_3 = new Position(4,3);
     pos4_4 = new Position(4,4);
@@ -84,10 +84,10 @@ public class TestAlphaCiv {
     assertThat(game.getCityAt(pos1_1).getOwner(), is(Player.RED));
   }
 
-  // test: should be a blue city at position (1, 4)
+  // test: should be a blue city at position (4, 1)
   @Test
-  public void shouldBeBlueCityAt1_4() {
-    assertThat(game.getCityAt(pos1_4).getOwner(), is(Player.BLUE));
+  public void shouldBeBlueCityAt4_1() {
+    assertThat(game.getCityAt(pos4_1).getOwner(), is(Player.BLUE));
   }
 
   // test: should be the blue players turn after the red player
@@ -207,10 +207,10 @@ public class TestAlphaCiv {
   @Test
   public void AfterEachTurnPlayerGainsSixProduction() {
     assertThat(game.getCityAt(pos1_1).getTreasury(), is(0));
-    assertThat(game.getCityAt(pos1_4).getTreasury(), is(0));
+    assertThat(game.getCityAt(pos4_1).getTreasury(), is(0));
     callEndOfTurn(2);
     assertThat(game.getCityAt(pos1_1).getTreasury(), is(6));
-    assertThat(game.getCityAt(pos1_4).getTreasury(), is(6));
+    assertThat(game.getCityAt(pos4_1).getTreasury(), is(6));
   }
 
   @Test
@@ -249,14 +249,14 @@ public class TestAlphaCiv {
 
   @Test
   public void blueCityCanChangeTypeOfUnitProduction() {
-    game.changeProductionInCityAt(pos1_4, "legion");
-    assertThat(game.getCityAt(pos1_4).getProduction(), is("legion"));
+    game.changeProductionInCityAt(pos4_1, "legion");
+    assertThat(game.getCityAt(pos4_1).getProduction(), is("legion"));
   }
 
   @Test
   public void blueCityCanChangeWorkForceFocus() {
-    game.changeWorkForceFocusInCityAt(pos1_4, "hammer");
-    assertThat(game.getCityAt(pos1_4).getWorkforceFocus(), is("hammer"));
+    game.changeWorkForceFocusInCityAt(pos4_1, "hammer");
+    assertThat(game.getCityAt(pos4_1).getWorkforceFocus(), is("hammer"));
   }
 
   @Test

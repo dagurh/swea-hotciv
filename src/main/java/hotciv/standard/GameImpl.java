@@ -76,7 +76,7 @@ public class GameImpl implements Game {
   // creates cities and their positions
   public void makeAndAddCities(){
     redCityPos = new Position(1, 1);
-    blueCityPos = new Position(1, 4);
+    blueCityPos = new Position(4, 1);
     City redCity = new CityImpl(Player.RED);
     City blueCity = new CityImpl(Player.BLUE);
     cityMap.put(redCityPos, redCity);
@@ -110,7 +110,7 @@ public class GameImpl implements Game {
 
 
   public Player getWinner(){
-    return winnerStrategy.determineWinner(age);
+    return winnerStrategy.determineWinner(age, cityMap);
   }
 
   // returns the current century
