@@ -1,3 +1,0 @@
-* Vi har ikke implementeret at Unit's defence og attack værdi har noget indflydelse på udfaldet af en kamp
-* Vi har ikke implementeret at en Tile's terrain har indflydelse på produktionen i en by
-* Vi har ikke implementeret performUnitActionAt() i gameImpl
