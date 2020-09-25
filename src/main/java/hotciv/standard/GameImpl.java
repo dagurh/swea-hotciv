@@ -195,9 +195,9 @@ public class GameImpl implements Game {
     City.changeWorkForce(balance);
   }
 
-  public void changeUnitsDefensiveStrength(Position p, int multiplier){
+  public void changeUnitsDefensiveStrength(Position p){
     UnitImpl Unit = (UnitImpl) getUnitAt(p);
-    Unit.setDefensiveStrength(multiplier);
+    Unit.setDefensiveStrength();
   }
 
   public void changeProductionInCityAt( Position p, String unitType ) {

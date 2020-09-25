@@ -1,5 +1,5 @@
 **OK** When a Settler calls buildCity() he places down a city with the same owner as himself, a population of 1 and he is removed from the map
 
-When an archer fortifies his defense doubles and he cannot move
+**OK** When an archer fortifies his defense doubles and he cannot move
 
-When an archer fortifies when he is already fortified he cancels it
+**OK** When an archer fortifies when he is already fortified he cancels it

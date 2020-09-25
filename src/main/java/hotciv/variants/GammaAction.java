@@ -19,11 +19,11 @@ public class GammaAction implements ActionStrategy {
                 UnitImpl archerUnit = (UnitImpl) game.getUnitAt(p);
                 if(!archerUnit.getFortified()) {
                     archerUnit.setFortified(true);
-                    game.changeUnitsDefensiveStrength(p, 2);
+                    game.changeUnitsDefensiveStrength(p);
                     archerUnit.decreaseMoveCount();
                 } else {
                     archerUnit.setFortified(false);
-                    game.changeUnitsDefensiveStrength(p, 1);
+                    game.changeUnitsDefensiveStrength(p);
                     archerUnit.setMoveCount();
                 }
         }

@@ -79,8 +79,12 @@ public class UnitImpl implements Unit {
         moveCount -= 1;
     }
 
-    public void setDefensiveStrength(int multiplier){
-        defensiveStrength = defensiveStrength * multiplier;
+    public void setDefensiveStrength() {
+        if (isFortified) {
+            defensiveStrength = 6;
+        } else {
+            defensiveStrength = 3;
+        }
     }
 
     public boolean getFortified() {
