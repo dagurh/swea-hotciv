@@ -1,25 +1,16 @@
 package hotciv.variants;
 
+import hotciv.framework.GameConstants;
+import hotciv.framework.Player;
 import hotciv.framework.Position;
-import hotciv.framework.Tile;
+import hotciv.standard.CityImpl;
+import hotciv.standard.GameImpl;
+import hotciv.standard.TileImpl;
 
-import java.util.Map;
 
-public class DeltaWorldLayout implements WorldLayoutStrategy {
+public class DeltaCivWorldLayoutStrategy implements WorldLayoutStrategy {
     @Override
-    public void createWorld(Map<Position, Tile> tileMap) {
-
-    }
-    /*
-    // A simple implementation to draw the map of DeltaCiv
-    protected Map<Position,Tile> world;
-    public Tile getTileAt( Position p ) { return world.get(p); }
-
-    /** Define the world as the DeltaCiv layout */
-/*    private Map<Position,Tile> defineWorld() {
-        // Basically we use a 'data driven' approach - code the
-        // layout in a simple semi-visual representation, and
-        // convert it to the actual Game representation.
+    public void createWorld(GameImpl game) {
         String[] layout =
                 new String[] {
                         "...ooMooooo.....",
@@ -40,7 +31,6 @@ public class DeltaWorldLayout implements WorldLayoutStrategy {
                         ".....ooooooooo..",
                 };
         // Conversion...
-        Map<Position,Tile> theWorld = new HashMap<Position,Tile>();
         String line;
         for ( int r = 0; r < GameConstants.WORLDSIZE; r++ ) {
             line = layout[r];
@@ -53,13 +43,15 @@ public class DeltaWorldLayout implements WorldLayoutStrategy {
                 if ( tileChar == 'f' ) { type = GameConstants.FOREST; }
                 if ( tileChar == 'h' ) { type = GameConstants.HILLS; }
                 Position p = new Position(r,c);
-                theWorld.put( p, new StubTile(type));
+                game.addTile(p, new TileImpl(type));
+                Position redCityPos = new Position(8,12);
+                Position blueCityPos = new Position(4,5);
+                CityImpl redCity = new CityImpl(Player.RED);
+                CityImpl blueCity = new CityImpl(Player.BLUE);
+                game.addCity(redCityPos, redCity);
+                game.addCity(blueCityPos, blueCity);
             }
         }
-        return theWorld;
     }
 
-
-
-    */
 }

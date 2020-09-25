@@ -2,10 +2,10 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
-import hotciv.variants.AlphaAction;
-import hotciv.variants.AlphaAging;
-import hotciv.variants.AlphaWinner;
-import hotciv.variants.AlphaWorldLayout;
+import hotciv.variants.AlphaCivActionStrategy;
+import hotciv.variants.AlphaCivAgingStrategy;
+import hotciv.variants.AlphaCivWinnerStrategy;
+import hotciv.variants.AlphaCivWorldLayoutStrategy;
 import org.junit.jupiter.api.*;
 
 import static hotciv.framework.Player.RED;
@@ -58,7 +58,7 @@ public class TestAlphaCiv {
    */
   @BeforeEach
   public void setUp() {
-    game = new GameImpl(new AlphaAging(), new AlphaWinner(), new AlphaAction(), new AlphaWorldLayout());
+    game = new GameImpl(new AlphaCivAgingStrategy(), new AlphaCivWinnerStrategy(), new AlphaCivActionStrategy(), new AlphaCivWorldLayoutStrategy());
     pos0_1 = new Position(0,1);
     pos1_0 = new Position(1,0);
     pos1_1 = new Position(1,1);

@@ -8,29 +8,22 @@ import org.junit.jupiter.api.*;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 
 class TestBetaCiv {
 
     private Game game;
-    private Position pos0_1, pos1_0, pos1_1, pos4_1, pos2_0, pos2_1, pos2_2, pos3_1, pos3_2, pos4_2, pos4_3, pos4_4;
+    private Position pos1_1, pos4_1, pos2_0, pos2_1, pos3_1, pos3_2;
 
     @BeforeEach
     void setUp() {
-        game = new GameImpl(new BetaAging(), new BetaWinner(), new AlphaAction(), new AlphaWorldLayout());
-        pos0_1 = new Position(0,1);
-        pos1_0 = new Position(1,0);
-        pos1_1 = new Position(1,1);
-        pos2_0 = new Position(2,0);
-        pos2_1 = new Position(2,1);
-        pos2_2 = new Position(2,2);
-        pos3_1 = new Position(3,1);
-        pos3_2 = new Position(3,2);
-        pos4_1 = new Position(4,1);
-        pos4_2 = new Position(4,2);
-        pos4_3 = new Position(4,3);
-        pos4_4 = new Position(4,4);
+        game = new GameImpl(new BetaCivAgingStrategy(), new BetaCivWinnerStrategy(), new AlphaCivActionStrategy(), new AlphaCivWorldLayoutStrategy());
+        pos1_1 = new Position(1, 1);
+        pos2_0 = new Position(2, 0);
+        pos2_1 = new Position(2, 1);
+        pos3_1 = new Position(3, 1);
+        pos3_2 = new Position(3, 2);
+        pos4_1 = new Position(4, 1);
     }
 
     public void callEndOfTurn(int x){

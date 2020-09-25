@@ -1,10 +1,8 @@
 package hotciv.variants;
 
-import hotciv.framework.Position;
-import hotciv.framework.Tile;
+import hotciv.standard.GameImpl;
 
-import java.util.Map;
 
 public interface WorldLayoutStrategy {
-    void createWorld(Map<Position, Tile> tileMap);
+    void createWorld(GameImpl game);
 }

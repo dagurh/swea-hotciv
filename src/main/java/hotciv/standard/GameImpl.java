@@ -91,7 +91,7 @@ public class GameImpl implements Game {
 
   // creates tiles and their position
   public void makeAndAddTiles() {
-    worldLayoutStrategy.createWorld(tileMap);
+    worldLayoutStrategy.createWorld(this);
   }
 
   // determines who's turn it is by using the timeCounter variable
@@ -101,7 +101,7 @@ public class GameImpl implements Game {
 
 
   public Player getWinner(){
-    return winnerStrategy.determineWinner(age, cityMap);
+    return winnerStrategy.determineWinner(age, this);
   }
 
   // returns the current century
@@ -227,7 +227,10 @@ public class GameImpl implements Game {
     cityMap.put(p, newCity);
   }
 
+  public void addTile(Position p, TileImpl newTile) { tileMap.put(p, newTile); }
+
   public void removeUnit(Position p) {
     unitMap.remove(p);
   }
+
 }

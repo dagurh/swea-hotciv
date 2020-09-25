@@ -5,9 +5,8 @@ import hotciv.standard.CityImpl;
 import hotciv.standard.GameImpl;
 import hotciv.standard.UnitImpl;
 
-import java.util.Map;
 
-public class GammaAction implements ActionStrategy {
+public class GammaCivActionStrategy implements ActionStrategy {
 
     @Override
     public void unitAction(GameImpl game, Position p) {

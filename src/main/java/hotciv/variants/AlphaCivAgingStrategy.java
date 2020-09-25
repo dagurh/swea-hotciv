@@ -1,6 +1,6 @@
 package hotciv.variants;
 
-public class AlphaAging implements AgeStrategy{
+public class AlphaCivAgingStrategy implements AgeStrategy{
     @Override
     public int advanceAge(int currentAge) {
         int yearsPerRound = 100;
