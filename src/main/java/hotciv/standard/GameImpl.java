@@ -221,14 +221,13 @@ public class GameImpl implements Game {
     }
   }
 
-  public void performUnitActionAt( Position p ) { actionStrategy.unitAction(p); }
+  public void performUnitActionAt( Position p ) { actionStrategy.unitAction(this, p); }
 
-  public Map<Position, City>  getCities(){
-    return cityMap;
+  public void addCity(Position p, CityImpl newCity) {
+    cityMap.put(p, newCity);
   }
 
-  public Map<Position, Unit>  getUnits(){
-    return unitMap;
+  public void removeUnit(Position p) {
+    unitMap.remove(p);
   }
-
 }

@@ -9,9 +9,6 @@ import hotciv.standard.GameImpl;
 import java.util.Map;
 
 public class BetaWinner implements WinnerStrategy {
-
-    private Game game;
-
     @Override
     public Player determineWinner(int currentAge, Map<Position, City> cityMap) {
         int redCityCounter = 0;

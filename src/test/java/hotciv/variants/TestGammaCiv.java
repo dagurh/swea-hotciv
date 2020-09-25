@@ -42,13 +42,24 @@ class TestGammaCiv {
     @Test
     public void settlerCanPerformActionAndBuildCity(){
         game.performUnitActionAt(pos4_3);
-        assertThat(game.getUnitAt(pos4_3), is(null));
+        assertNull(game.getUnitAt(pos4_3));
         assertThat(game.getCityAt(pos4_3).getOwner(), is(Player.RED));
+        assertThat(game.getCityAt(pos4_3).getSize(), is(1));
     }
 
     @Test
-    public void archerCanFortifyAndDoublesInDefStr(){
+    public void archerCanFortifyAndDoublesInDefStrAndCannotMove(){
         game.performUnitActionAt(pos2_0);
         assertThat(game.getUnitAt(pos2_0).getDefensiveStrength(), is(6));
+        assertThat(game.getUnitAt(pos2_0).getMoveCount(), is(0));
+    }
+
+    @Test
+    public void archerCanCancelHisFortificationByUsingItAgain(){
+        game.performUnitActionAt(pos2_0);
+        assertThat(game.getUnitAt(pos2_0).getDefensiveStrength(), is(6));
+        callEndOfTurn(2);
+        game.performUnitActionAt(pos2_0);
+        assertThat(game.getUnitAt(pos2_0).getDefensiveStrength(), is(3));
     }
 }

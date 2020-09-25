@@ -10,5 +10,5 @@ import java.util.Map;
 
 public class AlphaAction implements ActionStrategy{
     @Override
-    public void unitAction(Position p) { }
+    public void unitAction(GameImpl game, Position p) { }
 }

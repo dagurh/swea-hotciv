@@ -9,20 +9,23 @@ import java.util.Map;
 
 public class GammaAction implements ActionStrategy {
 
-    GameImpl game;
-
     @Override
-    public void unitAction(Position p) {
-
-        UnitImpl unitType = (UnitImpl) game.getUnitAt(p);
-
-            if (unitType.getTypeString().equals(GameConstants.SETTLER)) {
+    public void unitAction(GameImpl game, Position p) {
+            if (game.getUnitAt(p).getTypeString().equals(GameConstants.SETTLER)) {
                 CityImpl newCity = new CityImpl(game.getUnitAt(p).getOwner());
-                game.getCities().put(p, newCity);
-                game.getUnits().remove(p);
-            }
-            if(unitType.getTypeString().equals(GameConstants.ARCHER)){
-                game.changeUnitsDefensiveStrength(p, 2);
+                game.removeUnit(p);
+                game.addCity(p, newCity);
+            } else if (game.getUnitAt(p).getTypeString().equals(GameConstants.ARCHER)) {
+                UnitImpl archerUnit = (UnitImpl) game.getUnitAt(p);
+                if(!archerUnit.getFortified()) {
+                    archerUnit.setFortified(true);
+                    game.changeUnitsDefensiveStrength(p, 2);
+                    archerUnit.decreaseMoveCount();
+                } else {
+                    archerUnit.setFortified(false);
+                    game.changeUnitsDefensiveStrength(p, 1);
+                    archerUnit.setMoveCount();
+                }
         }
     }
 }

@@ -12,6 +12,7 @@ public class UnitImpl implements Unit {
     private int attackingStrength;
     private int cost;
     private int moveCount = 1;
+    private boolean isFortified = false;
 
 
     public UnitImpl(String unitType, Player owner) {
@@ -80,5 +81,13 @@ public class UnitImpl implements Unit {
 
     public void setDefensiveStrength(int multiplier){
         defensiveStrength = defensiveStrength * multiplier;
+    }
+
+    public boolean getFortified() {
+        return isFortified;
+    }
+
+    public void setFortified(boolean status) {
+        isFortified = status;
     }
 }

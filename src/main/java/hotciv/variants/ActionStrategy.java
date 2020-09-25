@@ -9,5 +9,5 @@ import hotciv.standard.GameImpl;
 import java.util.Map;
 
 public interface ActionStrategy {
-    void unitAction(Position p);
+    void unitAction(GameImpl game, Position p);
 }
