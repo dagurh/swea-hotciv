@@ -2,6 +2,7 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
+import hotciv.variants.AlphaAction;
 import hotciv.variants.AlphaAging;
 import hotciv.variants.AlphaWinner;
 import org.junit.jupiter.api.*;
@@ -44,7 +45,6 @@ public class TestAlphaCiv {
 
   private Game game;
   private Position pos0_1, pos1_0, pos1_1, pos4_1, pos2_0, pos2_1, pos2_2, pos3_1, pos3_2, pos4_2, pos4_3, pos4_4;
-  private int x;
 
   public void callEndOfTurn(int x){
     for (int i = 0; i < x; i++) {
@@ -57,7 +57,7 @@ public class TestAlphaCiv {
    */
   @BeforeEach
   public void setUp() {
-    game = new GameImpl(new AlphaAging(), new AlphaWinner());
+    game = new GameImpl(new AlphaAging(), new AlphaWinner(), new AlphaAction());
     pos0_1 = new Position(0,1);
     pos1_0 = new Position(1,0);
     pos1_1 = new Position(1,1);

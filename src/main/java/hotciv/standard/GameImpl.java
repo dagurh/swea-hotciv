@@ -2,6 +2,7 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 import hotciv.utility.Utility;
+import hotciv.variants.ActionStrategy;
 import hotciv.variants.AgeStrategy;
 import hotciv.variants.WinnerStrategy;
 
@@ -43,15 +44,17 @@ public class GameImpl implements Game {
   private int age = GameConstants.AGE;
   private AgeStrategy ageStrategy;
   private WinnerStrategy winnerStrategy;
+  private ActionStrategy actionStrategy;
   private Player playerInTurn = Player.RED; // Variable that determines whose turn it is
   Map<Position, City> cityMap = new HashMap<>(); // Hashmap to store cities and their positions
   Map<Position, Tile> tileMap = new HashMap<>(); // Hashmap to store tiles and their positions
   Map<Position, Unit> unitMap = new HashMap<>(); // Hashmap to store units and their positions
 
   // A method that calls the method makeAndAddCities
-  public GameImpl(AgeStrategy ageStrategy, WinnerStrategy winnerStrategy){
+  public GameImpl(AgeStrategy ageStrategy, WinnerStrategy winnerStrategy, ActionStrategy actionStrategy){
     this.ageStrategy = ageStrategy;
     this.winnerStrategy = winnerStrategy;
+    this.actionStrategy = actionStrategy;
     makeAndAddCities();
     makeAndAddTiles();
     makeAndAddUnits();
@@ -204,6 +207,11 @@ public class GameImpl implements Game {
     City.changeWorkForce(balance);
   }
 
+  public void changeUnitsDefensiveStrength(Position p, int multiplier){
+    UnitImpl Unit = (UnitImpl) getUnitAt(p);
+    Unit.setDefensiveStrength(multiplier);
+  }
+
   public void changeProductionInCityAt( Position p, String unitType ) {
     CityImpl City = (CityImpl) getCityAt(p);
     City.changeProduction(unitType);
@@ -225,6 +233,14 @@ public class GameImpl implements Game {
     }
   }
 
-  public void performUnitActionAt( Position p ) {}
+  public void performUnitActionAt( Position p ) { actionStrategy.unitAction(p); }
+
+  public Map<Position, City>  getCities(){
+    return cityMap;
+  }
+
+  public Map<Position, Unit>  getUnits(){
+    return unitMap;
+  }
 
 }

@@ -51,4 +51,7 @@ public class GameConstants {
   public static final String foodFocus = "apple";
   // The starting age of world
   public static final int AGE = -4000;
+  // Units actions
+  public static final String BUILDCITY = "build city";
+  public static final String FORTIFY = "fortify";
 }

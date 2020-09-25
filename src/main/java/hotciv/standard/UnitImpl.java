@@ -77,4 +77,8 @@ public class UnitImpl implements Unit {
     public void decreaseMoveCount() {
         moveCount -= 1;
     }
+
+    public void setDefensiveStrength(int multiplier){
+        defensiveStrength = defensiveStrength * multiplier;
+    }
 }
