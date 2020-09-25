@@ -5,6 +5,7 @@ import hotciv.utility.Utility;
 import hotciv.variants.ActionStrategy;
 import hotciv.variants.AgeStrategy;
 import hotciv.variants.WinnerStrategy;
+import hotciv.variants.WorldLayoutStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,16 +46,18 @@ public class GameImpl implements Game {
   private AgeStrategy ageStrategy;
   private WinnerStrategy winnerStrategy;
   private ActionStrategy actionStrategy;
+  private WorldLayoutStrategy worldLayoutStrategy;
   private Player playerInTurn = Player.RED; // Variable that determines whose turn it is
   Map<Position, City> cityMap = new HashMap<>(); // Hashmap to store cities and their positions
   Map<Position, Tile> tileMap = new HashMap<>(); // Hashmap to store tiles and their positions
   Map<Position, Unit> unitMap = new HashMap<>(); // Hashmap to store units and their positions
 
   // A method that calls the method makeAndAddCities
-  public GameImpl(AgeStrategy ageStrategy, WinnerStrategy winnerStrategy, ActionStrategy actionStrategy){
+  public GameImpl(AgeStrategy ageStrategy, WinnerStrategy winnerStrategy, ActionStrategy actionStrategy, WorldLayoutStrategy worldLayoutStrategy){
     this.ageStrategy = ageStrategy;
     this.winnerStrategy = winnerStrategy;
     this.actionStrategy = actionStrategy;
+    this.worldLayoutStrategy = worldLayoutStrategy;
     makeAndAddCities();
     makeAndAddTiles();
     makeAndAddUnits();
@@ -88,22 +91,7 @@ public class GameImpl implements Game {
 
   // creates tiles and their position
   public void makeAndAddTiles() {
-    for (int i = 0; i < GameConstants.WORLDSIZE; i++) {
-      for (int j = 0; j < GameConstants.WORLDSIZE; j++) {
-        tileMap.put(new Position(i, j), new TileImpl(GameConstants.PLAINS));
-      }
-      Position mountainsPos = new Position(2, 2);
-      TileImpl mountainsTile = new TileImpl(GameConstants.MOUNTAINS);
-      tileMap.put(mountainsPos, mountainsTile);
-
-      Position hillsPos = new Position(0, 1);
-      TileImpl hillsTile = new TileImpl(GameConstants.HILLS);
-      tileMap.put(hillsPos, hillsTile);
-
-      Position oceanPos = new Position(1, 0);
-      TileImpl oceanTile = new TileImpl(GameConstants.OCEANS);
-      tileMap.put(oceanPos, oceanTile);
-    }
+    worldLayoutStrategy.createWorld(tileMap);
   }
 
   // determines who's turn it is by using the timeCounter variable

@@ -18,7 +18,7 @@ class TestGammaCiv {
 
     @BeforeEach
     void setUp() {
-        game = new GameImpl(new AlphaAging(), new AlphaWinner(), new GammaAction());
+        game = new GameImpl(new AlphaAging(), new AlphaWinner(), new GammaAction(), new AlphaWorldLayout());
         pos0_1 = new Position(0, 1);
         pos1_0 = new Position(1, 0);
         pos1_1 = new Position(1, 1);
@@ -40,7 +40,7 @@ class TestGammaCiv {
     }
 
     @Test
-    public void settlerCanPerfomActionAndBuildCity(){
+    public void settlerCanPerformActionAndBuildCity(){
         game.performUnitActionAt(pos4_3);
         assertThat(game.getUnitAt(pos4_3), is(null));
         assertThat(game.getCityAt(pos4_3).getOwner(), is(Player.RED));
