@@ -2,10 +2,10 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
-import hotciv.variants.AlphaCivActionStrategy;
-import hotciv.variants.AlphaCivAgingStrategy;
-import hotciv.variants.AlphaCivWinnerStrategy;
-import hotciv.variants.AlphaCivWorldLayoutStrategy;
+import hotciv.variants.implementations.AlphaCivActionStrategy;
+import hotciv.variants.implementations.AlphaCivAgingStrategy;
+import hotciv.variants.implementations.AlphaCivWinnerStrategy;
+import hotciv.variants.implementations.AlphaCivWorldLayoutStrategy;
 import org.junit.jupiter.api.*;
 
 import static hotciv.framework.Player.RED;

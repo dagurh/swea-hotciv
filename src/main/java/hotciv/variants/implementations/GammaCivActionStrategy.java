@@ -1,9 +1,10 @@
-package hotciv.variants;
+package hotciv.variants.implementations;
 
 import hotciv.framework.*;
 import hotciv.standard.CityImpl;
 import hotciv.standard.GameImpl;
 import hotciv.standard.UnitImpl;
+import hotciv.variants.interfaces.ActionStrategy;
 
 
 public class GammaCivActionStrategy implements ActionStrategy {

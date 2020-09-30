@@ -1,8 +1,9 @@
-package hotciv.variants;
+package hotciv.variants.implementations;
 
 import hotciv.framework.Player;
 import hotciv.framework.Position;
 import hotciv.standard.GameImpl;
+import hotciv.variants.interfaces.WinnerStrategy;
 
 public class BetaCivWinnerStrategy implements WinnerStrategy {
 

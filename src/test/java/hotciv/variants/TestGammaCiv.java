@@ -4,6 +4,10 @@ import hotciv.framework.Game;
 import hotciv.framework.Player;
 import hotciv.framework.Position;
 import hotciv.standard.GameImpl;
+import hotciv.variants.implementations.AlphaCivAgingStrategy;
+import hotciv.variants.implementations.AlphaCivWinnerStrategy;
+import hotciv.variants.implementations.AlphaCivWorldLayoutStrategy;
+import hotciv.variants.implementations.GammaCivActionStrategy;
 import org.junit.jupiter.api.*;
 
 import static org.hamcrest.CoreMatchers.*;

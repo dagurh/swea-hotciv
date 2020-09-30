@@ -1,4 +1,6 @@
-package hotciv.variants;
+package hotciv.variants.implementations;
+
+import hotciv.variants.interfaces.AgeStrategy;
 
 public class BetaCivAgingStrategy implements AgeStrategy {
     @Override

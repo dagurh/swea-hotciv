@@ -1,4 +1,4 @@
-package hotciv.variants;
+package hotciv.variants.interfaces;
 
 import hotciv.framework.City;
 import hotciv.framework.Game;

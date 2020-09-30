@@ -5,6 +5,10 @@ import hotciv.framework.GameConstants;
 import hotciv.framework.Player;
 import hotciv.framework.Position;
 import hotciv.standard.GameImpl;
+import hotciv.variants.implementations.AlphaCivActionStrategy;
+import hotciv.variants.implementations.AlphaCivAgingStrategy;
+import hotciv.variants.implementations.AlphaCivWinnerStrategy;
+import hotciv.variants.implementations.DeltaCivWorldLayoutStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

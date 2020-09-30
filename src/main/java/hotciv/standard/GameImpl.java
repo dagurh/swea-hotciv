@@ -2,10 +2,10 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 import hotciv.utility.Utility;
-import hotciv.variants.ActionStrategy;
-import hotciv.variants.AgeStrategy;
-import hotciv.variants.WinnerStrategy;
-import hotciv.variants.WorldLayoutStrategy;
+import hotciv.variants.interfaces.ActionStrategy;
+import hotciv.variants.interfaces.AgeStrategy;
+import hotciv.variants.interfaces.WinnerStrategy;
+import hotciv.variants.interfaces.WorldLayoutStrategy;
 
 import java.util.HashMap;
 import java.util.Map;

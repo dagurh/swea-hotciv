@@ -1,9 +1,10 @@
-package hotciv.variants;
+package hotciv.variants.implementations;
 
 import hotciv.framework.GameConstants;
 import hotciv.framework.Position;
 import hotciv.standard.GameImpl;
 import hotciv.standard.TileImpl;
+import hotciv.variants.interfaces.WorldLayoutStrategy;
 
 
 public class AlphaCivWorldLayoutStrategy implements WorldLayoutStrategy {
