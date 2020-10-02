@@ -125,16 +125,32 @@ public class GameImpl implements Game {
   public boolean moveLegal(Position from, Position to){
     int rowDiff = to.getRow()-from.getRow();
     int colDiff = to.getColumn()- from.getColumn();
-    return rowDiff >= -1
+
+    boolean isOneTileInAnyDirection = rowDiff >= -1
             && rowDiff <= 1
             && colDiff >= -1
-            && colDiff <= 1
-            && !getTileAt(to).equals(GameConstants.OCEANS)
-            && !getTileAt(to).equals(GameConstants.MOUNTAINS)
-            && getPlayerInTurn().equals(getUnitAt(from).getOwner())
-            && (getUnitAt(to) == null || getUnitAt(from).getOwner() != getUnitAt(to).getOwner())
-            && (getUnitAt(from).getMoveCount() > 0);
+            && colDiff <= 1;
+    if(!isOneTileInAnyDirection) return false;
+
+    boolean isPlayerInTurn = getPlayerInTurn().equals(getUnitAt(from).getOwner());
+    if(!isPlayerInTurn) return false;
+
+    if(!isLegalTerrain(to)) return false;
+
+    boolean bothUnitsHaveTheSameOwner = getUnitAt(to) == null || getUnitAt(from).getOwner() != getUnitAt(to).getOwner();
+    if(!bothUnitsHaveTheSameOwner) return false;
+
+    boolean unitHasMoveCount = getUnitAt(from).getMoveCount() > 0;
+    if(!unitHasMoveCount) return false;
+
+    return true;
   }
+
+  private boolean isLegalTerrain(Position to) {
+    return !getTileAt(to).equals(GameConstants.OCEANS)
+            && !getTileAt(to).equals(GameConstants.MOUNTAINS);
+  }
+
 
   public void moveUnitToNewPos(Position from, Position to){
     Unit newUnit = getUnitAt(from);
@@ -212,8 +228,7 @@ public class GameImpl implements Game {
     } else {
       for (Position p : Utility.get8neighborhoodOf(cityPosition)) {
         if (getUnitAt(p) == null
-                && !getTileAt(p).equals(GameConstants.OCEANS)
-                && !getTileAt(p).equals(GameConstants.MOUNTAINS)) {
+                && isLegalTerrain(cityPosition)) {
           UnitImpl newUnit = new UnitImpl(unitType, getCityAt(cityPosition).getOwner());
           unitMap.put(p, newUnit);
         }
