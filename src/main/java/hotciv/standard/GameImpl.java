@@ -223,17 +223,25 @@ public class GameImpl implements Game {
 
   public void produceUnit(String unitType, Position cityPosition){
     if(getUnitAt(cityPosition) == null) {
-      UnitImpl newUnit = new UnitImpl(unitType, getCityAt(cityPosition).getOwner());
-      unitMap.put(cityPosition, newUnit);
+      UnitImpl newUnit = createUnit(unitType, cityPosition);
+      addUnit(cityPosition, newUnit);
     } else {
       for (Position p : Utility.get8neighborhoodOf(cityPosition)) {
         if (getUnitAt(p) == null
-                && isLegalTerrain(cityPosition)) {
-          UnitImpl newUnit = new UnitImpl(unitType, getCityAt(cityPosition).getOwner());
-          unitMap.put(p, newUnit);
+                && isLegalTerrain(p)) {
+          UnitImpl newUnit = createUnit(unitType, cityPosition);
+          addUnit(p, newUnit);
         }
       }
     }
+  }
+
+  private UnitImpl createUnit(String unitType, Position cityPosition) {
+    return new UnitImpl(unitType, getCityAt(cityPosition).getOwner());
+  }
+
+  private void addUnit(Position p, UnitImpl newUnit) {
+    unitMap.put(p, newUnit);
   }
 
   public void performUnitActionAt( Position p ) { actionStrategy.unitAction(this, p); }
