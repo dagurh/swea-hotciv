@@ -110,16 +110,30 @@ public class GameImpl implements Game {
   }
 
   public boolean moveUnit( Position from, Position to ) {
-    if (moveLegal(from, to) && getCityAt(to) == null){
-      moveUnitToNewPos(from, to);
-      return true;
-    } else if (moveLegal(from, to) && !getUnitAt(from).getOwner().equals(getCityAt(to).getOwner())){
-      changeOwnershipOfCity(to, getUnitAt(from).getOwner());
-      moveUnitToNewPos(from, to);
-      return true;
+    if (!moveLegal(from, to)) return false;
+    if (isEnemyUnitOnTo(from, to)) {
+      if(resultOfAttack(from, to)) { moveUnitToNewPos(from, to); }
+      else { removeUnit(from); }
     }
-    return false;
+    if (!getUnitAt(from).getOwner().equals(getCityAt(to).getOwner())){
+      changeOwnershipOfCity(to, getUnitAt(from).getOwner());
+    }
+    moveUnitToNewPos(from, to);
+    return true;
   }
+
+  private boolean isEnemyUnitOnTo(Position from, Position to) {
+    return getUnitAt(from).getOwner().equals(getUnitAt(to).getOwner());
+  }
+
+  /*
+  if(dererenfjendehvorvierpåvejhen)
+  (attackStrategy.attackerOutcome()){
+    moveUnitToNewPos();
+  } else {
+    removeUnit();
+  }
+   */
 
   public boolean moveLegal(Position from, Position to){
     int rowDiff = to.getRow()-from.getRow();
@@ -150,8 +164,8 @@ public class GameImpl implements Game {
             && !getTileAt(to).equals(GameConstants.MOUNTAINS);
   }
 
-  public void resultOfAttack(Position attacker, Position defender){
-    attackStrategy.unitBattle(this, attacker, defender);
+  public boolean resultOfAttack(Position attacker, Position defender){
+    return attackStrategy.unitBattle(this, attacker, defender);
   }
 
   public void moveUnitToNewPos(Position from, Position to){
@@ -249,5 +263,7 @@ public class GameImpl implements Game {
   public void removeUnit(Position p) {
     unitMap.remove(p);
   }
+
+
 
 }

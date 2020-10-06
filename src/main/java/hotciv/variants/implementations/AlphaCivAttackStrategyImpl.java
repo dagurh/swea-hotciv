@@ -7,7 +7,7 @@ import hotciv.variants.interfaces.AttackStrategy;
 public class AlphaCivAttackStrategyImpl implements AttackStrategy {
 
     @Override
-    public void unitBattle(GameImpl game, Position attacker, Position defender) {
-        game.moveUnitToNewPos(attacker, defender);
+    public boolean unitBattle(GameImpl game, Position attacker, Position defender) {
+        return true;
     }
 }
