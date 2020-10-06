@@ -4,10 +4,7 @@ import hotciv.framework.Game;
 import hotciv.framework.Player;
 import hotciv.framework.Position;
 import hotciv.standard.GameImpl;
-import hotciv.variants.implementations.AlphaCivAgingStrategy;
-import hotciv.variants.implementations.AlphaCivWinnerStrategy;
-import hotciv.variants.implementations.AlphaCivWorldLayoutStrategy;
-import hotciv.variants.implementations.GammaCivActionStrategy;
+import hotciv.variants.implementations.*;
 import org.junit.jupiter.api.*;
 
 import static org.hamcrest.CoreMatchers.*;
@@ -22,7 +19,7 @@ class TestGammaCiv {
 
     @BeforeEach
     void setUp() {
-        game = new GameImpl(new AlphaCivAgingStrategy(), new AlphaCivWinnerStrategy(), new GammaCivActionStrategy(), new AlphaCivWorldLayoutStrategy());
+        game = new GameImpl(new AlphaCivAgingStrategy(), new AlphaCivWinnerStrategy(), new GammaCivActionStrategy(), new AlphaCivWorldLayoutStrategy(), new AlphaCivAttackStrategyImpl());
         pos2_0 = new Position(2, 0);
         pos4_3 = new Position(4, 3);
     }

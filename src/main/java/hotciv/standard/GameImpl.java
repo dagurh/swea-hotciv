@@ -2,10 +2,8 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 import hotciv.utility.Utility;
-import hotciv.variants.interfaces.ActionStrategy;
-import hotciv.variants.interfaces.AgeStrategy;
-import hotciv.variants.interfaces.WinnerStrategy;
-import hotciv.variants.interfaces.WorldLayoutStrategy;
+import hotciv.variants.interfaces.*;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,17 +45,19 @@ public class GameImpl implements Game {
   private WinnerStrategy winnerStrategy;
   private ActionStrategy actionStrategy;
   private WorldLayoutStrategy worldLayoutStrategy;
+  private AttackStrategy attackStrategy;
   private Player playerInTurn = Player.RED; // Variable that determines whose turn it is
   Map<Position, City> cityMap = new HashMap<>(); // Hashmap to store cities and their positions
   Map<Position, Tile> tileMap = new HashMap<>(); // Hashmap to store tiles and their positions
   Map<Position, Unit> unitMap = new HashMap<>(); // Hashmap to store units and their positions
 
   // A method that calls the method makeAndAddCities
-  public GameImpl(AgeStrategy ageStrategy, WinnerStrategy winnerStrategy, ActionStrategy actionStrategy, WorldLayoutStrategy worldLayoutStrategy){
+  public GameImpl(AgeStrategy ageStrategy, WinnerStrategy winnerStrategy, ActionStrategy actionStrategy, WorldLayoutStrategy worldLayoutStrategy, AttackStrategy attackStrategy){
     this.ageStrategy = ageStrategy;
     this.winnerStrategy = winnerStrategy;
     this.actionStrategy = actionStrategy;
     this.worldLayoutStrategy = worldLayoutStrategy;
+    this.attackStrategy = attackStrategy;
     makeAndAddCities();
     makeAndAddTiles();
     makeAndAddUnits();
@@ -109,7 +109,6 @@ public class GameImpl implements Game {
     return age;
   }
 
-
   public boolean moveUnit( Position from, Position to ) {
     if (moveLegal(from, to) && getCityAt(to) == null){
       moveUnitToNewPos(from, to);
@@ -151,6 +150,9 @@ public class GameImpl implements Game {
             && !getTileAt(to).equals(GameConstants.MOUNTAINS);
   }
 
+  public void resultOfAttack(Position attacker, Position defender){
+    attackStrategy.unitBattle(this, attacker, defender);
+  }
 
   public void moveUnitToNewPos(Position from, Position to){
     Unit newUnit = getUnitAt(from);
