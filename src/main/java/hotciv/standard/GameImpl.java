@@ -112,18 +112,32 @@ public class GameImpl implements Game {
   public boolean moveUnit( Position from, Position to ) {
     if (!moveLegal(from, to)) return false;
     if (isEnemyUnitOnTo(from, to)) {
-      if(resultOfAttack(from, to)) { moveUnitToNewPos(from, to); }
+      if(resultOfAttack(from, to)) { removeUnit(to); }
       else { removeUnit(from); }
     }
-    if (!getUnitAt(from).getOwner().equals(getCityAt(to).getOwner())){
+    if (isCityUnderAttack(from, to)){
       changeOwnershipOfCity(to, getUnitAt(from).getOwner());
     }
     moveUnitToNewPos(from, to);
     return true;
   }
 
+  private boolean isCityUnderAttack(Position from, Position to) {
+    if (getCityAt(to) != null) {
+      if(!getUnitAt(from).getOwner().equals(getCityAt(to).getOwner())) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   private boolean isEnemyUnitOnTo(Position from, Position to) {
-    return getUnitAt(from).getOwner().equals(getUnitAt(to).getOwner());
+    if (getUnitAt(to) != null){
+      if(!getUnitAt(from).getOwner().equals(getUnitAt(to).getOwner())){
+        return true;
+      }
+    }
+    return false;
   }
 
   /*
