@@ -112,8 +112,7 @@ public class GameImpl implements Game {
   public boolean moveUnit( Position from, Position to ) {
     if (!moveLegal(from, to)) return false;
     if (isEnemyUnitOnTo(from, to)) {
-      if(resultOfAttack(from, to)) { removeUnit(to); }
-      else { removeUnit(from); }
+      if(!resultOfAttack(from, to)) removeUnit(from);
     }
     if (isCityUnderAttack(from, to)){
       changeOwnershipOfCity(to, getUnitAt(from).getOwner());
@@ -186,7 +185,9 @@ public class GameImpl implements Game {
     Unit newUnit = getUnitAt(from);
     unitMap.remove(from);
     unitMap.put(to, newUnit);
-    changeMoveCountForUnitAt(to);
+    if(getUnitAt(to) != null) {
+      changeMoveCountForUnitAt(to);
+    }
   }
 
 
@@ -232,8 +233,8 @@ public class GameImpl implements Game {
   }
 
   public void changeMoveCountForUnitAt(Position p){
-    UnitImpl Unit = (UnitImpl) getUnitAt(p);
-    Unit.decreaseMoveCount();
+      UnitImpl Unit = (UnitImpl) getUnitAt(p);
+      Unit.decreaseMoveCount();
   }
 
   public void changeWorkForceFocusInCityAt( Position p, String balance ) {
@@ -276,6 +277,10 @@ public class GameImpl implements Game {
 
   public void removeUnit(Position p) {
     unitMap.remove(p);
+  }
+
+  public void addUnit(Position p, UnitImpl newUnit) {
+    unitMap.put(p, newUnit);
   }
 
 

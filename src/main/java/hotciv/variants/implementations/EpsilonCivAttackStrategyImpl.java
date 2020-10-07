@@ -5,6 +5,8 @@ import hotciv.standard.GameImpl;
 import hotciv.utility.Utility;
 import hotciv.variants.interfaces.AttackStrategy;
 import hotciv.utility.Utility2;
+import hotciv.variants.interfaces.DieStrategy;
+
 import java.util.Random;
 
 public class EpsilonCivAttackStrategyImpl implements AttackStrategy {
@@ -15,10 +17,13 @@ public class EpsilonCivAttackStrategyImpl implements AttackStrategy {
     private int defendersSupportFactor;
     private int combinedAttackerStrength;
     private int combinedDefenceStrength;
-    private Random randomAtt = new Random();
-    private Random randomDef = new Random();
     private int eyesAtt;
     private int eyesDef;
+    private DieStrategy dieStrategy;
+
+    public EpsilonCivAttackStrategyImpl(DieStrategy dieStrategy){
+        this.dieStrategy = dieStrategy;
+    }
 
     @Override
     public boolean unitBattle(GameImpl game, Position attacker, Position defender) {
@@ -31,8 +36,8 @@ public class EpsilonCivAttackStrategyImpl implements AttackStrategy {
         combinedAttackerStrength = (game.getUnitAt(attacker).getAttackingStrength() + attackersSupportFactor) * attackersTerrainFactor;
         combinedDefenceStrength = (game.getUnitAt(defender).getDefensiveStrength() + defendersSupportFactor) * defendersTerrainFactor;
 
-        eyesAtt = randomAtt.nextInt(6) + 1;
-        eyesDef = randomDef.nextInt(6) + 1;
+        eyesAtt = dieStrategy.determineDie(game);
+        eyesDef = dieStrategy.determineDie(game);
 
         return combinedAttackerStrength * eyesAtt > combinedDefenceStrength * eyesDef;
     }
