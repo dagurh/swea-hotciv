@@ -9,7 +9,7 @@ import hotciv.variants.interfaces.DieStrategy;
 
 import java.util.Random;
 
-public class EpsilonCivAttackStrategyImpl implements AttackStrategy {
+public class EpsilonCivAttackStrategy implements AttackStrategy {
 
     private int attackersTerrainFactor;
     private int defendersTerrainFactor;
@@ -21,7 +21,7 @@ public class EpsilonCivAttackStrategyImpl implements AttackStrategy {
     private int eyesDef;
     private DieStrategy dieStrategy;
 
-    public EpsilonCivAttackStrategyImpl(DieStrategy dieStrategy){
+    public EpsilonCivAttackStrategy(DieStrategy dieStrategy){
         this.dieStrategy = dieStrategy;
     }
 

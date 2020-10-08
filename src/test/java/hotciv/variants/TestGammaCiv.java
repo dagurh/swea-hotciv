@@ -19,7 +19,7 @@ class TestGammaCiv {
 
     @BeforeEach
     void setUp() {
-        game = new GameImpl(new AlphaCivAgingStrategy(), new AlphaCivWinnerStrategy(), new GammaCivActionStrategy(), new AlphaCivWorldLayoutStrategy(), new AlphaCivAttackStrategyImpl());
+        game = new GameImpl(new AlphaCivAgingStrategy(), new AlphaCivWinnerStrategy(), new GammaCivActionStrategy(), new AlphaCivWorldLayoutStrategy(), new AlphaCivAttackStrategy());
         pos2_0 = new Position(2, 0);
         pos4_3 = new Position(4, 3);
     }

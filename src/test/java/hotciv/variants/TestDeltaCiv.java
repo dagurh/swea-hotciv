@@ -29,7 +29,7 @@ class TestDeltaCiv {
      */
     @BeforeEach
     public void setUp() {
-        game = new GameImpl(new AlphaCivAgingStrategy(), new AlphaCivWinnerStrategy(), new AlphaCivActionStrategy(), new DeltaCivWorldLayoutStrategy(), new AlphaCivAttackStrategyImpl());
+        game = new GameImpl(new AlphaCivAgingStrategy(), new AlphaCivWinnerStrategy(), new AlphaCivActionStrategy(), new DeltaCivWorldLayoutStrategy(), new AlphaCivAttackStrategy());
         pos0_1 = new Position(0,1);
         pos0_5 = new Position(0,5);
         pos1_4 = new Position(1,4);

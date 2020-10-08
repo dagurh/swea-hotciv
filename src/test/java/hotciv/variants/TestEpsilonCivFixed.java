@@ -1,6 +1,5 @@
 package hotciv.variants;
 
-import hotciv.framework.Game;
 import hotciv.framework.Player;
 import hotciv.framework.Position;
 import hotciv.standard.GameImpl;
@@ -10,14 +9,13 @@ import org.junit.jupiter.api.*;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 
 class TestEpsilonCivFixed {
 
     private GameImpl game;
     private Position pos3_2, pos4_2, pos4_3, pos4_4;
-    private EpsilonCivAttackStrategyImpl epsilon;
+    private EpsilonCivAttackStrategy epsilon;
 
     public void callEndOfTurn(int x){
         for (int i = 0; i < x; i++) {
@@ -27,7 +25,7 @@ class TestEpsilonCivFixed {
 
     @BeforeEach
     void setUp() {
-        game = new GameImpl(new AlphaCivAgingStrategy(), new AlphaCivWinnerStrategy(), new GammaCivActionStrategy(), new AlphaCivWorldLayoutStrategy(), new EpsilonCivAttackStrategyImpl(new FixedDieStrategy()));
+        game = new GameImpl(new AlphaCivAgingStrategy(), new AlphaCivWinnerStrategy(), new GammaCivActionStrategy(), new AlphaCivWorldLayoutStrategy(), new EpsilonCivAttackStrategy(new FixedDieStrategy()));
         pos3_2 = new Position(3, 2);
         pos4_2 = new Position(4,2);
         pos4_3 = new Position(4, 3);

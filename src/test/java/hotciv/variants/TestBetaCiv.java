@@ -18,7 +18,7 @@ class TestBetaCiv {
 
     @BeforeEach
     void setUp() {
-        game = new GameImpl(new BetaCivAgingStrategy(), new BetaCivWinnerStrategy(), new AlphaCivActionStrategy(), new AlphaCivWorldLayoutStrategy(), new AlphaCivAttackStrategyImpl());
+        game = new GameImpl(new BetaCivAgingStrategy(), new BetaCivWinnerStrategy(), new AlphaCivActionStrategy(), new AlphaCivWorldLayoutStrategy(), new AlphaCivAttackStrategy());
         pos1_1 = new Position(1, 1);
         pos2_0 = new Position(2, 0);
         pos2_1 = new Position(2, 1);

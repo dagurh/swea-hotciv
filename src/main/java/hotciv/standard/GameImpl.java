@@ -139,14 +139,6 @@ public class GameImpl implements Game {
     return false;
   }
 
-  /*
-  if(dererenfjendehvorvierpåvejhen)
-  (attackStrategy.attackerOutcome()){
-    moveUnitToNewPos();
-  } else {
-    removeUnit();
-  }
-   */
 
   public boolean moveLegal(Position from, Position to){
     int rowDiff = to.getRow()-from.getRow();
