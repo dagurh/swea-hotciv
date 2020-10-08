@@ -14,8 +14,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 class TestEpsilonCivFixed {
 
     private GameImpl game;
-    private Position pos3_2, pos4_2, pos4_3, pos4_4, pos4_5, pos4_7;
-    private EpsilonCivAttackStrategy epsilon;
+    private Position pos3_2, pos4_2, pos4_3, pos4_4, pos4_5;
 
     public void callEndOfTurn(int x){
         for (int i = 0; i < x; i++) {
