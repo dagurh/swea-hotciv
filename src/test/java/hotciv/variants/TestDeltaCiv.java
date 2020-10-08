@@ -5,6 +5,7 @@ import hotciv.framework.GameConstants;
 import hotciv.framework.Player;
 import hotciv.framework.Position;
 import hotciv.standard.GameImpl;
+import hotciv.variants.factories.DeltaCivFactory;
 import hotciv.variants.implementations.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,7 +30,7 @@ class TestDeltaCiv {
      */
     @BeforeEach
     public void setUp() {
-        game = new GameImpl(new AlphaCivAgingStrategy(), new AlphaCivWinnerStrategy(), new AlphaCivActionStrategy(), new DeltaCivWorldLayoutStrategy(), new AlphaCivAttackStrategy());
+        game = new GameImpl(new DeltaCivFactory());
         pos0_1 = new Position(0,1);
         pos0_5 = new Position(0,5);
         pos1_4 = new Position(1,4);

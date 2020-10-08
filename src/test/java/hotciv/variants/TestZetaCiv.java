@@ -4,6 +4,7 @@ import hotciv.framework.Player;
 import hotciv.framework.Position;
 import hotciv.standard.GameImpl;
 import hotciv.standard.UnitImpl;
+import hotciv.variants.factories.ZetaCivFactory;
 import hotciv.variants.implementations.*;
 import org.junit.jupiter.api.*;
 
@@ -25,7 +26,7 @@ class TestZetaCiv {
 
     @BeforeEach
     void setUp() {
-        game = new GameImpl(new AlphaCivAgingStrategy(), new ZetaWinnerStrategy(new BetaCivWinnerStrategy(), new EpsilonWinnerStrategy()), new GammaCivActionStrategy(), new AlphaCivWorldLayoutStrategy(), new EpsilonCivAttackStrategy(new FixedDieStrategy()));
+        game = new GameImpl(new ZetaCivFactory());
         pos1_1 = new Position(1,1);
         pos2_0 = new Position(2,0);
         pos2_1 = new Position(2,1);

@@ -4,7 +4,7 @@ import hotciv.framework.Player;
 import hotciv.framework.Position;
 import hotciv.standard.GameImpl;
 import hotciv.standard.UnitImpl;
-import hotciv.variants.implementations.*;
+import hotciv.variants.factories.EpsilonCivFactory;
 import org.junit.jupiter.api.*;
 
 import static org.hamcrest.CoreMatchers.*;
@@ -24,7 +24,7 @@ class TestEpsilonCivFixed {
 
     @BeforeEach
     void setUp() {
-        game = new GameImpl(new AlphaCivAgingStrategy(), new EpsilonWinnerStrategy(), new GammaCivActionStrategy(), new AlphaCivWorldLayoutStrategy(), new EpsilonCivAttackStrategy(new FixedDieStrategy()));
+        game = new GameImpl(new EpsilonCivFactory());
         pos3_2 = new Position(3, 2);
         pos4_2 = new Position(4,2);
         pos4_3 = new Position(4, 3);

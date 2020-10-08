@@ -53,12 +53,13 @@ public class GameImpl implements Game {
   Map<Position, Unit> unitMap = new HashMap<>(); // Hashmap to store units and their positions
 
   // A method that calls the method makeAndAddCities
-  public GameImpl(AgeStrategy ageStrategy, WinnerStrategy winnerStrategy, ActionStrategy actionStrategy, WorldLayoutStrategy worldLayoutStrategy, AttackStrategy attackStrategy){
-    this.ageStrategy = ageStrategy;
-    this.winnerStrategy = winnerStrategy;
-    this.actionStrategy = actionStrategy;
-    this.worldLayoutStrategy = worldLayoutStrategy;
-    this.attackStrategy = attackStrategy;
+  public GameImpl(AbstractFactory abstractFactory){
+    ageStrategy = abstractFactory.ageStrategy();
+    winnerStrategy = abstractFactory.winnerStrategy();
+    actionStrategy = abstractFactory.actionStrategy();
+    worldLayoutStrategy = abstractFactory.worldLayoutStrategy();
+    attackStrategy = abstractFactory.attackStrategy();
+
     makeAndAddCities();
     makeAndAddTiles();
     makeAndAddUnits();

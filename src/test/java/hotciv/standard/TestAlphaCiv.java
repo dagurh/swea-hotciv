@@ -2,6 +2,7 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 
+import hotciv.variants.factories.AlphaCivFactory;
 import hotciv.variants.implementations.*;
 import org.junit.jupiter.api.*;
 
@@ -55,7 +56,7 @@ public class TestAlphaCiv {
    */
   @BeforeEach
   public void setUp() {
-    game = new GameImpl(new AlphaCivAgingStrategy(), new AlphaCivWinnerStrategy(), new AlphaCivActionStrategy(), new AlphaCivWorldLayoutStrategy(), new AlphaCivAttackStrategy());
+    game = new GameImpl(new AlphaCivFactory());
     pos0_1 = new Position(0,1);
     pos1_0 = new Position(1,0);
     pos1_1 = new Position(1,1);
