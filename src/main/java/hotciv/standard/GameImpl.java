@@ -40,6 +40,7 @@ public class GameImpl implements Game {
 
   private static Position blueCityPos;
   private static Position redCityPos;
+  private int blueAttackWinCounter, redAttackWinCounter;
   private int age = GameConstants.AGE;
   private AgeStrategy ageStrategy;
   private WinnerStrategy winnerStrategy;
@@ -112,13 +113,17 @@ public class GameImpl implements Game {
   public boolean moveUnit( Position from, Position to ) {
     if (!moveLegal(from, to)) return false;
     if (isEnemyUnitOnTo(from, to)) {
-      if(!resultOfAttack(from, to)) removeUnit(from);
+      if(!resultOfAttack(from, to)) { removeUnit(from); } else { incrementSuccessfulAttacks(from); }
     }
-    if (isCityUnderAttack(from, to)){
-      changeOwnershipOfCity(to, getUnitAt(from).getOwner());
-    }
+    if (isCityUnderAttack(from, to)) changeOwnershipOfCity(to, getUnitAt(from).getOwner());
     moveUnitToNewPos(from, to);
     return true;
+  }
+
+  public void incrementSuccessfulAttacks(Position from){
+    if(getUnitAt(from).getOwner() == Player.BLUE) {
+      blueAttackWinCounter++;
+    } else { redAttackWinCounter++; }
   }
 
   private boolean isCityUnderAttack(Position from, Position to) {
@@ -174,9 +179,11 @@ public class GameImpl implements Game {
   }
 
   public void moveUnitToNewPos(Position from, Position to){
-    Unit newUnit = getUnitAt(from);
-    unitMap.remove(from);
-    unitMap.put(to, newUnit);
+    if(getUnitAt(from) != null) {
+      Unit newUnit = getUnitAt(from);
+      unitMap.remove(from);
+      unitMap.put(to, newUnit);
+    }
     if(getUnitAt(to) != null) {
       changeMoveCountForUnitAt(to);
     }
@@ -276,5 +283,11 @@ public class GameImpl implements Game {
   }
 
 
+  public int getBlueAttackWinCounter() {
+    return blueAttackWinCounter;
+  }
 
+  public int getRedAttackWinCounter() {
+    return redAttackWinCounter;
+  }
 }
