@@ -5,5 +5,6 @@ import hotciv.standard.GameImpl;
 
 
 public interface WinnerStrategy {
-    Player determineWinner(int currentAge, GameImpl game);
+    Player determineWinner(GameImpl game);
+    void incrementRound();
 }

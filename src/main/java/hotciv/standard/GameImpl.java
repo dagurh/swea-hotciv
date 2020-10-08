@@ -40,7 +40,7 @@ public class GameImpl implements Game {
 
   private static Position blueCityPos;
   private static Position redCityPos;
-  private int blueAttackWinCounter, redAttackWinCounter;
+  private int blueAttackWinCounter, redAttackWinCounter, numberOfRounds;
   private int age = GameConstants.AGE;
   private AgeStrategy ageStrategy;
   private WinnerStrategy winnerStrategy;
@@ -102,7 +102,7 @@ public class GameImpl implements Game {
 
 
   public Player getWinner(){
-    return winnerStrategy.determineWinner(age, this);
+    return winnerStrategy.determineWinner(this);
   }
 
   // returns the current century
@@ -204,6 +204,7 @@ public class GameImpl implements Game {
     CityImpl redCity = (CityImpl) cityMap.get(GameImpl.redCityPos);
     CityImpl blueCity = (CityImpl) cityMap.get(GameImpl.blueCityPos);
     advAge();
+    winnerStrategy.incrementRound();
     redCity.addTreasury(6);
     blueCity.addTreasury(6);
     resetMoveCount();

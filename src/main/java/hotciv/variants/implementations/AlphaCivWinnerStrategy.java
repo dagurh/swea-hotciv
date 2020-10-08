@@ -8,10 +8,16 @@ import hotciv.variants.interfaces.WinnerStrategy;
 public class AlphaCivWinnerStrategy implements WinnerStrategy {
 
     @Override
-    public Player determineWinner(int currentAge, GameImpl game) {
-        if(currentAge == -3000){
+    public Player determineWinner(GameImpl game) {
+
+        if(game.getAge() == -3000){
             return Player.RED;
         }
         return null;
+    }
+
+    @Override
+    public void incrementRound() {
+
     }
 }
