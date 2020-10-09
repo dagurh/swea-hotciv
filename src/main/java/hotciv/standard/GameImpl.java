@@ -40,7 +40,7 @@ public class GameImpl implements Game {
 
   private static Position blueCityPos;
   private static Position redCityPos;
-  private int blueAttackWinCounter, redAttackWinCounter, numberOfRounds;
+  private int blueAttackWinCounter, redAttackWinCounter;
   private int age = GameConstants.AGE;
   private AgeStrategy ageStrategy;
   private WinnerStrategy winnerStrategy;
@@ -283,7 +283,6 @@ public class GameImpl implements Game {
   public void addUnit(Position p, UnitImpl newUnit) {
     unitMap.put(p, newUnit);
   }
-
 
   public int getBlueAttackWinCounter() {
     return blueAttackWinCounter;

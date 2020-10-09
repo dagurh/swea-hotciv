@@ -21,7 +21,7 @@ public class ZetaCivFactory implements AbstractFactory {
 
     @Override
     public WinnerStrategy winnerStrategy() {
-        return new ZetaWinnerStrategy(new BetaCivWinnerStrategy(), new EpsilonWinnerStrategy());
+        return new ZetaCivWinnerStrategy(new BetaCivWinnerStrategy(), new EpsilonCivWinnerStrategy());
     }
 
     @Override

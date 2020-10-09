@@ -4,7 +4,7 @@ import hotciv.framework.Player;
 import hotciv.standard.GameImpl;
 import hotciv.variants.interfaces.WinnerStrategy;
 
-public class EpsilonWinnerStrategy implements WinnerStrategy {
+public class EpsilonCivWinnerStrategy implements WinnerStrategy {
 
     @Override
     public Player determineWinner(GameImpl game) {
