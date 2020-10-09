@@ -2,10 +2,8 @@ package hotciv.standard;
 
 import hotciv.framework.*;
 import hotciv.utility.Utility;
-import hotciv.variants.interfaces.ActionStrategy;
-import hotciv.variants.interfaces.AgeStrategy;
-import hotciv.variants.interfaces.WinnerStrategy;
-import hotciv.variants.interfaces.WorldLayoutStrategy;
+import hotciv.variants.interfaces.*;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,22 +40,26 @@ public class GameImpl implements Game {
 
   private static Position blueCityPos;
   private static Position redCityPos;
+  private int blueAttackWinCounter, redAttackWinCounter;
   private int age = GameConstants.AGE;
   private AgeStrategy ageStrategy;
   private WinnerStrategy winnerStrategy;
   private ActionStrategy actionStrategy;
   private WorldLayoutStrategy worldLayoutStrategy;
+  private AttackStrategy attackStrategy;
   private Player playerInTurn = Player.RED; // Variable that determines whose turn it is
   Map<Position, City> cityMap = new HashMap<>(); // Hashmap to store cities and their positions
   Map<Position, Tile> tileMap = new HashMap<>(); // Hashmap to store tiles and their positions
   Map<Position, Unit> unitMap = new HashMap<>(); // Hashmap to store units and their positions
 
   // A method that calls the method makeAndAddCities
-  public GameImpl(AgeStrategy ageStrategy, WinnerStrategy winnerStrategy, ActionStrategy actionStrategy, WorldLayoutStrategy worldLayoutStrategy){
-    this.ageStrategy = ageStrategy;
-    this.winnerStrategy = winnerStrategy;
-    this.actionStrategy = actionStrategy;
-    this.worldLayoutStrategy = worldLayoutStrategy;
+  public GameImpl(AbstractFactory abstractFactory){
+    ageStrategy = abstractFactory.ageStrategy();
+    winnerStrategy = abstractFactory.winnerStrategy();
+    actionStrategy = abstractFactory.actionStrategy();
+    worldLayoutStrategy = abstractFactory.worldLayoutStrategy();
+    attackStrategy = abstractFactory.attackStrategy();
+
     makeAndAddCities();
     makeAndAddTiles();
     makeAndAddUnits();
@@ -101,7 +103,7 @@ public class GameImpl implements Game {
 
 
   public Player getWinner(){
-    return winnerStrategy.determineWinner(age, this);
+    return winnerStrategy.determineWinner(this);
   }
 
   // returns the current century
@@ -109,18 +111,40 @@ public class GameImpl implements Game {
     return age;
   }
 
-
   public boolean moveUnit( Position from, Position to ) {
-    if (moveLegal(from, to) && getCityAt(to) == null){
-      moveUnitToNewPos(from, to);
-      return true;
-    } else if (moveLegal(from, to) && !getUnitAt(from).getOwner().equals(getCityAt(to).getOwner())){
-      changeOwnershipOfCity(to, getUnitAt(from).getOwner());
-      moveUnitToNewPos(from, to);
-      return true;
+    if (!moveLegal(from, to)) return false;
+    if (isEnemyUnitOnTo(from, to)) {
+      if(!resultOfAttack(from, to)) { removeUnit(from); } else { incrementSuccessfulAttacks(from); }
+    }
+    if (isCityUnderAttack(from, to)) changeOwnershipOfCity(to, getUnitAt(from).getOwner());
+    moveUnitToNewPos(from, to);
+    return true;
+  }
+
+  public void incrementSuccessfulAttacks(Position from){
+    if(getUnitAt(from).getOwner() == Player.BLUE) {
+      blueAttackWinCounter++;
+    } else { redAttackWinCounter++; }
+  }
+
+  private boolean isCityUnderAttack(Position from, Position to) {
+    if (getCityAt(to) != null) {
+      if(!getUnitAt(from).getOwner().equals(getCityAt(to).getOwner())) {
+        return true;
+      }
     }
     return false;
   }
+
+  private boolean isEnemyUnitOnTo(Position from, Position to) {
+    if (getUnitAt(to) != null){
+      if(!getUnitAt(from).getOwner().equals(getUnitAt(to).getOwner())){
+        return true;
+      }
+    }
+    return false;
+  }
+
 
   public boolean moveLegal(Position from, Position to){
     int rowDiff = to.getRow()-from.getRow();
@@ -151,12 +175,19 @@ public class GameImpl implements Game {
             && !getTileAt(to).equals(GameConstants.MOUNTAINS);
   }
 
+  public boolean resultOfAttack(Position attacker, Position defender){
+    return attackStrategy.unitBattle(this, attacker, defender);
+  }
 
   public void moveUnitToNewPos(Position from, Position to){
-    Unit newUnit = getUnitAt(from);
-    unitMap.remove(from);
-    unitMap.put(to, newUnit);
-    changeMoveCountForUnitAt(to);
+    if(getUnitAt(from) != null) {
+      Unit newUnit = getUnitAt(from);
+      unitMap.remove(from);
+      unitMap.put(to, newUnit);
+    }
+    if(getUnitAt(to) != null) {
+      changeMoveCountForUnitAt(to);
+    }
   }
 
 
@@ -174,6 +205,7 @@ public class GameImpl implements Game {
     CityImpl redCity = (CityImpl) cityMap.get(GameImpl.redCityPos);
     CityImpl blueCity = (CityImpl) cityMap.get(GameImpl.blueCityPos);
     advAge();
+    winnerStrategy.incrementRound();
     redCity.addTreasury(6);
     blueCity.addTreasury(6);
     resetMoveCount();
@@ -202,8 +234,8 @@ public class GameImpl implements Game {
   }
 
   public void changeMoveCountForUnitAt(Position p){
-    UnitImpl Unit = (UnitImpl) getUnitAt(p);
-    Unit.decreaseMoveCount();
+      UnitImpl Unit = (UnitImpl) getUnitAt(p);
+      Unit.decreaseMoveCount();
   }
 
   public void changeWorkForceFocusInCityAt( Position p, String balance ) {
@@ -256,4 +288,15 @@ public class GameImpl implements Game {
     unitMap.remove(p);
   }
 
+  public void addUnit(Position p, UnitImpl newUnit) {
+    unitMap.put(p, newUnit);
+  }
+
+  public int getBlueAttackWinCounter() {
+    return blueAttackWinCounter;
+  }
+
+  public int getRedAttackWinCounter() {
+    return redAttackWinCounter;
+  }
 }

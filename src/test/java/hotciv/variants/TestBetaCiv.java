@@ -4,10 +4,8 @@ import hotciv.framework.Game;
 import hotciv.framework.Player;
 import hotciv.framework.Position;
 import hotciv.standard.GameImpl;
-import hotciv.variants.implementations.AlphaCivActionStrategy;
-import hotciv.variants.implementations.AlphaCivWorldLayoutStrategy;
-import hotciv.variants.implementations.BetaCivAgingStrategy;
-import hotciv.variants.implementations.BetaCivWinnerStrategy;
+import hotciv.variants.factories.BetaCivFactory;
+import hotciv.variants.implementations.*;
 import org.junit.jupiter.api.*;
 
 import static org.hamcrest.CoreMatchers.*;
@@ -21,7 +19,7 @@ class TestBetaCiv {
 
     @BeforeEach
     void setUp() {
-        game = new GameImpl(new BetaCivAgingStrategy(), new BetaCivWinnerStrategy(), new AlphaCivActionStrategy(), new AlphaCivWorldLayoutStrategy());
+        game = new GameImpl(new BetaCivFactory());
         pos1_1 = new Position(1, 1);
         pos2_0 = new Position(2, 0);
         pos2_1 = new Position(2, 1);
