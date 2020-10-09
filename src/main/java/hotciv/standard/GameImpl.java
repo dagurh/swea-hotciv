@@ -272,10 +272,6 @@ public class GameImpl implements Game {
     return new UnitImpl(unitType, getCityAt(cityPosition).getOwner());
   }
 
-  private void addUnit(Position p, UnitImpl newUnit) {
-    unitMap.put(p, newUnit);
-  }
-
   public void performUnitActionAt( Position p ) { actionStrategy.unitAction(this, p); }
 
   public void addCity(Position p, CityImpl newCity) {
