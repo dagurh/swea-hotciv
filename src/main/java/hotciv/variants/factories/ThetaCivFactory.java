@@ -26,6 +26,6 @@ public class ThetaCivFactory implements AbstractFactory {
 
     @Override
     public WorldLayoutStrategy worldLayoutStrategy() {
-        return new AlphaCivWorldLayoutStrategy();
+        return new ThetaCivWorldLayoutStrategy();
     }
 }
