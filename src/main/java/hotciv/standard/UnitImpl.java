@@ -11,7 +11,7 @@ public class UnitImpl implements Unit {
     private int defensiveStrength;
     private int attackingStrength;
     private int cost;
-    private int moveCount = 1;
+    private int moveCount;
     private boolean isFortified = false;
 
 
@@ -26,21 +26,31 @@ public class UnitImpl implements Unit {
             case GameConstants.ARCHER: {
                 attackingStrength = 2;
                 defensiveStrength = 3;
-                cost = 10;
+                moveCount = 1;
+                cost = GameConstants.ARCHERCOST;
                 }
                 break;
             case GameConstants.LEGION: {
                 attackingStrength = 4;
                 defensiveStrength = 2;
-                cost = 15;
+                moveCount = 1;
+                cost = GameConstants.LEGIONCOST;
                 }
                 break;
             case GameConstants.SETTLER: {
                 attackingStrength = 0;
                 defensiveStrength = 3;
-                cost = 30;
+                moveCount = 1;
+                cost = GameConstants.SETTLERCOST;
                 }
                 break;
+            case GameConstants.CARAVAN: {
+                attackingStrength = 1;
+                defensiveStrength = 4;
+                moveCount = 2;
+                cost = GameConstants.CARAVANCOST;
+            }
+            break;
         }
     }
 

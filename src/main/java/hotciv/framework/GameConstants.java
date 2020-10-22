@@ -36,16 +36,19 @@ public class GameConstants {
   public static final String ARCHER    = "archer";
   public static final String LEGION    = "legion";
   public static final String SETTLER   = "settler";
+  public static final String CARAVAN   = "caravan";
   // Unit prices
   public static final int ARCHERCOST = 10;
   public static final int LEGIONCOST = 15;
   public static final int SETTLERCOST = 30;
+  public static final int CARAVANCOST = 30;
   // Valid terrain types
   public static final String PLAINS    = "plains";
   public static final String OCEANS    = "ocean";
   public static final String FOREST    = "forest";
   public static final String HILLS     = "hills";
   public static final String MOUNTAINS = "mountain";
+  public static final String DESERT = "desert";
   // Valid production balance types
   public static final String productionFocus = "hammer";
   public static final String foodFocus = "apple";

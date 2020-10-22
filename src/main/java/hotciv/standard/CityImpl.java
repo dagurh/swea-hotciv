@@ -77,6 +77,12 @@ public class CityImpl implements City {
                     return true;
                 }
                 break;
+            case GameConstants.CARAVAN:
+                if (getTreasury() >= GameConstants.CARAVANCOST) {
+                    addTreasury(-GameConstants.CARAVANCOST);
+                    return true;
+                }
+                break;
         }
         return false;
     }
