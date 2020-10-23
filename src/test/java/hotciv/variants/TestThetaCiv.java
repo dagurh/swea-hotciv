@@ -19,12 +19,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class TestThetaCiv {
 
     private GameImpl game;
-    private Position pos0_7, pos9_6, pos5_5, pos6_5, pos8_12, pos9_12;
+    private Position pos0_7, pos9_6, pos5_5, pos6_5, pos8_12, pos9_12, pos9_8, pos9_7;
 
     @BeforeEach
     void setUp() {
         game = new GameImpl(new ThetaCivFactory());
         pos0_7 = new Position(0, 7);
+        pos9_8 = new Position(9, 8);
+        pos9_7 = new Position(9, 7);
         pos9_6 = new Position(9, 6);
         pos5_5 = new Position(5, 5);
         pos6_5 = new Position(6, 5);
@@ -53,22 +55,26 @@ class TestThetaCiv {
 
     @Test
     public void CaravanCosts30TreasuryToProduce(){
-
+        UnitImpl caravan = (UnitImpl) game.getUnitAt(pos9_6);
+        assertThat(caravan.getCost(), is(30));
     }
 
     @Test
     public void CaravanHasDefence4AndAttack1(){
-
+        assertThat(game.getUnitAt(pos9_6).getDefensiveStrength(), is(4));
+        assertThat(game.getUnitAt(pos9_6).getAttackingStrength(), is(1));
     }
 
     @Test
     public void CaravanCanMoveTwoTiles(){
-
+        callEndOfTurn(1);
+        game.moveUnit(pos9_6, pos9_7);
+        game.moveUnit(pos9_7, pos9_8);
     }
 
     @Test
     public void OtherUnitsThanCaravanCannotMoveOnDesertTile(){
-
+        assertFalse(game.moveUnit(pos5_5, pos6_5));
     }
 
     @Test

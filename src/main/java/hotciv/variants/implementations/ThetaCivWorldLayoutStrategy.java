@@ -6,6 +6,7 @@ import hotciv.framework.Position;
 import hotciv.standard.CityImpl;
 import hotciv.standard.GameImpl;
 import hotciv.standard.TileImpl;
+import hotciv.standard.UnitImpl;
 import hotciv.variants.interfaces.WorldLayoutStrategy;
 
 public class ThetaCivWorldLayoutStrategy implements WorldLayoutStrategy {
@@ -46,10 +47,18 @@ public class ThetaCivWorldLayoutStrategy implements WorldLayoutStrategy {
                 game.addTile(p, new TileImpl(type));
                 Position redCityPos = new Position(8,12);
                 Position blueCityPos = new Position(4,5);
+                Position blueCaravanPos = new Position(9,6);
+                Position redArcherPos = new Position(3,8);
+                Position blueLegionPos = new Position(4,4);
+                Position redSettlerPos = new Position(5,5);
                 CityImpl redCity = new CityImpl(Player.RED);
                 CityImpl blueCity = new CityImpl(Player.BLUE);
                 game.addCity(redCityPos, redCity);
                 game.addCity(blueCityPos, blueCity);
+                game.addUnit(blueCaravanPos, new UnitImpl("caravan", Player.BLUE));
+                game.addUnit(redArcherPos, new UnitImpl("archer", Player.RED));
+                game.addUnit(blueLegionPos, new UnitImpl("legion", Player.BLUE));
+                game.addUnit(redSettlerPos, new UnitImpl("settler", Player.RED));
             }
         }
     }

@@ -156,6 +156,9 @@ public class GameImpl implements Game {
             && colDiff <= 1;
     if(!isOneTileInAnyDirection) return false;
 
+    boolean nonCaravanUnitToDesertTile = !getUnitAt(from).getTypeString().equals(GameConstants.CARAVAN) && getTileAt(to).equals(GameConstants.DESERT);
+    if(nonCaravanUnitToDesertTile) return false;
+
     boolean isPlayerInTurn = getPlayerInTurn().equals(getUnitAt(from).getOwner());
     if(!isPlayerInTurn) return false;
 
