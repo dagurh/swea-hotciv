@@ -6,7 +6,7 @@ import hotciv.variants.interfaces.*;
 public class ThetaCivFactory implements AbstractFactory {
     @Override
     public ActionStrategy actionStrategy() {
-        return new GammaCivActionStrategy();
+        return new ThetaCivActionStrategy();
     }
 
     @Override

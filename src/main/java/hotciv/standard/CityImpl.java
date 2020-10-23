@@ -10,6 +10,7 @@ public class CityImpl implements City {
     int money = 0; // variable money
     private String production = "archer";
     private String workForce;
+    private int population = 1;
 
     public CityImpl(Player owner) {
         this.owner = owner;
@@ -26,7 +27,11 @@ public class CityImpl implements City {
 
     @Override
     public int getSize() {
-        return 1;
+        return population;
+    }
+
+    public void setSize(int addPopulation){
+        population += addPopulation;
     }
 
     // returns the treasury of the city

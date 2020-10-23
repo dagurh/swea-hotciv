@@ -295,4 +295,10 @@ public class GameImpl implements Game {
   public int getRedAttackWinCounter() {
     return redAttackWinCounter;
   }
+
+  public void addPopulation(Position p, int size){
+    CityImpl City = (CityImpl) getCityAt(p);
+    City.setSize(size);
+  }
+
 }

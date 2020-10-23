@@ -5,6 +5,7 @@ import hotciv.framework.GameConstants;
 import hotciv.framework.Player;
 import hotciv.framework.Position;
 import hotciv.standard.GameImpl;
+import hotciv.standard.UnitImpl;
 import hotciv.variants.factories.GammaCivFactory;
 import hotciv.variants.factories.ThetaCivFactory;
 import hotciv.variants.implementations.*;
@@ -17,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TestThetaCiv {
 
-    private Game game;
-    private Position pos0_7, pos9_6, pos5_5, pos6_5;
+    private GameImpl game;
+    private Position pos0_7, pos9_6, pos5_5, pos6_5, pos8_12, pos9_12;
 
     @BeforeEach
     void setUp() {
@@ -27,6 +28,8 @@ class TestThetaCiv {
         pos9_6 = new Position(9, 6);
         pos5_5 = new Position(5, 5);
         pos6_5 = new Position(6, 5);
+        pos8_12 = new Position(8,12);
+        pos9_12 = new Position(9,12);
     }
 
     public void callEndOfTurn(int x) {
@@ -67,12 +70,17 @@ class TestThetaCiv {
 
     @Test
     public void CaravanCanPopulateAndAddsTwoPopulationToCities(){
-
+        game.addUnit(pos8_12, new UnitImpl("caravan", Player.RED));
+        game.performUnitActionAt(pos8_12);
+        assertThat(game.getCityAt(pos8_12).getSize(), is(3));
     }
 
     @Test
     public void CaravanCannotPerfomPopulateWhenNotInCity(){
-
+        game.addUnit(pos8_12, new UnitImpl("caravan", Player.RED));
+        game.moveUnit(pos8_12, pos9_12);
+        game.performUnitActionAt(pos9_12);
+        assertThat(game.getCityAt(pos8_12).getSize(), is(1));
     }
 
 
