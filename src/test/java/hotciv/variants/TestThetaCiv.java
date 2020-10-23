@@ -45,6 +45,9 @@ class TestThetaCiv {
 
     @Test
     public void CityCanProduceCaravan(){
+        game.changeProductionInCityAt(pos8_12, "caravan");
+        callEndOfTurn(10);
+        assertThat(game.getUnitAt(pos8_12).getTypeString(), is("caravan"));
 
     }
 

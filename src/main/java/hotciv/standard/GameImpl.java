@@ -202,18 +202,15 @@ public class GameImpl implements Game {
     }
 
   public void endOfRound() {
-    CityImpl redCity = (CityImpl) cityMap.get(GameImpl.redCityPos);
-    CityImpl blueCity = (CityImpl) cityMap.get(GameImpl.blueCityPos);
     advAge();
     winnerStrategy.incrementRound();
-    redCity.addTreasury(6);
-    blueCity.addTreasury(6);
     resetMoveCount();
-    if(redCity.canProduceUnit()) {
-      produceUnit(redCity.getProduction(), redCityPos);
-    }
-    if (blueCity.canProduceUnit()) {
-      produceUnit(blueCity.getProduction(), blueCityPos);
+    for (Position p : cityMap.keySet()){
+      CityImpl cityTemp = (CityImpl) getCityAt(p);
+      cityTemp.addTreasury(6);
+      if(cityTemp.canProduceUnit()) {
+        produceUnit(cityTemp.getProduction(), p);
+      }
     }
   }
 
