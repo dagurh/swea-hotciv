@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TestThetaCiv {
 
     private GameImpl game;
-    private Position pos0_7, pos9_6, pos5_5, pos6_5, pos8_12, pos9_12, pos9_8, pos9_7;
+    private Position pos0_7, pos9_6, pos5_5, pos6_5, pos8_12, pos9_12, pos9_8, pos9_7, pos3_8;
 
     @BeforeEach
     void setUp() {
@@ -32,6 +32,7 @@ class TestThetaCiv {
         pos6_5 = new Position(6, 5);
         pos8_12 = new Position(8,12);
         pos9_12 = new Position(9,12);
+        pos3_8 = new Position(3,8);
     }
 
     public void callEndOfTurn(int x) {
@@ -50,7 +51,6 @@ class TestThetaCiv {
         game.changeProductionInCityAt(pos8_12, "caravan");
         callEndOfTurn(10);
         assertThat(game.getUnitAt(pos8_12).getTypeString(), is("caravan"));
-
     }
 
     @Test
@@ -85,11 +85,23 @@ class TestThetaCiv {
     }
 
     @Test
-    public void CaravanCannotPerfomPopulateWhenNotInCity(){
+    public void CaravanCannotPerformPopulateWhenNotInCity(){
         game.addUnit(pos8_12, new UnitImpl("caravan", Player.RED));
         game.moveUnit(pos8_12, pos9_12);
         game.performUnitActionAt(pos9_12);
         assertThat(game.getCityAt(pos8_12).getSize(), is(1));
+    }
+
+    @Test
+    public void ArcherCanFortify(){
+        game.performUnitActionAt(pos3_8);
+        assertThat(game.getUnitAt(pos3_8).getDefensiveStrength(),is(6));
+    }
+
+    @Test
+    public void SettlerCanBuildCity(){
+        game.performUnitActionAt(pos5_5);
+        assertThat(game.getCityAt(pos5_5).getOwner(), is(Player.RED));
     }
 
 
