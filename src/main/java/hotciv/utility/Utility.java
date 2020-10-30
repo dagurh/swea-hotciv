@@ -20,10 +20,12 @@ package hotciv.utility;
 
 import hotciv.framework.GameConstants;
 import hotciv.framework.Position;
+import hotciv.framework.Tile;
+import hotciv.standard.TileImpl;
+import hotciv.variants.interfaces.WorldLayoutStrategy;
+import hotciv.standard.GameImpl;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * At 09 May 2018
@@ -59,4 +61,38 @@ public class Utility {
         };
         return iterable;
     }
+
+    public static Map<Position, Tile> worldGenerator(String[] layout) {
+        String line;
+        Map<Position,Tile> theWorld = new HashMap<Position,Tile>();
+        for (int r = 0; r < GameConstants.WORLDSIZE; r++) {
+            line = layout[r];
+            for (int c = 0; c < GameConstants.WORLDSIZE; c++) {
+                char tileChar = line.charAt(c);
+                String type = "error";
+                if (tileChar == '.') {
+                    type = GameConstants.OCEANS;
+                }
+                if (tileChar == 'o') {
+                    type = GameConstants.PLAINS;
+                }
+                if (tileChar == 'M') {
+                    type = GameConstants.MOUNTAINS;
+                }
+                if (tileChar == 'd') {
+                    type = GameConstants.DESERT;
+                }
+                if (tileChar == 'f') {
+                    type = GameConstants.FOREST;
+                }
+                if (tileChar == 'h') {
+                    type = GameConstants.HILLS;
+                }
+                Position p = new Position(r, c);
+                theWorld.put(p, new TileImpl(type));
+            }
+        }
+        return theWorld;
+    }
+
 }

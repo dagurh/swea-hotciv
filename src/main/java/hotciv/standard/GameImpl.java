@@ -301,4 +301,7 @@ public class GameImpl implements Game {
     City.setSize(size);
   }
 
+  public void setWorldMap(Map<Position, Tile> newTileMap) {
+    tileMap = newTileMap;
+  }
 }
