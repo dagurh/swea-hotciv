@@ -84,8 +84,10 @@
 
 **OK** cities can change unit production
 
+**OK** units can only move 1 tile per round
+
 
 **Incompleted tests and implementations**
 
-units can only move 1 tile per round
+UnitsCanTakeOwnershipOfCities
 
