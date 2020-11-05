@@ -1,15 +1,13 @@
 package hotciv.variants.implementations;
 
 import hotciv.framework.*;
-import hotciv.standard.GameImpl;
-import hotciv.variants.factories.AlphaCivFactory;
 
 public class LogDecorator implements Game {
 
     private Game game;
 
-    public LogDecorator (){
-        game = new GameImpl(new AlphaCivFactory());
+    public LogDecorator (Game g){
+        game = g;
     }
 
     @Override
