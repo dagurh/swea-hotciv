@@ -177,10 +177,6 @@ public class TestAlphaCiv {
     assertFalse(game.moveUnit(pos3_2, pos2_0));
   }
 
-  @Test
-  public void unitCannotMoveMoreThan1TileInAnyDirection() {
-    assertFalse(game.moveUnit(pos3_2, pos2_0));
-  }
 
   @Test
   public void UnitCannotMoveOverMountains() {
