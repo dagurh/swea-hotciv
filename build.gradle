@@ -49,6 +49,9 @@ apply plugin: 'jacoco'
 
 repositories {
     jcenter()
+    maven {
+        url 'https://dl.bintray.com/henrikbaerbak/maven'
+    }
 }
     
 dependencies {
@@ -61,6 +64,8 @@ dependencies {
     // Use the Hamcrest matcher library
     testCompile group: 'org.hamcrest',
         name: 'hamcrest-library', version: '2.2'
+
+    compile 'com.baerbak.maven:hotciv-fractal:1.0'
 }
 
 // Tell to use JUnit as testing platform
