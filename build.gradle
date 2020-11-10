@@ -75,7 +75,7 @@ dependencies {
 
 // Tell to use JUnit as testing platform
 test {
-    //useJUnitPlatform()
+    useJUnitPlatform()
 }
 
 // Sigh, JUnit 5 only works with JUnit 4.6+, so upgrade gradle
