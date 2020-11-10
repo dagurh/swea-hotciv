@@ -53,7 +53,7 @@ public class StubGame1 implements Game {
 
   // A simple implementation to draw the map of DeltaCiv
   protected Map<Position,Tile> world; 
-  public Tile getTileAt( Position p ) { return world.get(p); }
+  public String getTileAt( Position p ) { return world.get(p).getTypeString(); }
 
 
   /** Define the world as the DeltaCiv layout */

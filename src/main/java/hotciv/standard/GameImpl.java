@@ -304,4 +304,14 @@ public class GameImpl implements Game {
   public void setWorldMap(Map<Position, Tile> newTileMap) {
     tileMap = newTileMap;
   }
+
+  public void addObserver(GameObserver observer){
+
+  }
+
+  public void setTileFocus(Position position){
+
+  }
+
 }
+

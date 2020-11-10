@@ -79,14 +79,14 @@ public class MapView
         int xpos = GfxConstants.getXFromColumn(c);
         int ypos = GfxConstants.getYFromRow(r);
         // Draw proper terrain
-        Tile t = game.getTileAt(p);
-        String image_name = t.getTypeString();
+        String s = game.getTileAt(p);
+        String image_name = s;
         // special handling of terrains with a
         // 'coastline'...
         if (image_name.equals(GameConstants.OCEANS) ||
                 image_name.equals(ThetaConstants.DESERT)) {
           image_name = image_name +
-                  MapAlgorithms.getCoastlineCoding(game, p, t.getTypeString());
+                  MapAlgorithms.getCoastlineCoding(game, p, s);
         }
         img = im.getImage(image_name);
         g.drawImage(img, xpos, ypos, null);

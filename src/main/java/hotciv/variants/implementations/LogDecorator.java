@@ -72,4 +72,14 @@ public class LogDecorator implements Game {
         System.out.println(game.getPlayerInTurn() + "'s " + game.getUnitAt(p).getTypeString() + " performs an action.");
         game.performUnitActionAt(p);
     }
+
+    @Override
+    public void addObserver(GameObserver observer) {
+
+    }
+
+    @Override
+    public void setTileFocus(Position position) {
+
+    }
 }
