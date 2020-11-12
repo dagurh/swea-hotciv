@@ -51,6 +51,7 @@ public class GameImpl implements Game {
   Map<Position, City> cityMap = new HashMap<>(); // Hashmap to store cities and their positions
   Map<Position, Tile> tileMap = new HashMap<>(); // Hashmap to store tiles and their positions
   Map<Position, Unit> unitMap = new HashMap<>(); // Hashmap to store units and their positions
+  private GameObserver observer;
 
   // A method that calls the method makeAndAddCities
   public GameImpl(AbstractFactory abstractFactory){
@@ -59,6 +60,7 @@ public class GameImpl implements Game {
     actionStrategy = abstractFactory.actionStrategy();
     worldLayoutStrategy = abstractFactory.worldLayoutStrategy();
     attackStrategy = abstractFactory.attackStrategy();
+    observer = abstractFactory.observer();
 
     makeAndAddCities();
     makeAndAddTiles();
@@ -306,11 +308,11 @@ public class GameImpl implements Game {
   }
 
   public void addObserver(GameObserver observer){
-
+    this.observer = observer;
   }
 
   public void setTileFocus(Position position){
-
+    observer.tileFocusChangedAt(position);
   }
 
 }

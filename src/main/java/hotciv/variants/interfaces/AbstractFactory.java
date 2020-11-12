@@ -1,5 +1,7 @@
 package hotciv.variants.interfaces;
 
+import hotciv.framework.GameObserver;
+
 public interface AbstractFactory {
 
     ActionStrategy actionStrategy();
@@ -12,4 +14,5 @@ public interface AbstractFactory {
 
     WorldLayoutStrategy worldLayoutStrategy();
 
+    GameObserver observer();
 }

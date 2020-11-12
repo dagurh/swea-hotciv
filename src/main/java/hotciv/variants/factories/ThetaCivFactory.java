@@ -1,5 +1,6 @@
 package hotciv.variants.factories;
 
+import hotciv.framework.GameObserver;
 import hotciv.variants.implementations.*;
 import hotciv.variants.interfaces.*;
 
@@ -27,5 +28,10 @@ public class ThetaCivFactory implements AbstractFactory {
     @Override
     public WorldLayoutStrategy worldLayoutStrategy() {
         return new ThetaCivWorldLayoutStrategy();
+    }
+
+    @Override
+    public GameObserver observer() {
+        return new ObserverSpy();
     }
 }

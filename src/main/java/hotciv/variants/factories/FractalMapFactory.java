@@ -1,6 +1,6 @@
 package hotciv.variants.factories;
 
-import hotciv.utility.AdapterFractalMap;
+import hotciv.framework.GameObserver;
 import hotciv.variants.implementations.*;
 import hotciv.variants.interfaces.*;
 
@@ -29,6 +29,11 @@ public class FractalMapFactory implements AbstractFactory {
     @Override
     public WorldLayoutStrategy worldLayoutStrategy() {
         return new RandomWorldLayoutStrategy();
+    }
+
+    @Override
+    public GameObserver observer() {
+        return new ObserverSpy();
     }
 
 }
