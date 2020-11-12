@@ -25,6 +25,7 @@ class TestObserverSpy {
     @BeforeEach
     void setUp() {
         game = new GameImpl(new AlphaCivFactory());
+        observer = new ObserverSpy();
         pos0_7 = new Position(0, 7);
         pos3_8 = new Position(3,8);
         pos5_5 = new Position(5, 5);
@@ -39,6 +40,7 @@ class TestObserverSpy {
     public void callEndOfTurn(int x) {
         for (int i = 0; i < x; i++) {
             game.endOfTurn();
+            observer.turnEnds(game.getPlayerInTurn(), game.getAge());
         }
     }
 
