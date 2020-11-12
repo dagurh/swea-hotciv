@@ -47,11 +47,12 @@ public class GameImpl implements Game {
   private ActionStrategy actionStrategy;
   private WorldLayoutStrategy worldLayoutStrategy;
   private AttackStrategy attackStrategy;
+  private GameObserver observer;
   private Player playerInTurn = Player.RED; // Variable that determines whose turn it is
   Map<Position, City> cityMap = new HashMap<>(); // Hashmap to store cities and their positions
   Map<Position, Tile> tileMap = new HashMap<>(); // Hashmap to store tiles and their positions
   Map<Position, Unit> unitMap = new HashMap<>(); // Hashmap to store units and their positions
-  private GameObserver observer;
+
 
   // A method that calls the method makeAndAddCities
   public GameImpl(AbstractFactory abstractFactory){
