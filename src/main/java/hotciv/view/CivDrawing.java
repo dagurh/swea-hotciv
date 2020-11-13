@@ -6,6 +6,7 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
+import hotciv.view.figure.CityFigure;
 import hotciv.view.figure.HotCivFigure;
 import hotciv.view.figure.UnitFigure;
 import minidraw.framework.*;
@@ -50,6 +51,7 @@ public class CivDrawing
   protected Drawing delegate;
   /** store all moveable figures visible in this drawing = units */
   protected Map<Unit, UnitFigure> unitFigureMap;
+  protected Map<City, CityFigure> cityFigureMap;
 
   /** the Game instance that this CivDrawing is going to render units
    * from */
@@ -60,6 +62,7 @@ public class CivDrawing
     this.delegate = new StandardDrawing();
     this.game = game;
     this.unitFigureMap = new HashMap<>();
+    this.cityFigureMap = new HashMap<>();
 
     // register this unit drawing as listener to any game state
     // changes...
@@ -122,12 +125,6 @@ public class CivDrawing
     }
   }
 
-  /** remove all unit figures in this
-   * drawing, and reset the map (unit->unitfigure).
-   * It is important to actually remove the figures
-   * as it forces a graphical redraw of the screen
-   * where the unit figure was.
-   */
   protected void removeAllUnitFigures() {
     for (Unit u : unitFigureMap.keySet()) {
       UnitFigure uf = unitFigureMap.get(u);
@@ -135,6 +132,46 @@ public class CivDrawing
     }
     unitFigureMap.clear();
   }
+
+  /** remove all unit figures in this
+   * drawing, and reset the map (unit->unitfigure).
+   * It is important to actually remove the figures
+   * as it forces a graphical redraw of the screen
+   * where the unit figure was.
+   */
+
+
+  protected void defineCityMap() {
+    clearSelection();
+    removeAllCityFigures();
+    Position p;
+    for (int r = 0; r < GameConstants.WORLDSIZE; r++) {
+      for (int c = 0; c < GameConstants.WORLDSIZE; c++) {
+        p = new Position(r, c);
+        City city = game.getCityAt(p);
+        if( city != null) {
+          Point point = new Point( GfxConstants.getXFromColumn(p.getColumn()),
+                  GfxConstants.getYFromRow(p.getRow()) );
+          CityFigure cityFigure =
+                  new CityFigure(city, point);
+          cityFigure.addFigureChangeListener(this);
+          cityFigureMap.put(city, cityFigure);
+          delegate.add(cityFigure);
+        }
+      }
+    }
+  }
+
+  protected void removeAllCityFigures() {
+    for (City c : cityFigureMap.keySet()) {
+      CityFigure cf = cityFigureMap.get(c);
+      delegate.remove(cf);
+    }
+    cityFigureMap.clear();
+  }
+
+
+
 
   protected ImageFigure turnShieldIcon;
   protected ImageFigure unitShieldIcon;
@@ -166,7 +203,7 @@ public class CivDrawing
     // this is a really brute-force algorithm: destroy
     // all known units and build up the entire set again
     defineUnitMap();
-
+    defineCityMap();
     // TODO: Cities may change on position as well
   }
 
@@ -187,7 +224,7 @@ public class CivDrawing
   }
 
   private void updateUnitShield(Player nextPlayer) {
-    String owner = "";
+    String owner = "red";
     if (nextPlayer == Player.BLUE ) { owner = "blue"; }
     unitShieldIcon.set( owner + "shield",
                         new Point( GfxConstants.UNIT_SHIELD_X,
