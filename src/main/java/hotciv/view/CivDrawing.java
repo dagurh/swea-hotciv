@@ -8,6 +8,7 @@ import java.util.List;
 
 import hotciv.view.figure.CityFigure;
 import hotciv.view.figure.HotCivFigure;
+import hotciv.view.figure.TextFigure;
 import hotciv.view.figure.UnitFigure;
 import minidraw.framework.*;
 import minidraw.standard.*;
@@ -56,7 +57,8 @@ public class CivDrawing
   /** the Game instance that this CivDrawing is going to render units
    * from */
   protected Game game;
-  
+  private Position positionInFocus;
+
   public CivDrawing( DrawingEditor editor, Game game ) {
     super();
     this.delegate = new StandardDrawing();
@@ -116,7 +118,6 @@ public class CivDrawing
             new UnitFigure( type, point, unit );
           unitFigure.addFigureChangeListener(this);
           unitFigureMap.put(unit, unitFigure);
-
           // also insert in delegate list as it is
           // this list that is iterated by the
           // graphics rendering algorithms
@@ -176,8 +177,8 @@ public class CivDrawing
 
   protected ImageFigure turnShieldIcon;
   protected ImageFigure unitShieldIcon;
+  protected TextFigure ageTextIcon;
   protected void defineIcons() {
-    // TODO: Further development to include rest of figures needed
     turnShieldIcon = 
       new HotCivFigure("redshield",
                        new Point( GfxConstants.TURN_SHIELD_X,
@@ -192,7 +193,19 @@ public class CivDrawing
                     GfxConstants.UNIT_SHIELD_TYPE_STRING);
     updateUnitShield(game.getPlayerInTurn());
     // rendering.
+    ageTextIcon =
+            new TextFigure("age",
+                    new Point( GfxConstants.AGE_TEXT_X,
+                            GfxConstants.AGE_TEXT_Y));
+    updateAgeText(game.getAge());
+
     delegate.add(unitShieldIcon);
+    delegate.add(turnShieldIcon);
+    delegate.add(ageTextIcon);
+  }
+
+  private void updateAgeText(int age) {
+    ageTextIcon.setText("" + age);
   }
 
 
@@ -205,7 +218,6 @@ public class CivDrawing
     // all known units and build up the entire set again
     defineUnitMap();
     defineCityMap();
-    // TODO: Cities may change on position as well
   }
 
   public void turnEnds(Player nextPlayer, int age) {
@@ -213,7 +225,8 @@ public class CivDrawing
     System.out.println( "CivDrawing: turnEnds for "+
                         nextPlayer+" at "+age );
     updateTurnShield(nextPlayer);
-    // TODO: Age output pending
+    updateAgeText(age);
+
   }
 
   private void updateTurnShield(Player nextPlayer) {
@@ -233,8 +246,7 @@ public class CivDrawing
   }
 
   public void tileFocusChangedAt(Position position) {
-    // TODO: Implementation pending
-    System.out.println( "Fake it: tileFocusChangedAt "+position );
+    positionInFocus = position;
   }
 
   @Override
@@ -244,7 +256,7 @@ public class CivDrawing
     // entire Drawing.
     defineUnitMap();
     defineIcons();
-    // TODO: Cities pending
+    defineCityMap();
   }
 
   @Override

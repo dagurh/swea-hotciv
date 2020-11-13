@@ -1,6 +1,7 @@
 package hotciv.stub;
 
 import hotciv.framework.*;
+import hotciv.standard.CityImpl;
 
 import java.util.*;
 
@@ -42,6 +43,8 @@ public class StubGame2 implements Game {
   private Position pos_thetaciv_unit;
 
   private Unit red_archer;
+  private int currentAge = GameConstants.AGE;
+  private int endCount;
 
   public Unit getUnitAt(Position p) {
     if ( p.equals(pos_archer_red) ) {
@@ -78,11 +81,16 @@ public class StubGame2 implements Game {
     inTurn = (getPlayerInTurn() == Player.RED ?
               Player.BLUE : 
               Player.RED );
-    // no age increments
-    gameObserver.turnEnds(inTurn, -4000);
+    endCount += 1;
+    if (endCount == 2){
+      currentAge += 100;
+      endCount = 0;
+    }
+    gameObserver.turnEnds(inTurn, getAge());
   }
   public Player getPlayerInTurn() { return inTurn; }
-  
+
+
 
   // === Observer handling ===
   protected GameObserver gameObserver;
@@ -92,7 +100,8 @@ public class StubGame2 implements Game {
   } 
 
   public StubGame2() { 
-    defineWorld(1); 
+    defineWorld(1);
+    defineCitiesStub2();
     // AlphaCiv configuration
     pos_archer_red = new Position( 2, 0);
     pos_legion_blue = new Position( 3, 2);
@@ -108,6 +117,9 @@ public class StubGame2 implements Game {
   // A simple implementation to draw the map of DeltaCiv
   protected Map<Position,Tile> world; 
   public String getTileAt( Position p ) { return world.get(p).getTypeString(); }
+
+  protected Map<Position, City> citiesStub2;
+  public City getCityAt( Position p ) { return citiesStub2.get(p); }
 
   /** define the world.
    * @param worldType 1 gives one layout while all other
@@ -127,10 +139,22 @@ public class StubGame2 implements Game {
     world.put(new Position(7,4), new StubTile(ThetaConstants.DESERT));
   }
 
+  protected void defineCitiesStub2() {
+    citiesStub2 = new HashMap<Position, City>();
+    citiesStub2.put(new Position(5, 5), new CityImpl(Player.RED));
+    citiesStub2.put(new Position(2, 1), new CityImpl(Player.BLUE));
+  }
+
+
   // TODO: Add more stub behaviour to test MiniDraw updating
-  public City getCityAt( Position p ) { return null; }
-  public Player getWinner() { return null; }
-  public int getAge() { return 0; }  
+  public Player getWinner() {
+    if (getAge() == -3500) {
+      return Player.RED;
+    }
+    return null;
+  }
+
+  public int getAge() { return currentAge; }
   public void changeWorkForceFocusInCityAt( Position p, String balance ) {}
   public void changeProductionInCityAt( Position p, String unitType ) {}
   public void performUnitActionAt( Position p ) {}  
