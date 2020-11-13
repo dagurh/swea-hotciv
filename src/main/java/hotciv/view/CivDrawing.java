@@ -205,7 +205,6 @@ public class CivDrawing
     // all known units and build up the entire set again
     defineUnitMap();
     defineCityMap();
-    // TODO: Cities may change on position as well
   }
 
   public void turnEnds(Player nextPlayer, int age) {
@@ -244,7 +243,7 @@ public class CivDrawing
     // entire Drawing.
     defineUnitMap();
     defineIcons();
-    // TODO: Cities pending
+    defineCityMap();
   }
 
   @Override
