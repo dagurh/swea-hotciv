@@ -12,12 +12,12 @@ import java.awt.event.MouseEvent;
  *
  * @author Henrik Bærbak Christensen, Aarhus University
  */
-public class moveUnitTool extends NullTool {
+public class MoveUnitTool extends NullTool {
     private final DrawingEditor editor;
     private final Game game;
     private Position from, to;
 
-    public moveUnitTool(DrawingEditor editor, Game game) {
+    public MoveUnitTool(DrawingEditor editor, Game game) {
         this.editor = editor;
         this.game = game;
     }

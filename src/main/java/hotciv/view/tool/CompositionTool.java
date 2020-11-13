@@ -40,23 +40,18 @@ public class CompositionTool extends NullTool {
     figureBelowClickPoint = (HotCivFigure) editor.drawing().findFigure(x, y);
     // Next determine the state of tool to use
     if (figureBelowClickPoint == null) {
-      // TODO: no figure below - set state correctly (set focus tool or null tool)
-      System.out.println("TODO: No figure below click point - PENDING IMPLEMENTATION");
       state = new NullTool();
     } else {
-      if (figureBelowClickPoint.getTypeString().equals(GfxConstants.TURN_SHIELD_TYPE_STRING)) {
-        state = new EndOfTurnTool(editor, game);
-      } else {
-        if (figureBelowClickPoint.getTypeString().equals(GfxConstants.UNIT_TYPE_STRING)) {
-          state = new moveUnitTool(editor, game);
-        }
-        // TODO: handle all the cases - action tool, unit move tool, etc
-        System.out.println("TODO: PENDING IMPLEMENTATION based upon hitting a figure with type: "
-                + figureBelowClickPoint.getTypeString());
-        state = new NullTool();
-      }
+      state = new SetFocusTool(editor, game);
+      state.mouseDown(e, x, y);
     }
-    // Finally, delegate to the selected state
-    state.mouseDown(e, x, y);
+    if (figureBelowClickPoint.getTypeString().equals(GfxConstants.TURN_SHIELD_TYPE_STRING)) {
+      state = new EndOfTurnTool(editor, game);
+    }
+    if (figureBelowClickPoint.getTypeString().equals(GfxConstants.UNIT_TYPE_STRING)) {
+      state = new MoveUnitTool(editor, game);
+    }
+    state.mouseDown(e,x,y);
   }
+
 }

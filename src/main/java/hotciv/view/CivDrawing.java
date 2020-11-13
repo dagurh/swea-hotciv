@@ -178,6 +178,7 @@ public class CivDrawing
   protected ImageFigure turnShieldIcon;
   protected ImageFigure unitShieldIcon;
   protected TextFigure ageTextIcon;
+  protected TextFigure moveCountTextIcon;
   protected void defineIcons() {
     turnShieldIcon = 
       new HotCivFigure("redshield",
@@ -199,21 +200,29 @@ public class CivDrawing
                             GfxConstants.AGE_TEXT_Y));
     updateAgeText(game.getAge());
 
+    moveCountTextIcon = new TextFigure("",
+            new Point(GfxConstants.UNIT_COUNT_X,
+                    GfxConstants.UNIT_COUNT_Y));
+    updateMoveCountText(positionInFocus);
+
     delegate.add(unitShieldIcon);
     delegate.add(turnShieldIcon);
     delegate.add(ageTextIcon);
+    delegate.add(moveCountTextIcon);
   }
 
   private void updateAgeText(int age) {
     ageTextIcon.setText("" + age);
   }
 
+  public void updateMoveCountText(Position unitPos) {
+    moveCountTextIcon.setText("" + game.getUnitAt(unitPos).getMoveCount());
+  }
+
 
   // === Observer Methods ===
 
   public void worldChangedAt(Position pos) {
-    // TODO: Remove system.out debugging output
-    System.out.println( "CivDrawing: world changes at "+pos);
     // this is a really brute-force algorithm: destroy
     // all known units and build up the entire set again
     defineUnitMap();
@@ -221,9 +230,6 @@ public class CivDrawing
   }
 
   public void turnEnds(Player nextPlayer, int age) {
-    // TODO: Remove system.out debugging output
-    System.out.println( "CivDrawing: turnEnds for "+
-                        nextPlayer+" at "+age );
     updateTurnShield(nextPlayer);
     updateAgeText(age);
 
