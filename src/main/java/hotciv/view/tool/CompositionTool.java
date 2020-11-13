@@ -47,6 +47,9 @@ public class CompositionTool extends NullTool {
       if (figureBelowClickPoint.getTypeString().equals(GfxConstants.TURN_SHIELD_TYPE_STRING)) {
         state = new EndOfTurnTool(editor, game);
       } else {
+        if (figureBelowClickPoint.getTypeString().equals(GfxConstants.UNIT_TYPE_STRING)) {
+          state = new moveUnitTool(editor, game);
+        }
         // TODO: handle all the cases - action tool, unit move tool, etc
         System.out.println("TODO: PENDING IMPLEMENTATION based upon hitting a figure with type: "
                 + figureBelowClickPoint.getTypeString());
