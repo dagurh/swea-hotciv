@@ -137,6 +137,7 @@ public class CivDrawing
   }
 
   protected ImageFigure turnShieldIcon;
+  protected ImageFigure unitShieldIcon;
   protected void defineIcons() {
     // TODO: Further development to include rest of figures needed
     turnShieldIcon = 
@@ -146,10 +147,17 @@ public class CivDrawing
           GfxConstants.TURN_SHIELD_TYPE_STRING);
     updateTurnShield(game.getPlayerInTurn());
     // insert in delegate figure list to ensure graphical
+    unitShieldIcon =
+            new HotCivFigure("black",
+                    new Point( GfxConstants.UNIT_SHIELD_X,
+                            GfxConstants.UNIT_SHIELD_Y ),
+                    GfxConstants.UNIT_SHIELD_TYPE_STRING);
+    updateUnitShield(game.getPlayerInTurn());
     // rendering.
-    delegate.add(turnShieldIcon);
+    delegate.add(unitShieldIcon);
   }
- 
+
+
   // === Observer Methods ===
 
   public void worldChangedAt(Position pos) {
@@ -176,6 +184,14 @@ public class CivDrawing
     turnShieldIcon.set( playername+"shield",
                         new Point( GfxConstants.TURN_SHIELD_X,
                                    GfxConstants.TURN_SHIELD_Y ) );
+  }
+
+  private void updateUnitShield(Player nextPlayer) {
+    String owner = "";
+    if (nextPlayer == Player.BLUE ) { owner = "blue"; }
+    unitShieldIcon.set( owner + "shield",
+                        new Point( GfxConstants.UNIT_SHIELD_X,
+                                   GfxConstants.UNIT_SHIELD_Y) );
   }
 
   public void tileFocusChangedAt(Position position) {
