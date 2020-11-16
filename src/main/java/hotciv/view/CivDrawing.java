@@ -190,14 +190,12 @@ public class CivDrawing
                     new Point( GfxConstants.UNIT_SHIELD_X,
                             GfxConstants.UNIT_SHIELD_Y ),
                     GfxConstants.UNIT_SHIELD_TYPE_STRING);
-    updateUnitShield(game.getPlayerInTurn());
 
     cityShieldIcon =
             new HotCivFigure("black",
                     new Point( GfxConstants.CITY_SHIELD_X,
                             GfxConstants.CITY_SHIELD_Y),
                     GfxConstants.CITY_TYPE_STRING);
-    updateCityShield(game.getPlayerInTurn());
 
     cityProduceIcon =
             new HotCivFigure("black",
@@ -220,7 +218,6 @@ public class CivDrawing
     moveCountTextIcon = new TextFigure("",
             new Point(GfxConstants.UNIT_COUNT_X,
                     GfxConstants.UNIT_COUNT_Y));
-    updateMoveCountText(positionInFocus);
 
     delegate.add(unitShieldIcon);
     delegate.add(turnShieldIcon);
@@ -233,10 +230,6 @@ public class CivDrawing
 
   private void updateAgeText(int age) {
     ageTextIcon.setText("" + age);
-  }
-
-  public void updateMoveCountText(Position unitPos) {
-    moveCountTextIcon.setText("" + game.getUnitAt(unitPos).getMoveCount());
   }
 
 
@@ -263,22 +256,7 @@ public class CivDrawing
                                    GfxConstants.TURN_SHIELD_Y ) );
   }
 
-  private void updateUnitShield(Player nextPlayer) {
-    String owner = "red";
-    if (nextPlayer == Player.BLUE ) { owner = "blue"; }
-    unitShieldIcon.set( owner + "shield",
-                        new Point( GfxConstants.UNIT_SHIELD_X,
-                                   GfxConstants.UNIT_SHIELD_Y) );
-  }
-
-  private void updateCityShield(Player nextPlayer) {
-    String owner = "red";
-    if (nextPlayer == Player.BLUE) { owner = "blue"; }
-    cityShieldIcon.set( owner + "shield",
-            new Point( GfxConstants.CITY_SHIELD_X,
-                    GfxConstants.CITY_SHIELD_Y));
-  }
-
+  /*
   private void updateProduceIcon(City city) {
     String production = "";
     if (city.getProduction().equals("archer")) { production = "archer"; }
@@ -298,6 +276,7 @@ public class CivDrawing
               new Point(GfxConstants.WORKFORCEFOCUS_X,
                       GfxConstants.WORKFORCEFOCUS_Y));
   }
+*/
 
   public void tileFocusChangedAt(Position position) {
     clearTileFocus();

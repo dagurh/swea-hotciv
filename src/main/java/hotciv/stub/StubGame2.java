@@ -126,23 +126,23 @@ public class StubGame2 implements Game {
    * values provide a second world layout.
    */
   protected void defineWorld(int worldType) {
-    world = new HashMap<Position,Tile>();
+    world = new HashMap<>();
     for ( int r = 0; r < GameConstants.WORLDSIZE; r++ ) {
       for ( int c = 0; c < GameConstants.WORLDSIZE; c++ ) {
         Position p = new Position(r,c);
         world.put( p, new StubTile(GameConstants.PLAINS));
       }
     }
-    // Creaate a little area around the theta unit of special terrain
+    // Create a little area around the theta unit of special terrain
     world.put(new Position(6,4), new StubTile(ThetaConstants.DESERT));
     world.put(new Position(6,5), new StubTile(ThetaConstants.DESERT));
     world.put(new Position(7,4), new StubTile(ThetaConstants.DESERT));
   }
 
   protected void defineCitiesStub2() {
-    citiesStub2 = new HashMap<Position, City>();
-    citiesStub2.put(new Position(5, 5), new CityImpl(Player.RED));
-    citiesStub2.put(new Position(2, 1), new CityImpl(Player.BLUE));
+    citiesStub2 = new HashMap<>();
+    citiesStub2.put(new Position(5, 5), new StubCity(Player.RED));
+    citiesStub2.put(new Position(2, 1), new StubCity(Player.BLUE));
   }
 
 
@@ -155,14 +155,13 @@ public class StubGame2 implements Game {
   }
 
   public int getAge() { return currentAge; }
+
   public void changeWorkForceFocusInCityAt( Position p, String balance ) {}
   public void changeProductionInCityAt( Position p, String unitType ) {}
   public void performUnitActionAt( Position p ) {}  
 
   public void setTileFocus(Position position) {
-    // TODO: setTileFocus implementation pending.
-    System.out.println("-- StubGame2 / setTileFocus called.");
-    System.out.println(" *** IMPLEMENTATION PENDING ***");
+    gameObserver.tileFocusChangedAt(position);
   }
 
 }
@@ -179,4 +178,42 @@ class StubUnit implements  Unit {
   public int getMoveCount() { return 1; }
   public int getDefensiveStrength() { return 0; }
   public int getAttackingStrength() { return 0; }
+}
+
+class StubCity implements City {
+
+  private Player owner;
+  int money = 0;
+  private String production;
+  private String workforce;
+  private int population = 1;
+
+  public StubCity(Player owner){
+    this.owner = owner;
+  }
+
+  @Override
+  public Player getOwner() {
+    return owner;
+  }
+
+  @Override
+  public int getSize() {
+    return population;
+  }
+
+  @Override
+  public int getTreasury() {
+    return money;
+  }
+
+  @Override
+  public String getProduction() {
+    return GameConstants.ARCHER;
+  }
+
+  @Override
+  public String getWorkforceFocus() {
+    return GameConstants.foodFocus;
+  }
 }

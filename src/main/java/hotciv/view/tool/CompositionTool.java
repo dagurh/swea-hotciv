@@ -54,4 +54,13 @@ public class CompositionTool extends NullTool {
     state.mouseDown(e,x,y);
   }
 
+  @Override
+  public void mouseDrag(MouseEvent e, int x, int y) {
+    super.mouseDrag(e, x, y);
+  }
+
+  @Override
+  public void mouseUp(MouseEvent e, int x, int y) {
+    super.mouseUp(e, x, y);
+  }
 }

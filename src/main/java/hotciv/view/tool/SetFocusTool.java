@@ -16,8 +16,7 @@ import java.awt.event.MouseEvent;
 public class SetFocusTool extends NullTool {
     private final DrawingEditor editor;
     private final Game game;
-    private HotCivFigure figureBelowClickPoint;
-    private Position unitPos;
+
 
     public SetFocusTool(DrawingEditor editor, Game game) {
         this.editor = editor;
