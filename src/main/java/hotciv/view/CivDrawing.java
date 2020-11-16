@@ -175,10 +175,8 @@ public class CivDrawing
 
 
 
-  protected ImageFigure turnShieldIcon;
-  protected ImageFigure unitShieldIcon;
-  protected TextFigure ageTextIcon;
-  protected TextFigure moveCountTextIcon;
+  protected ImageFigure turnShieldIcon, unitShieldIcon, cityShieldIcon, cityProduceIcon, cityWorkforceIcon;
+  protected TextFigure ageTextIcon, moveCountTextIcon;
   protected void defineIcons() {
     turnShieldIcon = 
       new HotCivFigure("redshield",
@@ -193,6 +191,25 @@ public class CivDrawing
                             GfxConstants.UNIT_SHIELD_Y ),
                     GfxConstants.UNIT_SHIELD_TYPE_STRING);
     updateUnitShield(game.getPlayerInTurn());
+
+    cityShieldIcon =
+            new HotCivFigure("black",
+                    new Point( GfxConstants.CITY_SHIELD_X,
+                            GfxConstants.CITY_SHIELD_Y),
+                    GfxConstants.CITY_TYPE_STRING);
+    updateCityShield(game.getPlayerInTurn());
+
+    cityProduceIcon =
+            new HotCivFigure("black",
+                    new Point(GfxConstants.CITY_PRODUCTION_X,
+                            GfxConstants.CITY_PRODUCTION_Y),
+                    GfxConstants.CITY_TYPE_STRING);
+
+    cityWorkforceIcon = new HotCivFigure("black",
+            new Point(GfxConstants.WORKFORCEFOCUS_X,
+                    GfxConstants.WORKFORCEFOCUS_Y),
+            GfxConstants.CITY_TYPE_STRING);
+
     // rendering.
     ageTextIcon =
             new TextFigure("age",
@@ -207,6 +224,9 @@ public class CivDrawing
 
     delegate.add(unitShieldIcon);
     delegate.add(turnShieldIcon);
+    delegate.add(cityShieldIcon);
+    delegate.add(cityProduceIcon);
+    delegate.add(cityWorkforceIcon);
     delegate.add(ageTextIcon);
     delegate.add(moveCountTextIcon);
   }
@@ -251,8 +271,82 @@ public class CivDrawing
                                    GfxConstants.UNIT_SHIELD_Y) );
   }
 
+  private void updateCityShield(Player nextPlayer) {
+    String owner = "red";
+    if (nextPlayer == Player.BLUE) { owner = "blue"; }
+    cityShieldIcon.set( owner + "shield",
+            new Point( GfxConstants.CITY_SHIELD_X,
+                    GfxConstants.CITY_SHIELD_Y));
+  }
+
+  private void updateProduceIcon(City city) {
+    String production = "";
+    if (city.getProduction().equals("archer")) { production = "archer"; }
+    else if (city.getProduction().equals("legion")) {production = "legion"; }
+    else if (city.getProduction().equals("settler")) {production = "settler"; }
+    else if (city.getProduction().equals("caravan")) {production = "caravan"; }
+    cityProduceIcon.set( production,
+            new Point(GfxConstants.CITY_PRODUCTION_X,
+                    GfxConstants.CITY_PRODUCTION_Y));
+  }
+
+  private void updateWorkforceIcon(City city) {
+    String workForceFocus = "";
+    if (city.getWorkforceFocus().equals("hammer")) { workForceFocus = "hammer"; }
+    else if (city.getWorkforceFocus().equals("apple")) {workForceFocus = "apple"; }
+        cityWorkforceIcon.set( workForceFocus,
+              new Point(GfxConstants.WORKFORCEFOCUS_X,
+                      GfxConstants.WORKFORCEFOCUS_Y));
+  }
+
   public void tileFocusChangedAt(Position position) {
-    positionInFocus = position;
+    clearTileFocus();
+    String cityPlayer = GfxConstants.NOTHING;
+    String unitPlayer = GfxConstants.NOTHING;
+
+    Unit unit = game.getUnitAt(position);
+    City city = game.getCityAt(position);
+
+    if (unit != null) {
+      if (unit.getOwner() == Player.BLUE) unitPlayer = GfxConstants.BLUE_SHIELD;
+      else if (unit.getOwner() == Player.RED) unitPlayer = GfxConstants.RED_SHIELD;
+      setMoveCount(unit);
+    }
+    if (city != null) {
+      if (city.getOwner() == Player.BLUE) cityPlayer = GfxConstants.BLUE_SHIELD;
+      else if (city.getOwner() == Player.RED) cityPlayer = GfxConstants.RED_SHIELD;
+      setCityInfo(city);
+    }
+
+    unitShieldIcon.set(unitPlayer, new Point(GfxConstants.UNIT_SHIELD_X, GfxConstants.UNIT_SHIELD_Y));
+    cityShieldIcon.set(cityPlayer, new Point(GfxConstants.CITY_SHIELD_X, GfxConstants.CITY_SHIELD_Y));
+  }
+
+  private void clearTileFocus() {
+    unitShieldIcon.set(GfxConstants.NOTHING, new Point(GfxConstants.UNIT_SHIELD_X, GfxConstants.UNIT_SHIELD_Y));
+    cityShieldIcon.set(GfxConstants.NOTHING, new Point(GfxConstants.CITY_SHIELD_X, GfxConstants.CITY_SHIELD_Y));
+    cityProduceIcon.set(GfxConstants.NOTHING, new Point(GfxConstants.CITY_PRODUCTION_X, GfxConstants.CITY_PRODUCTION_Y));
+    cityWorkforceIcon.set(GfxConstants.NOTHING, new Point(GfxConstants.WORKFORCEFOCUS_X, GfxConstants.WORKFORCEFOCUS_Y));
+
+    moveCountTextIcon.setText("");
+  }
+
+  private void setCityInfo(City city) {
+    String production = GfxConstants.NOTHING;
+    String workForceFocus = GfxConstants.NOTHING;
+    if (city.getProduction() != null) {
+      production = city.getProduction();
+    }
+    if (city.getWorkforceFocus() != null) {
+      workForceFocus = city.getWorkforceFocus();
+    }
+    cityProduceIcon.set(production, new Point(GfxConstants.CITY_PRODUCTION_X, GfxConstants.CITY_PRODUCTION_Y));
+    cityWorkforceIcon.set(workForceFocus, new Point(GfxConstants.WORKFORCEFOCUS_X, GfxConstants.WORKFORCEFOCUS_Y));
+  }
+
+  private void setMoveCount(Unit unit){
+    int moveCount = unit.getMoveCount();
+    moveCountTextIcon.setText("" + moveCount);
   }
 
   @Override

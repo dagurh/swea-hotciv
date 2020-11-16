@@ -27,9 +27,7 @@ public class SetFocusTool extends NullTool {
     @Override
     public void mouseDown(MouseEvent e, int x, int y) {
         super.mouseDown(e, x, y);
-
-        if (figureBelowClickPoint.getTypeString().equals(GfxConstants.UNIT_TYPE_STRING)){
-            unitPos = GfxConstants.getPositionFromXY(x, y);
+        game.setTileFocus(GfxConstants.getPositionFromXY(x,y));
         }
     }
-}
+
