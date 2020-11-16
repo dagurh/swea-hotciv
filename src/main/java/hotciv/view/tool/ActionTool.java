@@ -36,7 +36,7 @@ public class ActionTool extends NullTool {
     public void mouseDown(MouseEvent e, int x, int y) {
         super.mouseDown(e, x, y);
         if(e.isShiftDown()) {
-            game.setTileFocus(GfxConstants.getPositionFromXY(x,y));
+            game.performUnitActionAt(GfxConstants.getPositionFromXY(x, y));
         }
     }
 }
