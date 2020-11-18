@@ -168,7 +168,6 @@ public class GameImpl implements Game {
       Unit newUnit = getUnitAt(from);
       unitMap.remove(from);
       unitMap.put(to, newUnit);
-      observer.worldChangedAt(from);
       observer.worldChangedAt(to);
     }
     if(getUnitAt(to) != null) {
