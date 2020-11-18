@@ -63,36 +63,12 @@ public class GameImpl implements Game {
     attackStrategy = abstractFactory.attackStrategy();
     observer = abstractFactory.observer();
 
-    makeAndAddCities();
     makeAndAddTiles();
-    makeAndAddUnits();
   }
 
   public Unit getUnitAt( Position p ) { return unitMap.get(p); }
   public City getCityAt( Position p ) { return cityMap.get(p); }
   public String getTileAt( Position p ) { return tileMap.get(p).getTypeString(); }
-
-  public void makeAndAddUnits(){
-    Position redArcherPos = new Position(2, 0);
-    Unit redArcher = new UnitImpl("archer", Player.RED);
-    Position blueLegionPos = new Position(3, 2);
-    Unit blueLegion = new UnitImpl("legion", Player.BLUE);
-    Position redSettlerPos = new Position(4, 3);
-    Unit redSettler = new UnitImpl("settler", Player.RED);
-    unitMap.put(redArcherPos, redArcher);
-    unitMap.put(blueLegionPos, blueLegion);
-    unitMap.put(redSettlerPos, redSettler);
-  }
-
-  // creates cities and their positions
-  public void makeAndAddCities(){
-    redCityPos = new Position(1, 1);
-    blueCityPos = new Position(4, 1);
-    City redCity = new CityImpl(Player.RED);
-    City blueCity = new CityImpl(Player.BLUE);
-    cityMap.put(redCityPos, redCity);
-    cityMap.put(blueCityPos, blueCity);
-  }
 
   // creates tiles and their position
   public void makeAndAddTiles() {
@@ -117,7 +93,9 @@ public class GameImpl implements Game {
   public boolean moveUnit( Position from, Position to ) {
     if (!moveLegal(from, to)) return false;
     if (isEnemyUnitOnTo(from, to)) {
-      if(!resultOfAttack(from, to)) { removeUnit(from); } else { incrementSuccessfulAttacks(from); }
+      if(!resultOfAttack(from, to)) { removeUnit(from);
+        observer.worldChangedAt(from);
+      } else { incrementSuccessfulAttacks(from); }
     }
     if (isCityUnderAttack(from, to)) changeOwnershipOfCity(to, getUnitAt(from).getOwner());
     moveUnitToNewPos(from, to);
@@ -190,6 +168,8 @@ public class GameImpl implements Game {
       Unit newUnit = getUnitAt(from);
       unitMap.remove(from);
       unitMap.put(to, newUnit);
+      observer.worldChangedAt(from);
+      observer.worldChangedAt(to);
     }
     if(getUnitAt(to) != null) {
       changeMoveCountForUnitAt(to);
@@ -200,10 +180,13 @@ public class GameImpl implements Game {
   // Called when a player has ended their turn, if both players have ended their turn a new century begins
   public void endOfTurn() {
     if(playerInTurn == Player.RED){
-      playerInTurn = Player.BLUE; }
+      playerInTurn = Player.BLUE;
+      observer.turnEnds(playerInTurn, getAge());
+    }
      else {
        playerInTurn = Player.RED;
        endOfRound();
+       observer.turnEnds(playerInTurn, getAge());
     }
     }
 
@@ -266,6 +249,7 @@ public class GameImpl implements Game {
                 && isLegalTerrain(p)) {
           UnitImpl newUnit = createUnit(unitType, cityPosition);
           addUnit(p, newUnit);
+          break;
         }
       }
     }

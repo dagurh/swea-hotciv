@@ -238,14 +238,15 @@ public class CivDrawing
   public void worldChangedAt(Position pos) {
     // this is a really brute-force algorithm: destroy
     // all known units and build up the entire set again
-    defineUnitMap();
     defineCityMap();
+    defineUnitMap();
   }
 
   public void turnEnds(Player nextPlayer, int age) {
     updateTurnShield(nextPlayer);
     updateAgeText(age);
-
+    defineCityMap();
+    defineUnitMap();
   }
 
   private void updateTurnShield(Player nextPlayer) {
@@ -255,28 +256,6 @@ public class CivDrawing
                         new Point( GfxConstants.TURN_SHIELD_X,
                                    GfxConstants.TURN_SHIELD_Y ) );
   }
-
-  /*
-  private void updateProduceIcon(City city) {
-    String production = "";
-    if (city.getProduction().equals("archer")) { production = "archer"; }
-    else if (city.getProduction().equals("legion")) {production = "legion"; }
-    else if (city.getProduction().equals("settler")) {production = "settler"; }
-    else if (city.getProduction().equals("caravan")) {production = "caravan"; }
-    cityProduceIcon.set( production,
-            new Point(GfxConstants.CITY_PRODUCTION_X,
-                    GfxConstants.CITY_PRODUCTION_Y));
-  }
-
-  private void updateWorkforceIcon(City city) {
-    String workForceFocus = "";
-    if (city.getWorkforceFocus().equals("hammer")) { workForceFocus = "hammer"; }
-    else if (city.getWorkforceFocus().equals("apple")) {workForceFocus = "apple"; }
-        cityWorkforceIcon.set( workForceFocus,
-              new Point(GfxConstants.WORKFORCEFOCUS_X,
-                      GfxConstants.WORKFORCEFOCUS_Y));
-  }
-*/
 
   public void tileFocusChangedAt(Position position) {
     clearTileFocus();
