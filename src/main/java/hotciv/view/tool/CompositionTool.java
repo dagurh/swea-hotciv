@@ -50,17 +50,21 @@ public class CompositionTool extends NullTool {
     }
     if (figureBelowClickPoint.getTypeString().equals(GfxConstants.UNIT_TYPE_STRING)) {
       state = new MoveUnitTool(editor, game);
+
+      if (e.isShiftDown()) {
+        state = new ActionTool(editor, game);
+      }
     }
     state.mouseDown(e,x,y);
   }
 
   @Override
   public void mouseDrag(MouseEvent e, int x, int y) {
-    super.mouseDrag(e, x, y);
+    state.mouseDrag(e, x, y);
   }
 
   @Override
   public void mouseUp(MouseEvent e, int x, int y) {
-    super.mouseUp(e, x, y);
+    state.mouseUp(e, x, y);
   }
 }

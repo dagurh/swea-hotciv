@@ -3,8 +3,12 @@ package hotciv.view.tool;
 import hotciv.framework.Game;
 import hotciv.framework.Position;
 import hotciv.view.GfxConstants;
+import minidraw.framework.Drawing;
 import minidraw.framework.DrawingEditor;
+import minidraw.framework.Figure;
+import minidraw.framework.Tool;
 import minidraw.standard.NullTool;
+import minidraw.standard.handlers.DragTracker;
 
 import java.awt.event.MouseEvent;
 
@@ -16,16 +20,26 @@ public class MoveUnitTool extends NullTool {
     private final DrawingEditor editor;
     private final Game game;
     private Position from, to;
+    protected Tool fChild;
+    protected Tool cacheNullTool;
+    protected Figure draggedFigure;
 
     public MoveUnitTool(DrawingEditor editor, Game game) {
         this.editor = editor;
         this.game = game;
+        fChild = cacheNullTool = new NullTool();
     }
 
     @Override
     public void mouseDown(MouseEvent e, int x, int y) {
         super.mouseDown(e, x, y);
         from = GfxConstants.getPositionFromXY(x,y);
+    }
+
+    @Override
+    public void mouseDrag(MouseEvent e, int x, int y) {
+        fChild.mouseDrag(e, x, y);
+
     }
 
     @Override
