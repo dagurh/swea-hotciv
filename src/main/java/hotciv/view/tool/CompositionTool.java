@@ -39,12 +39,10 @@ public class CompositionTool extends NullTool {
     // Find the figure (if any) just below the mouse click position
     figureBelowClickPoint = (HotCivFigure) editor.drawing().findFigure(x, y);
     // Next determine the state of tool to use
-    if (figureBelowClickPoint == null) {
-      state = new NullTool();
-    } else {
+
       state = new SetFocusTool(editor, game);
       state.mouseDown(e, x, y);
-    }
+
     if (figureBelowClickPoint.getTypeString().equals(GfxConstants.TURN_SHIELD_TYPE_STRING)) {
       state = new EndOfTurnTool(editor, game);
     }
