@@ -254,12 +254,14 @@ public class GameImpl implements Game {
       }
     }
   }
-
   private UnitImpl createUnit(String unitType, Position cityPosition) {
     return new UnitImpl(unitType, getCityAt(cityPosition).getOwner());
   }
 
-  public void performUnitActionAt( Position p ) { actionStrategy.unitAction(this, p); }
+  public void performUnitActionAt( Position p ) {
+    actionStrategy.unitAction(this, p);
+    observer.worldChangedAt(p);
+  }
 
   public void addCity(Position p, CityImpl newCity) {
     cityMap.put(p, newCity);
