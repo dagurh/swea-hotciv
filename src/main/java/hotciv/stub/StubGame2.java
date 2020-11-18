@@ -109,7 +109,7 @@ public class StubGame2 implements Game {
     pos_thetaciv_unit = new Position( 6, 4);
 
     // the only one I need to store for this stub
-    red_archer = new StubUnit( GameConstants.ARCHER, Player.RED );   
+    red_archer = new StubUnit( GameConstants.ARCHER, Player.RED );
 
     inTurn = Player.RED;
   }
@@ -120,6 +120,7 @@ public class StubGame2 implements Game {
 
   protected Map<Position, City> citiesStub2;
   public City getCityAt( Position p ) { return citiesStub2.get(p); }
+
 
   /** define the world.
    * @param worldType 1 gives one layout while all other
@@ -146,6 +147,8 @@ public class StubGame2 implements Game {
   }
 
 
+
+
   // TODO: Add more stub behaviour to test MiniDraw updating
   public Player getWinner() {
     if (getAge() == -3500) {
@@ -156,9 +159,19 @@ public class StubGame2 implements Game {
 
   public int getAge() { return currentAge; }
 
+  public void addCity(Position p, StubCity newCity) {
+    citiesStub2.put(p, newCity);
+    gameObserver.worldChangedAt(p);
+  }
+
   public void changeWorkForceFocusInCityAt( Position p, String balance ) {}
   public void changeProductionInCityAt( Position p, String unitType ) {}
-  public void performUnitActionAt( Position p ) {}  
+  public void performUnitActionAt( Position p ) {
+    if (getUnitAt(p).getTypeString().equals(GameConstants.SETTLER)) {
+      StubCity newCity = new StubCity(getUnitAt(p).getOwner());
+      addCity(p, newCity);
+    }
+  }
 
   public void setTileFocus(Position position) {
     gameObserver.tileFocusChangedAt(position);

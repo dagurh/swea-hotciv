@@ -34,9 +34,7 @@ public class ActionTool extends NullTool {
 
     @Override
     public void mouseDown(MouseEvent e, int x, int y) {
-        super.mouseDown(e, x, y);
-        if(e.isShiftDown()) {
-            game.performUnitActionAt(GfxConstants.getPositionFromXY(x, y));
-        }
+        Position p = GfxConstants.getPositionFromXY(x, y);
+        game.performUnitActionAt(p);
     }
 }
