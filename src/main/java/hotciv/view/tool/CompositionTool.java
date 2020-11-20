@@ -1,6 +1,8 @@
 package hotciv.view.tool;
 
 import hotciv.framework.Game;
+import hotciv.standard.GameImpl;
+import hotciv.variants.factories.SemiCivFactory;
 import hotciv.view.GfxConstants;
 import hotciv.view.figure.HotCivFigure;
 import minidraw.framework.DrawingEditor;

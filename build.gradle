@@ -59,6 +59,7 @@ repositories {
 dependencies {
     // Depend on the MiniDraw library
     implementation 'com.baerbak.maven:minidraw:1.13'
+    compile 'com.baerbak.maven:broker:2.0'
     
     // Depend on JUnit 5. Require both API and Engine
     testImplementation group: 'org.junit.jupiter',
@@ -71,6 +72,7 @@ dependencies {
         name: 'hamcrest-library', version: '2.2'
 
     compile 'com.baerbak.maven:hotciv-fractal:1.0'
+
 }
 
 // Tell to use JUnit as testing platform
@@ -175,3 +177,12 @@ task semi(type: JavaExec) {
   main = 'hotciv.visual.ShowSemiCiv'
   classpath = sourceSets.main.runtimeClasspath
 }
+
+task hotcivServer(type: JavaExec) {
+  group 'SWEA Distribution'
+  description 'Run HotCiv server (Socket)'
+
+  classpath sourceSets.test.runtimeClasspath
+  main = 'hotciv.broker.main.HotCivServer'
+}
+
