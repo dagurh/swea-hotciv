@@ -6,7 +6,9 @@ import frds.broker.Requestor;
 import frds.broker.marshall.json.StandardJSONRequestor;
 import hotciv.framework.Game;
 import hotciv.framework.GameObserver;
+import hotciv.framework.Player;
 import hotciv.framework.Position;
+import hotciv.stub.StubGame2;
 import hotciv.stub.StubGame3;
 import hotciv.variants.implementations.broker.GameProxy;
 import hotciv.variants.implementations.broker.HotCivGameInvoker;
@@ -15,16 +17,15 @@ import hotciv.variants.implementations.broker.NullObserver;
 import org.junit.jupiter.api.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-
+import static org.hamcrest.CoreMatchers.*;
 
 class TestBroker {
 
-    private Game game;
-    private Position pos1_1, pos4_1, pos2_0, pos2_1, pos3_1, pos3_2;
+    private GameProxy game;
 
     @BeforeEach
     void setUp() {
-        Game servant = new StubGame3();
+        Game servant = new StubGame2();
         GameObserver nullObserver = new NullObserver();
         servant.addObserver(nullObserver);
 
@@ -36,5 +37,11 @@ class TestBroker {
 
         game = new GameProxy(requestor);
         game.addObserver(nullObserver);
+    }
+
+    @Test
+    public void getWinner(){
+        Player winner = game.getWinner();
+        assertThat(winner, is(Player.RED));
     }
 }

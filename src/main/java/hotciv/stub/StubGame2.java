@@ -151,10 +151,7 @@ public class StubGame2 implements Game {
 
   // TODO: Add more stub behaviour to test MiniDraw updating
   public Player getWinner() {
-    if (getAge() == -3500) {
-      return Player.RED;
-    }
-    return null;
+    return Player.RED;
   }
 
   public int getAge() { return currentAge; }

@@ -4,7 +4,11 @@ import frds.broker.Requestor;
 import hotciv.framework.*;
 
 public class GameProxy implements Game {
+    private final Requestor requestor;
+    private final String Game_OBJECTID = "singleton";
+
     public GameProxy(Requestor requestor) {
+        this.requestor = requestor;
     }
 
     @Override
@@ -28,7 +32,15 @@ public class GameProxy implements Game {
     }
 
     @Override
-    public Object getWinner() {
+    public Player getWinner() {
+        String winner = requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GET_WINNER, String.class);
+        Player[] players = Player.values();
+        for (Player p: players) {
+            if (winner.equals(p.toString())){
+                System.out.println("Winner was: " + p.toString());
+                return p;
+            }
+        }
         return null;
     }
 
