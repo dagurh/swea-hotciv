@@ -25,7 +25,7 @@ class TestBroker {
 
     @BeforeEach
     void setUp() {
-        Game servant = new StubGame2();
+        Game servant = new StubGame3();
         GameObserver nullObserver = new NullObserver();
         servant.addObserver(nullObserver);
 
@@ -42,6 +42,6 @@ class TestBroker {
     @Test
     public void getWinner(){
         Player winner = game.getWinner();
-        assertThat(winner, is(Player.RED));
+        assertThat(winner, is(Player.YELLOW));
     }
 }

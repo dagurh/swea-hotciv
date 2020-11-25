@@ -1,8 +1,12 @@
 package hotciv.stub;
 
+import frds.broker.Servant;
 import hotciv.framework.*;
 
-public class StubGame3 implements Game {
+public class StubGame3 implements Game, Servant {
+
+    Position position_of_green_city = new Position(1,1);
+
     @Override
     public String getTileAt(Position p) {
         return null;
@@ -15,6 +19,9 @@ public class StubGame3 implements Game {
 
     @Override
     public City getCityAt(Position p) {
+        if(p.equals(position_of_green_city)){
+        return new StubCity(Player.GREEN);
+    }
         return null;
     }
 
@@ -25,12 +32,12 @@ public class StubGame3 implements Game {
 
     @Override
     public Object getWinner() {
-        return null;
+        return Player.YELLOW;
     }
 
     @Override
     public int getAge() {
-        return 0;
+        return 42;
     }
 
     @Override

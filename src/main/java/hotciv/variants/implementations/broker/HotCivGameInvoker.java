@@ -1,14 +1,20 @@
 package hotciv.variants.implementations.broker;
 
-import com.google.gson.Gson;
+import java.util.*;
+
+import com.google.gson.*;
 import frds.broker.Invoker;
 import frds.broker.ReplyObject;
+import frds.broker.RequestObject;
 import hotciv.framework.Game;
 import hotciv.framework.Player;
 
+import javax.servlet.http.HttpServletResponse;
+
 public class HotCivGameInvoker implements Invoker {
-    private Game servant;
+    private final Game servant;
     private final Gson gson;
+    private ReplyObject reply;
 
     public HotCivGameInvoker(Game servant) {
         this.servant = servant;
@@ -17,8 +23,20 @@ public class HotCivGameInvoker implements Invoker {
 
     @Override
     public String handleRequest(String request) {
-        ReplyObject reply = new ReplyObject(200, gson.toJson(Player.RED.toString()));
-        //JSON PARSE
+        RequestObject requestObject =
+                gson.fromJson(request, RequestObject.class);
+
+
+            if (requestObject.getOperationName().equals(OperationNames.GET_WINNER)) {
+                reply = new ReplyObject(200, gson.toJson(Player.YELLOW.toString()));
+            }
+
+
+      
+
+        // And marshall the reply
         return gson.toJson(reply);
     }
+
 }
+
