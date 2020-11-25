@@ -8,6 +8,7 @@ import frds.broker.ReplyObject;
 import frds.broker.RequestObject;
 import hotciv.framework.Game;
 import hotciv.framework.Player;
+import hotciv.framework.Position;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,8 +24,13 @@ public class HotCivGameInvoker implements Invoker {
 
     @Override
     public String handleRequest(String request) {
+
+
+
         RequestObject requestObject =
                 gson.fromJson(request, RequestObject.class);
+
+        JsonArray array = new JsonParser().parse(requestObject.getPayload()).getAsJsonArray();
 
 
             if (requestObject.getOperationName().equals(OperationNames.GET_WINNER)) {
@@ -35,6 +41,11 @@ public class HotCivGameInvoker implements Invoker {
             }
             else if (requestObject.getOperationName().equals(OperationNames.GET_PLAYERINTURN)) {
                 reply = new ReplyObject(200, gson.toJson(servant.getPlayerInTurn()));
+            }
+            else if (requestObject.getOperationName().equals(OperationNames.MOVE_UNIT)){
+                Position from = gson.fromJson(array.get(0), Position.class);
+                Position to = gson.fromJson(array.get(1), Position.class);
+                reply = new ReplyObject(200, gson.toJson(servant.moveUnit(from, to)));
             }
 
 

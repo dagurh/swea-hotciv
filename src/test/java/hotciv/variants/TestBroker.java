@@ -56,4 +56,11 @@ class TestBroker {
         Player playerInTurn = game.getPlayerInTurn();
         assertThat(playerInTurn, is(Player.GREEN));
     }
+
+    @Test
+    public void moveUnitMovesFrom11To12(){
+        Position pos11 = new Position(1,1);
+        Position pos12 = new Position(1,2);
+        assertThat(game.moveUnit(pos11, pos12), is(true));
+    }
 }

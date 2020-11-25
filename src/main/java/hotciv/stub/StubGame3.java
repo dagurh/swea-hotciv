@@ -42,7 +42,7 @@ public class StubGame3 implements Game, Servant {
 
     @Override
     public boolean moveUnit(Position from, Position to) {
-        return false;
+        return true;
     }
 
     @Override

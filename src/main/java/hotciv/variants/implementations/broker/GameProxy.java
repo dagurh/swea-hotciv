@@ -1,5 +1,6 @@
 package hotciv.variants.implementations.broker;
 
+import frds.broker.ClientRequestHandler;
 import frds.broker.Requestor;
 import hotciv.framework.*;
 
@@ -22,7 +23,7 @@ public class GameProxy implements Game {
     }
 
     @Override
-    public City getCityAt(Position p) {
+    public City getCityAt(Position position) {
         return null;
     }
 
@@ -61,7 +62,7 @@ public class GameProxy implements Game {
 
     @Override
     public boolean moveUnit(Position from, Position to) {
-        return false;
+        return requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.MOVE_UNIT, boolean.class, from, to);
     }
 
     @Override
