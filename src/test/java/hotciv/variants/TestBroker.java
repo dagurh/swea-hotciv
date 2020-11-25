@@ -22,6 +22,7 @@ import static org.hamcrest.CoreMatchers.*;
 class TestBroker {
 
     private GameProxy game;
+    private Game servant;
 
     @BeforeEach
     void setUp() {
@@ -63,4 +64,12 @@ class TestBroker {
         Position pos12 = new Position(1,2);
         assertThat(game.moveUnit(pos11, pos12), is(true));
     }
+
+    @Test
+    public void turnCountsUpWhenEnded(){
+        game.endOfTurn();
+        assertThat(servant.);
+    }
+
+
 }

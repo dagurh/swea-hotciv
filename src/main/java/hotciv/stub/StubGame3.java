@@ -6,6 +6,7 @@ import hotciv.framework.*;
 public class StubGame3 implements Game, Servant {
 
     Position position_of_green_city = new Position(1,1);
+    int numberOfEndedTurns = 0;
 
     @Override
     public String getTileAt(Position p) {
@@ -47,7 +48,7 @@ public class StubGame3 implements Game, Servant {
 
     @Override
     public void endOfTurn() {
-
+        numberOfEndedTurns++;
     }
 
     @Override
@@ -73,5 +74,9 @@ public class StubGame3 implements Game, Servant {
     @Override
     public void setTileFocus(Position position) {
 
+    }
+
+    public int getNumberOfEndedTurns() {
+        return numberOfEndedTurns;
     }
 }

@@ -67,7 +67,7 @@ public class GameProxy implements Game {
 
     @Override
     public void endOfTurn() {
-
+        requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.END_OF_TURN, null);
     }
 
     @Override

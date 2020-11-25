@@ -47,6 +47,9 @@ public class HotCivGameInvoker implements Invoker {
                 Position to = gson.fromJson(array.get(1), Position.class);
                 reply = new ReplyObject(200, gson.toJson(servant.moveUnit(from, to)));
             }
+            else if (requestObject.getOperationName().equals(OperationNames.END_OF_TURN)){
+                reply = new ReplyObject(200, "end of turn called");
+            }
 
 
 
