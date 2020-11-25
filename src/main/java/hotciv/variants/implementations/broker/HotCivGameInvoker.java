@@ -51,6 +51,12 @@ public class HotCivGameInvoker implements Invoker {
                 servant.endOfTurn();
                 reply = new ReplyObject(200, "end of turn called");
             }
+            else if (requestObject.getOperationName().equals(OperationNames.CHANGEWORKFORCEFOCUS)){
+                Position p = gson.fromJson(array.get(0), Position.class);
+                String balance = gson.fromJson(array.get(1), String.class);
+                servant.changeWorkForceFocusInCityAt(p,balance);
+                reply = new ReplyObject(200, "changed workForceFocus to " + balance + "in city with position " + p);
+            }
 
 
 

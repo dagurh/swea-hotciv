@@ -72,7 +72,7 @@ public class GameProxy implements Game {
 
     @Override
     public void changeWorkForceFocusInCityAt(Position p, String balance) {
-        requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.END_OF_TURN, void.class);
+        requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.CHANGEWORKFORCEFOCUS, null, p, balance);
     }
 
     @Override

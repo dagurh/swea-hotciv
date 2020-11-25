@@ -67,11 +67,19 @@ class TestBroker {
         assertThat(servant.numberOfEndedTurns, is(1));
     }
 
+    @Test
+    public void WorkForceFocusCanBeChanged(){
+        Position pos11 = new Position(1,1);
+        game.changeWorkForceFocusInCityAt(pos11, "apple");
+        assertThat(servant.workForceFocus, is("apple"));
+    }
+
 
 
     public class StubGame3 implements Game, Servant {
 
         private int numberOfEndedTurns = 0;
+        private String workForceFocus = "hammer";
 
         @Override
         public String getTileAt(Position p) {
@@ -115,7 +123,7 @@ class TestBroker {
 
         @Override
         public void changeWorkForceFocusInCityAt(Position p, String balance) {
-
+            workForceFocus = balance;
         }
 
         @Override
