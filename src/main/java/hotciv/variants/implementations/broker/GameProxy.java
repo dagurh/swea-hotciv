@@ -1,6 +1,5 @@
 package hotciv.variants.implementations.broker;
 
-import frds.broker.ClientRequestHandler;
 import frds.broker.Requestor;
 import hotciv.framework.*;
 
@@ -29,7 +28,7 @@ public class GameProxy implements Game {
 
     @Override
     public Player getPlayerInTurn() {
-        String playerInTurn = requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GET_PLAYERINTURN, String.class);
+        String playerInTurn = requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GET_PLAYER_IN_TURN, String.class);
         Player[] players = Player.values();
         for (Player p : players) {
             if (playerInTurn.equals(p.toString())) {
@@ -72,17 +71,17 @@ public class GameProxy implements Game {
 
     @Override
     public void changeWorkForceFocusInCityAt(Position p, String balance) {
-        requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.CHANGEWORKFORCEFOCUS, null, p, balance);
+        requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.CHANGE_WORK_FORCE_FOCUS, null, p, balance);
     }
 
     @Override
     public void changeProductionInCityAt(Position p, String unitType) {
-
+        requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.CHANGE_PRODUCTION, null, p, unitType);
     }
 
     @Override
     public void performUnitActionAt(Position p) {
-
+        requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.UNIT_ACTION, null, p);
     }
 
     @Override

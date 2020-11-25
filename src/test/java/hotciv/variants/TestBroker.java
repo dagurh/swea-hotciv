@@ -19,6 +19,7 @@ class TestBroker {
 
     private GameProxy game;
     private StubGame3 servant;
+    private Position pos1_1, pos1_2;
 
     @BeforeEach
     void setUp() {
@@ -34,6 +35,9 @@ class TestBroker {
 
         game = new GameProxy(requestor);
         game.addObserver(nullObserver);
+
+        pos1_1 = new Position(1,1);
+        pos1_2 = new Position(1,2);
     }
 
     @Test
@@ -56,9 +60,7 @@ class TestBroker {
 
     @Test
     public void moveUnitMovesFrom11To12(){
-        Position pos11 = new Position(1,1);
-        Position pos12 = new Position(1,2);
-        assertThat(game.moveUnit(pos11, pos12), is(true));
+        assertThat(game.moveUnit(pos1_1, pos1_2), is(true));
     }
 
     @Test
@@ -69,9 +71,20 @@ class TestBroker {
 
     @Test
     public void WorkForceFocusCanBeChanged(){
-        Position pos11 = new Position(1,1);
-        game.changeWorkForceFocusInCityAt(pos11, "apple");
+        game.changeWorkForceFocusInCityAt(pos1_1, "apple");
         assertThat(servant.workForceFocus, is("apple"));
+    }
+
+    @Test
+    public void ProductionCanBeChanged(){
+        game.changeProductionInCityAt(pos1_1,"legion");
+        assertThat(servant.production, is("legion"));
+    }
+
+    @Test
+    public void unitActionCountsUp(){
+        game.performUnitActionAt(pos1_1);
+        assertThat(servant.numberOfUnitActions, is(1));
     }
 
 
@@ -79,7 +92,9 @@ class TestBroker {
     public class StubGame3 implements Game, Servant {
 
         private int numberOfEndedTurns = 0;
+        private int numberOfUnitActions = 0;
         private String workForceFocus = "hammer";
+        private String production = "archer";
 
         @Override
         public String getTileAt(Position p) {
@@ -128,12 +143,12 @@ class TestBroker {
 
         @Override
         public void changeProductionInCityAt(Position p, String unitType) {
-
+            production = unitType;
         }
 
         @Override
         public void performUnitActionAt(Position p) {
-
+            numberOfUnitActions++;
         }
 
         @Override

@@ -1,16 +1,11 @@
 package hotciv.variants.implementations.broker;
 
-import java.util.*;
-
 import com.google.gson.*;
 import frds.broker.Invoker;
 import frds.broker.ReplyObject;
 import frds.broker.RequestObject;
 import hotciv.framework.Game;
-import hotciv.framework.Player;
 import hotciv.framework.Position;
-
-import javax.servlet.http.HttpServletResponse;
 
 public class HotCivGameInvoker implements Invoker {
     private final Game servant;
@@ -39,7 +34,7 @@ public class HotCivGameInvoker implements Invoker {
             else if (requestObject.getOperationName().equals(OperationNames.GET_AGE)) {
                 reply = new ReplyObject(200, gson.toJson(servant.getAge()));
             }
-            else if (requestObject.getOperationName().equals(OperationNames.GET_PLAYERINTURN)) {
+            else if (requestObject.getOperationName().equals(OperationNames.GET_PLAYER_IN_TURN)) {
                 reply = new ReplyObject(200, gson.toJson(servant.getPlayerInTurn()));
             }
             else if (requestObject.getOperationName().equals(OperationNames.MOVE_UNIT)){
@@ -51,11 +46,22 @@ public class HotCivGameInvoker implements Invoker {
                 servant.endOfTurn();
                 reply = new ReplyObject(200, "end of turn called");
             }
-            else if (requestObject.getOperationName().equals(OperationNames.CHANGEWORKFORCEFOCUS)){
+            else if (requestObject.getOperationName().equals(OperationNames.CHANGE_WORK_FORCE_FOCUS)){
                 Position p = gson.fromJson(array.get(0), Position.class);
                 String balance = gson.fromJson(array.get(1), String.class);
                 servant.changeWorkForceFocusInCityAt(p,balance);
-                reply = new ReplyObject(200, "changed workForceFocus to " + balance + "in city with position " + p);
+                reply = new ReplyObject(200, "changed workForceFocus to " + balance + " in city with position " + p);
+            }
+            else if (requestObject.getOperationName().equals(OperationNames.CHANGE_PRODUCTION)) {
+                Position p = gson.fromJson(array.get(0), Position.class);
+                String production = gson.fromJson(array.get(1), String.class);
+                servant.changeProductionInCityAt(p,production);
+                reply = new ReplyObject(200, "changed production to " + production + " in city with position " + p);
+            }
+            else if (requestObject.getOperationName().equals(OperationNames.UNIT_ACTION)) {
+                Position p = gson.fromJson(array.get(0), Position.class);
+                servant.performUnitActionAt(p);
+                reply = new ReplyObject(200, "Unit performed action at position" + p);
             }
 
 
