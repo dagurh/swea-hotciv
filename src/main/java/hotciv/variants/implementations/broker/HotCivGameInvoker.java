@@ -28,11 +28,17 @@ public class HotCivGameInvoker implements Invoker {
 
 
             if (requestObject.getOperationName().equals(OperationNames.GET_WINNER)) {
-                reply = new ReplyObject(200, gson.toJson(Player.YELLOW.toString()));
+                reply = new ReplyObject(200, gson.toJson(servant.getWinner().toString()));
+            }
+            else if (requestObject.getOperationName().equals(OperationNames.GET_AGE)) {
+                reply = new ReplyObject(200, gson.toJson(servant.getAge()));
+            }
+            else if (requestObject.getOperationName().equals(OperationNames.GET_PLAYERINTURN)) {
+                reply = new ReplyObject(200, gson.toJson(servant.getPlayerInTurn()));
             }
 
 
-      
+
 
         // And marshall the reply
         return gson.toJson(reply);

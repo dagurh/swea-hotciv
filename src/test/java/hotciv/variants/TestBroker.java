@@ -40,8 +40,20 @@ class TestBroker {
     }
 
     @Test
-    public void getWinner(){
+    public void winnerIsYellow(){
         Player winner = game.getWinner();
         assertThat(winner, is(Player.YELLOW));
+    }
+
+    @Test
+    public void ageIs42(){
+        int age = game.getAge();
+        assertThat(age, is(42));
+    }
+
+    @Test
+    public void playerInTurnIsGreen(){
+        Player playerInTurn = game.getPlayerInTurn();
+        assertThat(playerInTurn, is(Player.GREEN));
     }
 }

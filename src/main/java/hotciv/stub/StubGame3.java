@@ -27,7 +27,7 @@ public class StubGame3 implements Game, Servant {
 
     @Override
     public Player getPlayerInTurn() {
-        return null;
+        return Player.GREEN;
     }
 
     @Override

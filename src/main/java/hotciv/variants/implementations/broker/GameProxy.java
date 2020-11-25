@@ -28,6 +28,15 @@ public class GameProxy implements Game {
 
     @Override
     public Player getPlayerInTurn() {
+        String playerInTurn = requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GET_PLAYERINTURN, String.class);
+        Player[] players = Player.values();
+        for (Player p : players) {
+            if (playerInTurn.equals(p.toString())) {
+                System.out.println("PlayerInTurn was: " + p.toString());
+                return p;
+
+            }
+        }
         return null;
     }
 
@@ -46,7 +55,8 @@ public class GameProxy implements Game {
 
     @Override
     public int getAge() {
-        return 0;
+        int age = requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GET_AGE, int.class);
+        return age;
     }
 
     @Override
