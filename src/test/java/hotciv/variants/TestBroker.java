@@ -3,13 +3,9 @@ package hotciv.variants;
 import frds.broker.ClientRequestHandler;
 import frds.broker.Invoker;
 import frds.broker.Requestor;
+import frds.broker.Servant;
 import frds.broker.marshall.json.StandardJSONRequestor;
-import hotciv.framework.Game;
-import hotciv.framework.GameObserver;
-import hotciv.framework.Player;
-import hotciv.framework.Position;
-import hotciv.stub.StubGame2;
-import hotciv.stub.StubGame3;
+import hotciv.framework.*;
 import hotciv.variants.implementations.broker.GameProxy;
 import hotciv.variants.implementations.broker.HotCivGameInvoker;
 import hotciv.variants.implementations.broker.LocalMethodClientRequestHandler;
@@ -22,11 +18,11 @@ import static org.hamcrest.CoreMatchers.*;
 class TestBroker {
 
     private GameProxy game;
-    private Game servant;
+    private StubGame3 servant;
 
     @BeforeEach
     void setUp() {
-        Game servant = new StubGame3();
+        servant = new StubGame3();
         GameObserver nullObserver = new NullObserver();
         servant.addObserver(nullObserver);
 
@@ -68,8 +64,81 @@ class TestBroker {
     @Test
     public void turnCountsUpWhenEnded(){
         game.endOfTurn();
-        assertThat(servant.);
+        assertThat(servant.numberOfEndedTurns, is(1));
     }
+
+
+
+    public class StubGame3 implements Game, Servant {
+
+        private int numberOfEndedTurns = 0;
+
+        @Override
+        public String getTileAt(Position p) {
+            return null;
+        }
+
+        @Override
+        public Unit getUnitAt(Position p) {
+            return null;
+        }
+
+        @Override
+        public City getCityAt(Position p) {
+            return null;
+        }
+
+        @Override
+        public Player getPlayerInTurn() {
+            return Player.GREEN;
+        }
+
+        @Override
+        public Object getWinner() {
+            return Player.YELLOW;
+        }
+
+        @Override
+        public int getAge() {
+            return 42;
+        }
+
+        @Override
+        public boolean moveUnit(Position from, Position to) {
+            return true;
+        }
+
+        @Override
+        public void endOfTurn() {
+            numberOfEndedTurns++;
+        }
+
+        @Override
+        public void changeWorkForceFocusInCityAt(Position p, String balance) {
+
+        }
+
+        @Override
+        public void changeProductionInCityAt(Position p, String unitType) {
+
+        }
+
+        @Override
+        public void performUnitActionAt(Position p) {
+
+        }
+
+        @Override
+        public void addObserver(GameObserver observer) {
+
+        }
+
+        @Override
+        public void setTileFocus(Position position) {
+
+        }
+    }
+
 
 
 }

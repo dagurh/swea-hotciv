@@ -75,8 +75,4 @@ public class StubGame3 implements Game, Servant {
     public void setTileFocus(Position position) {
 
     }
-
-    public int getNumberOfEndedTurns() {
-        return numberOfEndedTurns;
-    }
 }
