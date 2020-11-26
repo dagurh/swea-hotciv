@@ -15,4 +15,9 @@ public class OperationNames {
     public static final String CITY_GET_TREASURY = "city-getTreasury";
     public static final String CITY_GET_PRODUCTION = "city-getProduction";
     public static final String CITY_GET_WORK_FORCE_FOCUS = "city-getWorkForceFocus";
+    public static final String UNIT_GET_TYPE_STRING = "unit-getTypeString";
+    public static final String UNIT_GET_OWNER = "unit-getOwner";
+    public static final String UNIT_GET_MOVE_COUNT = "unit-getMoveCount";
+    public static final String UNIT_GET_DEFENSIVE_STRENGTH = "unit-getDefensiveStrength";
+    public static final String UNIT_GET_ATTACKING_STRENGTH = "unit-getAttackingStrength";
 }

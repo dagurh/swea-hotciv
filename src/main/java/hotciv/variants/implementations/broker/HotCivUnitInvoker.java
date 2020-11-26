@@ -10,6 +10,7 @@ import hotciv.stub.StubUnit;
 
 public class HotCivUnitInvoker implements Invoker{
         private Gson gson;
+        private ReplyObject reply;
 
     public HotCivUnitInvoker() {
         gson = new Gson();
@@ -22,14 +23,34 @@ public class HotCivUnitInvoker implements Invoker{
         String operationName = requestObject.getOperationName();
         String payload = requestObject.getPayload();
 
-        ReplyObject replyObject = null;
+
 
         JsonParser parser = new JsonParser();
         JsonArray array = parser.parse(payload).getAsJsonArray();
 
         Unit unit = lookUpUnit(objectId);
 
-        return null;
+        if (operationName.equals(OperationNames.UNIT_GET_TYPE_STRING)) {
+            reply = new ReplyObject(200,gson.toJson(unit.getTypeString()));
+        }
+        else if (operationName.equals(OperationNames.UNIT_GET_OWNER)) {
+            reply = new ReplyObject(200, gson.toJson(unit.getOwner()));
+        }
+        else if (operationName.equals(OperationNames.UNIT_GET_MOVE_COUNT)) {
+            reply = new ReplyObject(200,gson.toJson(unit.getMoveCount()));
+        }
+        else if (operationName.equals(OperationNames.UNIT_GET_DEFENSIVE_STRENGTH)) {
+            reply = new ReplyObject(200, gson.toJson(unit.getDefensiveStrength()));
+        }
+        else if (operationName.equals(OperationNames.UNIT_GET_ATTACKING_STRENGTH)) {
+            reply = new ReplyObject(200, gson.toJson(unit.getAttackingStrength()));
+        }
+
+
+
+
+
+        return gson.toJson(reply);
     }
 
     private Unit lookUpUnit(String objectId) {

@@ -56,8 +56,7 @@ public class GameProxy implements Game {
 
     @Override
     public int getAge() {
-        int age = requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GAME_GET_AGE, int.class);
-        return age;
+        return requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GAME_GET_AGE, int.class);
     }
 
     @Override
