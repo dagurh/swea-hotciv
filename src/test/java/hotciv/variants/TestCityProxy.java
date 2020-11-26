@@ -15,22 +15,28 @@ import static org.hamcrest.CoreMatchers.*;
 
 class TestCityProxy {
 
-    private CityProxy game;
+    private CityProxy city;
     private Position pos1_1, pos1_2;
+    private StubCity servant;
 
     @BeforeEach
     void setUp() {
-        GameObserver nullObserver = new NullObserver();
-
         Invoker invoker = new HotCivCityInvoker();
 
         ClientRequestHandler crh = new LocalMethodClientRequestHandler(invoker);
 
         Requestor requestor = new StandardJSONRequestor(crh);
 
-        game = new CityProxy(requestor);
+        city = new CityProxy(requestor);
+        servant = new StubCity(Player.GREEN);
 
         pos1_1 = new Position(1,1);
         pos1_2 = new Position(1,2);
     }
+
+    @Test
+    public void cityOwnerIsGreen(){
+        assertThat(city.getOwner(), is(Player.GREEN));
+    }
+
 }

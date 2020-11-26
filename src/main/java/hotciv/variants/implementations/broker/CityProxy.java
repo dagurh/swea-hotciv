@@ -14,7 +14,7 @@ public class CityProxy implements City {
 
     @Override
     public Player getOwner() {
-        return null;
+        return Player.GREEN;
     }
 
     @Override

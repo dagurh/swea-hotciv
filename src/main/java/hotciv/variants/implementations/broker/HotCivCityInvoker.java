@@ -9,7 +9,9 @@ import hotciv.framework.Player;
 import hotciv.stub.StubCity;
 
 public class HotCivCityInvoker implements Invoker {
+
     private Gson gson;
+    private ReplyObject reply;
 
     public HotCivCityInvoker() {
         gson = new Gson();
@@ -29,7 +31,11 @@ public class HotCivCityInvoker implements Invoker {
 
         City city = lookUpCity(objectId);
 
-        return null;
+        if(operationName.equals(OperationNames.CITY_GET_OWNER)){
+            reply = new ReplyObject(200, gson.toJson(city.getOwner()));
+        }
+
+        return gson.toJson(reply);
     }
 
     private City lookUpCity(String objectId) {
