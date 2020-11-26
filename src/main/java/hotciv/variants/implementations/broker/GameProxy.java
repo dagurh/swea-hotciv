@@ -6,6 +6,7 @@ import hotciv.framework.*;
 public class GameProxy implements Game {
     private final Requestor requestor;
     private final String Game_OBJECTID = "singleton";
+    private GameObserver observer;
 
     public GameProxy(Requestor requestor) {
         this.requestor = requestor;
@@ -86,11 +87,11 @@ public class GameProxy implements Game {
 
     @Override
     public void addObserver(GameObserver observer) {
-
+        this.observer = observer;
     }
 
     @Override
     public void setTileFocus(Position position) {
-
+        observer.tileFocusChangedAt(position);
     }
 }

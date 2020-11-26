@@ -95,6 +95,7 @@ class TestBroker {
         private int numberOfUnitActions = 0;
         private String workForceFocus = "hammer";
         private String production = "archer";
+        private GameObserver observer;
 
         @Override
         public String getTileAt(Position p) {
@@ -153,12 +154,12 @@ class TestBroker {
 
         @Override
         public void addObserver(GameObserver observer) {
-
+            this.observer = observer;
         }
 
         @Override
         public void setTileFocus(Position position) {
-
+            observer.tileFocusChangedAt(position);
         }
     }
 

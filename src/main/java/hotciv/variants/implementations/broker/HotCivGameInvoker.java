@@ -67,6 +67,7 @@ public class HotCivGameInvoker implements Invoker {
 
 
 
+
         // And marshall the reply
         return gson.toJson(reply);
     }

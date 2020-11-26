@@ -9,4 +9,5 @@ public class OperationNames {
     public static final String CHANGE_WORK_FORCE_FOCUS = "game-changeWorkForceFocus";
     public static final String CHANGE_PRODUCTION = "game-changeProduction";
     public static final String UNIT_ACTION = "game-unitAction";
+    public static final String ADD_OBSERVER = "game-addObserver";
 }
