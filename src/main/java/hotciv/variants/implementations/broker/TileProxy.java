@@ -5,7 +5,8 @@ import hotciv.framework.Tile;
 
 public class TileProxy implements Tile {
 
-    private final Requestor requestor;
+    private Requestor requestor;
+    private final String tile_OBJECTID = "yoink";
 
     public TileProxy(Requestor requestor) {
         this.requestor = requestor;
@@ -13,6 +14,6 @@ public class TileProxy implements Tile {
 
     @Override
     public String getTypeString() {
-        return null;
+        return requestor.sendRequestAndAwaitReply(tile_OBJECTID, OperationNames.TILE_GET_TYPE_STRING, String.class);
     }
 }

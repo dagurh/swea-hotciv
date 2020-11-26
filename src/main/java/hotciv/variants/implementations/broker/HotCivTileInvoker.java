@@ -30,7 +30,11 @@ public class HotCivTileInvoker implements Invoker {
 
         Tile tile = lookUpTile(objectId);
 
-        return null;
+        if(operationName.equals(OperationNames.TILE_GET_TYPE_STRING)){
+            replyObject = new ReplyObject(200, gson.toJson(tile.getTypeString()));
+        }
+
+        return gson.toJson(replyObject);
     }
 
     private Tile lookUpTile(String objectId) {
