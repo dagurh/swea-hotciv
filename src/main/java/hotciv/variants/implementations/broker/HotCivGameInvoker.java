@@ -28,37 +28,37 @@ public class HotCivGameInvoker implements Invoker {
         JsonArray array = new JsonParser().parse(requestObject.getPayload()).getAsJsonArray();
 
 
-            if (requestObject.getOperationName().equals(OperationNames.GET_WINNER)) {
+            if (requestObject.getOperationName().equals(OperationNames.GAME_GET_WINNER)) {
                 reply = new ReplyObject(200, gson.toJson(servant.getWinner().toString()));
             }
-            else if (requestObject.getOperationName().equals(OperationNames.GET_AGE)) {
+            else if (requestObject.getOperationName().equals(OperationNames.GAME_GET_AGE)) {
                 reply = new ReplyObject(200, gson.toJson(servant.getAge()));
             }
-            else if (requestObject.getOperationName().equals(OperationNames.GET_PLAYER_IN_TURN)) {
+            else if (requestObject.getOperationName().equals(OperationNames.GAME_GET_PLAY_IN_TURN)) {
                 reply = new ReplyObject(200, gson.toJson(servant.getPlayerInTurn()));
             }
-            else if (requestObject.getOperationName().equals(OperationNames.MOVE_UNIT)){
+            else if (requestObject.getOperationName().equals(OperationNames.GAME_MOVE_UNIT)){
                 Position from = gson.fromJson(array.get(0), Position.class);
                 Position to = gson.fromJson(array.get(1), Position.class);
                 reply = new ReplyObject(200, gson.toJson(servant.moveUnit(from, to)));
             }
-            else if (requestObject.getOperationName().equals(OperationNames.END_OF_TURN)){
+            else if (requestObject.getOperationName().equals(OperationNames.GAME_END_OF_TURN)){
                 servant.endOfTurn();
                 reply = new ReplyObject(200, "end of turn called");
             }
-            else if (requestObject.getOperationName().equals(OperationNames.CHANGE_WORK_FORCE_FOCUS)){
+            else if (requestObject.getOperationName().equals(OperationNames.GAME_CHANGE_WORK_FORCE_FOCUS)){
                 Position p = gson.fromJson(array.get(0), Position.class);
                 String balance = gson.fromJson(array.get(1), String.class);
                 servant.changeWorkForceFocusInCityAt(p,balance);
                 reply = new ReplyObject(200, "changed workForceFocus to " + balance + " in city with position " + p);
             }
-            else if (requestObject.getOperationName().equals(OperationNames.CHANGE_PRODUCTION)) {
+            else if (requestObject.getOperationName().equals(OperationNames.GAME_CHANGE_PRODUCTION)) {
                 Position p = gson.fromJson(array.get(0), Position.class);
                 String production = gson.fromJson(array.get(1), String.class);
                 servant.changeProductionInCityAt(p,production);
                 reply = new ReplyObject(200, "changed production to " + production + " in city with position " + p);
             }
-            else if (requestObject.getOperationName().equals(OperationNames.UNIT_ACTION)) {
+            else if (requestObject.getOperationName().equals(OperationNames.GAME_UNIT_ACTION)) {
                 Position p = gson.fromJson(array.get(0), Position.class);
                 servant.performUnitActionAt(p);
                 reply = new ReplyObject(200, "Unit performed action at position" + p);

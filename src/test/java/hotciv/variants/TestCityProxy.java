@@ -16,8 +16,6 @@ import static org.hamcrest.CoreMatchers.*;
 class TestCityProxy {
 
     private CityProxy city;
-    private Position pos1_1, pos1_2;
-    private StubCity servant;
 
     @BeforeEach
     void setUp() {
@@ -28,15 +26,31 @@ class TestCityProxy {
         Requestor requestor = new StandardJSONRequestor(crh);
 
         city = new CityProxy(requestor);
-        servant = new StubCity(Player.GREEN);
-
-        pos1_1 = new Position(1,1);
-        pos1_2 = new Position(1,2);
     }
 
     @Test
     public void cityOwnerIsGreen(){
         assertThat(city.getOwner(), is(Player.GREEN));
+    }
+
+    @Test
+    public void citySizeIs3(){
+        assertThat(city.getSize(), is(3));
+    }
+
+    @Test
+    public void cityTreasureIs2(){
+        assertThat(city.getTreasury(), is(2));
+    }
+
+    @Test
+    public void productionIsArcher(){
+        assertThat(city.getProduction(), is("archer"));
+    }
+
+    @Test
+    public void workForceFocusIsApple(){
+        assertThat(city.getWorkforceFocus(), is("apple"));
     }
 
 }

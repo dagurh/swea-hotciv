@@ -23,21 +23,21 @@ public class StubCity implements City {
 
     @Override
     public int getSize() {
-        return population;
+        return 3;
     }
 
     @Override
     public int getTreasury() {
-        return money;
+        return 2;
     }
 
     @Override
     public String getProduction() {
-        return GameConstants.ARCHER;
+        return "archer";
     }
 
     @Override
     public String getWorkforceFocus() {
-        return GameConstants.foodFocus;
+        return "apple";
     }
 }

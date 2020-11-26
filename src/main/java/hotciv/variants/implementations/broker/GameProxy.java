@@ -29,7 +29,7 @@ public class GameProxy implements Game {
 
     @Override
     public Player getPlayerInTurn() {
-        String playerInTurn = requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GET_PLAYER_IN_TURN, String.class);
+        String playerInTurn = requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GAME_GET_PLAY_IN_TURN, String.class);
         Player[] players = Player.values();
         for (Player p : players) {
             if (playerInTurn.equals(p.toString())) {
@@ -43,7 +43,7 @@ public class GameProxy implements Game {
 
     @Override
     public Player getWinner() {
-        String winner = requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GET_WINNER, String.class);
+        String winner = requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GAME_GET_WINNER, String.class);
         Player[] players = Player.values();
         for (Player p: players) {
             if (winner.equals(p.toString())){
@@ -56,33 +56,33 @@ public class GameProxy implements Game {
 
     @Override
     public int getAge() {
-        int age = requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GET_AGE, int.class);
+        int age = requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GAME_GET_AGE, int.class);
         return age;
     }
 
     @Override
     public boolean moveUnit(Position from, Position to) {
-        return requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.MOVE_UNIT, boolean.class, from, to);
+        return requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GAME_MOVE_UNIT, boolean.class, from, to);
     }
 
     @Override
     public void endOfTurn() {
-        requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.END_OF_TURN, null);
+        requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GAME_END_OF_TURN, null);
     }
 
     @Override
     public void changeWorkForceFocusInCityAt(Position p, String balance) {
-        requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.CHANGE_WORK_FORCE_FOCUS, null, p, balance);
+        requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GAME_CHANGE_WORK_FORCE_FOCUS, null, p, balance);
     }
 
     @Override
     public void changeProductionInCityAt(Position p, String unitType) {
-        requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.CHANGE_PRODUCTION, null, p, unitType);
+        requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GAME_CHANGE_PRODUCTION, null, p, unitType);
     }
 
     @Override
     public void performUnitActionAt(Position p) {
-        requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.UNIT_ACTION, null, p);
+        requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GAME_UNIT_ACTION, null, p);
     }
 
     @Override

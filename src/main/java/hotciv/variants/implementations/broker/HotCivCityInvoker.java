@@ -35,6 +35,22 @@ public class HotCivCityInvoker implements Invoker {
             reply = new ReplyObject(200, gson.toJson(city.getOwner()));
         }
 
+        if(operationName.equals(OperationNames.CITY_GET_SIZE)){
+            reply = new ReplyObject(200, gson.toJson(city.getSize()));
+        }
+
+        if(operationName.equals(OperationNames.CITY_GET_TREASURY)){
+            reply = new ReplyObject(200, gson.toJson(city.getTreasury()));
+        }
+
+        if(operationName.equals(OperationNames.CITY_GET_PRODUCTION)){
+            reply = new ReplyObject(200, gson.toJson(city.getProduction()));
+        }
+
+        if(operationName.equals(OperationNames.CITY_GET_WORK_FORCE_FOCUS)){
+            reply = new ReplyObject(200, gson.toJson(city.getWorkforceFocus()));
+        }
+
         return gson.toJson(reply);
     }
 
