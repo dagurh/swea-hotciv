@@ -33,7 +33,7 @@ public class HotCivServer {
                 System.out.println("=== HotCiv Socket based Server request handler running on IP: " + InetAddress.getLocalHost().getHostAddress());
                 System.out.println("=== HotCiv SOCKET based Server Request Handler (port: " + port + ") ===");
             } catch (UnknownHostException e) {
-                e.printStackTrace();
+                e.printStackTrace(); //not used for anything
             }
 
             ssrh.start();
