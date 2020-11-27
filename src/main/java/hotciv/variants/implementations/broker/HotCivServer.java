@@ -15,7 +15,7 @@ public class HotCivServer {
 
     private static class ServerMainSocket {
         public ServerMainSocket() {
-            int port = 37321;
+            int port = 37329;
 
             Game servant = new StubGame2();
 

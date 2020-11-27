@@ -9,15 +9,13 @@ import hotciv.framework.Position;
 
 
 public class HotCivClient {
-    public static void main(String[] args) throws Exception {
-        new HotCivClient(args[0]);
-    }
+
 
     public HotCivClient(String hostname) {
         System.out.println("== HotCiv Story Test Client (Socket) (host " + hostname + ") ===");
 
         ClientRequestHandler crh = new SocketClientRequestHandler();
-        crh.setServer(hostname, 37123);
+        crh.setServer(hostname, 37329);
 
         Requestor requestor = new StandardJSONRequestor(crh);
 
@@ -27,6 +25,10 @@ public class HotCivClient {
         testSimpleMethods(game);
 
         crh.close();
+    }
+
+    public static void main(String[] args) {
+        new HotCivClient(args[0]);
     }
 
     private void testSimpleMethods(Game game) {

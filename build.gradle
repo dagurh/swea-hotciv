@@ -192,5 +192,6 @@ task hotcivClient(type: JavaExec) {
 
   classpath sourceSets.test.runtimeClasspath
   main = 'hotciv.variants.implementations.broker.HotCivClient'
+  args host
 }
 
