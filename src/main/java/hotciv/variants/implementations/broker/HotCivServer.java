@@ -7,6 +7,9 @@ import frds.broker.ipc.socket.SocketServerRequestHandler;
 import hotciv.framework.Game;
 import hotciv.stub.StubGame2;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 
 public class HotCivServer {
     public static void main(String[] args) throws Exception {
@@ -26,7 +29,12 @@ public class HotCivServer {
             ServerRequestHandler ssrh = new SocketServerRequestHandler();
             ssrh.setPortAndInvoker(port, invoker);
 
-            System.out.println("=== HotCiv SOCKET based Server Request Handler (port: " + port + ") ===");
+            try {
+                System.out.println("=== HotCiv Socket based Server request handler running on IP: " + InetAddress.getLocalHost().getHostAddress());
+                System.out.println("=== HotCiv SOCKET based Server Request Handler (port: " + port + ") ===");
+            } catch (UnknownHostException e) {
+                e.printStackTrace();
+            }
 
             ssrh.start();
         }

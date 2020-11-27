@@ -63,11 +63,6 @@ public class HotCivGameInvoker implements Invoker {
                 servant.performUnitActionAt(p);
                 reply = new ReplyObject(200, "Unit performed action at position" + p);
             }
-
-
-
-
-
         // And marshall the reply
         return gson.toJson(reply);
     }
