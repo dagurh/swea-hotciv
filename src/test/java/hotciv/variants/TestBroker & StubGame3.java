@@ -162,7 +162,4 @@ class TestBroker {
             observer.tileFocusChangedAt(position);
         }
     }
-
-
-
 }
