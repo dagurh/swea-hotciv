@@ -28,25 +28,21 @@ public class CityProxy implements City {
 
     @Override
     public int getSize() {
-        int size = requestor.sendRequestAndAwaitReply(city_OBJECTID, OperationNames.CITY_GET_SIZE, int.class);
-        return size;
+        return requestor.sendRequestAndAwaitReply(city_OBJECTID, OperationNames.CITY_GET_SIZE, int.class);
     }
 
     @Override
     public int getTreasury() {
-        int treasury = requestor.sendRequestAndAwaitReply(city_OBJECTID, OperationNames.CITY_GET_TREASURY, int.class);
-        return treasury;
+        return requestor.sendRequestAndAwaitReply(city_OBJECTID, OperationNames.CITY_GET_TREASURY, int.class);
     }
 
     @Override
     public String getProduction() {
-        String production = requestor.sendRequestAndAwaitReply(city_OBJECTID, OperationNames.CITY_GET_PRODUCTION, String.class);
-        return production;
+        return requestor.sendRequestAndAwaitReply(city_OBJECTID, OperationNames.CITY_GET_PRODUCTION, String.class);
     }
 
     @Override
     public String getWorkforceFocus() {
-        String workForceFocus = requestor.sendRequestAndAwaitReply(city_OBJECTID, OperationNames.CITY_GET_WORK_FORCE_FOCUS, String.class);
-        return workForceFocus;
+        return requestor.sendRequestAndAwaitReply(city_OBJECTID, OperationNames.CITY_GET_WORK_FORCE_FOCUS, String.class);
     }
 }
