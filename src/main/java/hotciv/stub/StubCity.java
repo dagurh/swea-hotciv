@@ -17,6 +17,11 @@ public class StubCity implements City {
     }
 
     @Override
+    public String getCity_OBJECTID() {
+        return null;
+    }
+
+    @Override
     public Player getOwner() {
         return owner;
     }

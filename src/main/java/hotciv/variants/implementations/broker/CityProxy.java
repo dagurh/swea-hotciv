@@ -4,13 +4,22 @@ import frds.broker.Requestor;
 import hotciv.framework.City;
 import hotciv.framework.Player;
 
+import java.util.UUID;
+
 public class CityProxy implements City {
 
     private final Requestor requestor;
-    private final String city_OBJECTID = "the boy who lived, come to die";
+    private final String city_OBJECTID;
 
     public CityProxy(Requestor requestor) {
         this.requestor = requestor;
+        city_OBJECTID = UUID.randomUUID().toString();
+    }
+
+
+    @Override
+    public String getCity_OBJECTID() {
+        return city_OBJECTID;
     }
 
     @Override
