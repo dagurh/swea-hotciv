@@ -7,6 +7,7 @@ import hotciv.variants.interfaces.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /** Skeleton implementation of HotCiv.
 
@@ -52,6 +53,7 @@ public class GameImpl implements Game {
   Map<Position, City> cityMap = new HashMap<>(); // Hashmap to store cities and their positions
   Map<Position, Tile> tileMap = new HashMap<>(); // Hashmap to store tiles and their positions
   Map<Position, Unit> unitMap = new HashMap<>(); // Hashmap to store units and their positions
+  private String Game_OBJECTID;
 
 
   // A method that calls the method makeAndAddCities
@@ -62,13 +64,19 @@ public class GameImpl implements Game {
     worldLayoutStrategy = abstractFactory.worldLayoutStrategy();
     attackStrategy = abstractFactory.attackStrategy();
     observer = abstractFactory.observer();
-
+    Game_OBJECTID = "singleton";
     makeAndAddTiles();
   }
 
   public Unit getUnitAt( Position p ) { return unitMap.get(p); }
   public City getCityAt( Position p ) { return cityMap.get(p); }
-  public String getTileAt( Position p ) { return tileMap.get(p).getTypeString(); }
+
+  @Override
+  public String getID() {
+    return Game_OBJECTID;
+  }
+
+  public String getTileAt(Position p ) { return tileMap.get(p).getTypeString(); }
 
   // creates tiles and their position
   public void makeAndAddTiles() {

@@ -5,11 +5,17 @@ import hotciv.framework.*;
 
 public class GameProxy implements Game {
     private final Requestor requestor;
-    private final String Game_OBJECTID = "singleton";
+    private final String Game_OBJECTID;
     private GameObserver observer;
 
-    public GameProxy(Requestor requestor) {
+    public GameProxy(String Game_OBJECTID, Requestor requestor) {
+        this.Game_OBJECTID = Game_OBJECTID;
         this.requestor = requestor;
+    }
+
+    @Override
+    public String getID() {
+        return Game_OBJECTID;
     }
 
     @Override

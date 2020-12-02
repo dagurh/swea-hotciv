@@ -33,13 +33,6 @@ Responsibilities:
 
 
 public interface City {
-
-
-  String city_OBJECTID = "";
-
-  public String getCity_OBJECTID();
-
-
   /** return the owner of this city.
    * @return the player that controls this city.
    */

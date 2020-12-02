@@ -30,7 +30,9 @@ package hotciv.framework;
 
 public interface Game {
   // === Accessor methods ===================================
-  
+
+  public String getID();
+
   /** return a specific tile.
    * Precondition: Position p is a valid position in the world.
    * @param p the position in the world that must be returned.

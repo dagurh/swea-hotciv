@@ -115,8 +115,14 @@ public class StubGame2 implements Game {
   }
 
   // A simple implementation to draw the map of DeltaCiv
-  protected Map<Position,Tile> world; 
-  public String getTileAt( Position p ) { return world.get(p).getTypeString(); }
+  protected Map<Position,Tile> world;
+
+  @Override
+  public String getID() {
+    return null;
+  }
+
+  public String getTileAt(Position p ) { return world.get(p).getTypeString(); }
 
   protected Map<Position, City> citiesStub2;
   public City getCityAt( Position p ) { return citiesStub2.get(p); }

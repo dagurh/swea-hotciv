@@ -33,7 +33,7 @@ class TestBroker {
 
         Requestor requestor = new StandardJSONRequestor(crh);
 
-        game = new GameProxy(requestor);
+        game = new GameProxy("singleton", requestor);
         game.addObserver(nullObserver);
 
         pos1_1 = new Position(1,1);
@@ -96,6 +96,11 @@ class TestBroker {
         private String workForceFocus = "hammer";
         private String production = "archer";
         private GameObserver observer;
+
+        @Override
+        public String getID() {
+            return null;
+        }
 
         @Override
         public String getTileAt(Position p) {

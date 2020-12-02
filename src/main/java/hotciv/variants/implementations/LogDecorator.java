@@ -11,6 +11,11 @@ public class LogDecorator implements Game {
     }
 
     @Override
+    public String getID() {
+        return null;
+    }
+
+    @Override
     public String getTileAt(Position p) {
         return game.getTileAt(p);
     }
