@@ -7,21 +7,22 @@ import frds.broker.RequestObject;
 import hotciv.framework.Game;
 import hotciv.framework.Position;
 
+import java.util.UUID;
+
 public class HotCivGameInvoker implements Invoker {
     private final Game servant;
     private final Gson gson;
+    private final NameService nameService;
     private ReplyObject reply;
 
-    public HotCivGameInvoker(Game servant) {
+    public HotCivGameInvoker(Game servant, NameService nameService) {
         this.servant = servant;
         this.gson = new Gson();
+        this.nameService = nameService;
     }
 
     @Override
     public String handleRequest(String request) {
-
-
-
         RequestObject requestObject =
                 gson.fromJson(request, RequestObject.class);
 
@@ -62,6 +63,24 @@ public class HotCivGameInvoker implements Invoker {
                 Position p = gson.fromJson(array.get(0), Position.class);
                 servant.performUnitActionAt(p);
                 reply = new ReplyObject(200, "Unit performed action at position" + p);
+            }
+            else if (requestObject.getOperationName().equals(OperationNames.GAME_GET_CITY_AT)) {
+                Position position = gson.fromJson(array.get(0), Position.class);
+
+                String id = UUID.randomUUID().toString();
+                nameService.putCity(id, servant.getCityAt(position));
+                reply = new ReplyObject(200, gson.toJson(id));
+            }
+            else if (requestObject.getOperationName().equals(OperationNames.GAME_GET_UNIT_AT)) {
+                Position p = gson.fromJson(array.get(0), Position.class);
+
+                String id = UUID.randomUUID().toString();
+                nameService.putUnit(id, servant.getUnitAt(p));
+                reply = new ReplyObject(200, gson.toJson(id));
+            }
+            else if (requestObject.getOperationName().equals(OperationNames.GAME_GET_TILE_AT)) {
+                Position p = gson.fromJson(array.get(0), Position.class);
+                reply = new ReplyObject(200, gson.toJson(servant.getTileAt(p)));
             }
         // And marshall the reply
         return gson.toJson(reply);

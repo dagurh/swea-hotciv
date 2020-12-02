@@ -4,12 +4,14 @@ import frds.broker.ClientRequestHandler;
 import frds.broker.Invoker;
 import frds.broker.Requestor;
 import frds.broker.marshall.json.StandardJSONRequestor;
+import hotciv.framework.City;
 import hotciv.framework.Player;
-import hotciv.framework.Position;
 import hotciv.framework.Unit;
 import hotciv.variants.implementations.broker.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.*;
@@ -20,13 +22,14 @@ public class TestUnitProxy {
 
     @BeforeEach
     void setUp() {
-        Invoker invoker = new HotCivUnitInvoker();
+        NameService nameService = new HotCivNameService();
+        Invoker invoker = new HotCivUnitInvoker(nameService);
 
         ClientRequestHandler crh = new LocalMethodClientRequestHandler(invoker);
 
         Requestor requestor = new StandardJSONRequestor(crh);
 
-        unit = new UnitProxy(requestor);
+        unit = new UnitProxy(requestor, null);
     }
 
     @Test

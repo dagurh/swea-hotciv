@@ -11,9 +11,9 @@ public class CityProxy implements City {
     private final Requestor requestor;
     private final String City_OBJECTID;
 
-    public CityProxy(Requestor requestor) {
+    public CityProxy(Requestor requestor, String cityId) {
         this.requestor = requestor;
-        City_OBJECTID = UUID.randomUUID().toString();
+        this.City_OBJECTID = cityId;
     }
 
     public String getCity_OBJECTID() {

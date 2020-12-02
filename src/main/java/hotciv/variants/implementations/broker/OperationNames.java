@@ -1,6 +1,9 @@
 package hotciv.variants.implementations.broker;
 
 public class OperationNames {
+    public static final String GAME_GET_CITY_AT = "game-getCityAt";
+    public static final String GAME_GET_UNIT_AT = "game-getUnitAt";
+    public static final String GAME_GET_TILE_AT = "game-getTileAt";
     public static final String GAME_GET_WINNER = "game-get-winner";
     public static final String GAME_GET_AGE = "game-get-age";
     public static final String GAME_GET_PLAY_IN_TURN = "game-get-playInTurn";
@@ -21,4 +24,7 @@ public class OperationNames {
     public static final String UNIT_GET_DEFENSIVE_STRENGTH = "unit-getDefensiveStrength";
     public static final String UNIT_GET_ATTACKING_STRENGTH = "unit-getAttackingStrength";
     public static final String TILE_GET_TYPE_STRING = "tile-getTypeString";
+
+
+    public static final String SEPARATOR = "-";
 }

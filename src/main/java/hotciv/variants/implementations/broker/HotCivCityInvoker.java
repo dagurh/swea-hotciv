@@ -10,11 +10,13 @@ import hotciv.stub.StubCity;
 
 public class HotCivCityInvoker implements Invoker {
 
+    private final NameService nameService;
     private Gson gson;
     private ReplyObject reply;
 
-    public HotCivCityInvoker() {
+    public HotCivCityInvoker(NameService nameService) {
         gson = new Gson();
+        this.nameService = nameService;
     }
 
     @Override
@@ -55,7 +57,6 @@ public class HotCivCityInvoker implements Invoker {
     }
 
     private City lookUpCity(String objectId) {
-        City city = new StubCity(Player.GREEN);
-        return city;
+        return nameService.getCity(objectId);
     }
 }

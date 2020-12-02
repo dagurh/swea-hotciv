@@ -11,12 +11,13 @@ public class UnitProxy implements Unit {
     private final Requestor requestor;
     private final String Unit_OBJECTID;
 
-    public UnitProxy(Requestor requestor) {
+    public UnitProxy(Requestor requestor, String unitID) {
         this.requestor = requestor;
-        Unit_OBJECTID = UUID.randomUUID().toString();
+        this.Unit_OBJECTID = unitID;
     }
 
-    public String getUnit_OBJECTID() {
+
+    public String getID() {
         return Unit_OBJECTID;
     }
 

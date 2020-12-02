@@ -9,11 +9,13 @@ import hotciv.framework.Unit;
 import hotciv.stub.StubUnit;
 
 public class HotCivUnitInvoker implements Invoker{
-        private Gson gson;
+    private final NameService nameService;
+    private Gson gson;
         private ReplyObject reply;
 
-    public HotCivUnitInvoker() {
+    public HotCivUnitInvoker(NameService nameService) {
         gson = new Gson();
+        this.nameService = nameService;
     }
 
     @Override
@@ -45,16 +47,10 @@ public class HotCivUnitInvoker implements Invoker{
         else if (operationName.equals(OperationNames.UNIT_GET_ATTACKING_STRENGTH)) {
             reply = new ReplyObject(200, gson.toJson(unit.getAttackingStrength()));
         }
-
-
-
-
-
         return gson.toJson(reply);
     }
 
     private Unit lookUpUnit(String objectId) {
-        Unit unit = new StubUnit("archer", Player.GREEN);
-        return unit;
+        return nameService.getUnit(objectId);
     }
 }

@@ -6,11 +6,15 @@ import frds.broker.Requestor;
 import frds.broker.Servant;
 import frds.broker.marshall.json.StandardJSONRequestor;
 import hotciv.framework.*;
-import hotciv.variants.implementations.broker.GameProxy;
-import hotciv.variants.implementations.broker.HotCivGameInvoker;
-import hotciv.variants.implementations.broker.LocalMethodClientRequestHandler;
-import hotciv.variants.implementations.broker.NullObserver;
+import hotciv.stub.StubCity;
+import hotciv.stub.StubUnit;
+import hotciv.variants.implementations.broker.*;
 import org.junit.jupiter.api.*;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.HashMap;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.*;
@@ -19,25 +23,26 @@ class TestBroker {
 
     private GameProxy game;
     private StubGame3 servant;
-    private Position pos1_1, pos1_2;
+    private Position pos1_1, pos1_2, pos2_0, pos5_5;
 
     @BeforeEach
     void setUp() {
         servant = new StubGame3();
         GameObserver nullObserver = new NullObserver();
         servant.addObserver(nullObserver);
-
-        Invoker invoker = new HotCivGameInvoker(servant);
+        Invoker invoker = new RootInvoker(servant);
 
         ClientRequestHandler crh = new LocalMethodClientRequestHandler(invoker);
 
         Requestor requestor = new StandardJSONRequestor(crh);
 
-        game = new GameProxy("singleton", requestor);
+        game = new GameProxy(requestor);
         game.addObserver(nullObserver);
 
         pos1_1 = new Position(1,1);
         pos1_2 = new Position(1,2);
+        pos2_0 = new Position(2,0);
+        pos5_5 = new Position(5,5);
     }
 
     @Test
@@ -87,6 +92,25 @@ class TestBroker {
         assertThat(servant.numberOfUnitActions, is(1));
     }
 
+    @Test
+    public void gameIDIsSingleton(){
+        assertThat(game.getID(), is("singleton"));
+    }
+
+    @Test
+    public void thereIsAUnitIn2_0() {
+        assertThat(game.getUnitAt(pos2_0).getTypeString(), is(GameConstants.ARCHER));
+    }
+
+    @Test
+    public void thereIsACityAt5_5() {
+        assertThat(game.getCityAt(pos5_5).getOwner(), is (Player.RED));
+    }
+
+    @Test
+    public void tileAtPos1_1IsPlains() {
+        assertThat(game.getTileAt(pos1_1), is(GameConstants.PLAINS));
+    }
 
 
     public class StubGame3 implements Game, Servant {
@@ -96,25 +120,28 @@ class TestBroker {
         private String workForceFocus = "hammer";
         private String production = "archer";
         private GameObserver observer;
+        private String Game_OBJECTID = "singleton";
 
         @Override
         public String getID() {
-            return null;
+            return Game_OBJECTID;
         }
 
         @Override
         public String getTileAt(Position p) {
-            return null;
+            return "plains";
         }
 
         @Override
         public Unit getUnitAt(Position p) {
-            return null;
+            Unit unit = new StubUnit("archer", Player.RED);
+            return unit;
         }
 
         @Override
         public City getCityAt(Position p) {
-            return null;
+            City city = new StubCity(Player.RED);
+            return city;
         }
 
         @Override

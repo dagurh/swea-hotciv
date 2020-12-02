@@ -19,7 +19,7 @@ public class HotCivClient {
 
         Requestor requestor = new StandardJSONRequestor(crh);
 
-        Game game = new GameProxy("singleton", requestor);
+        Game game = new GameProxy(requestor);
         game.addObserver(new NullObserver());
 
         testSimpleMethods(game);

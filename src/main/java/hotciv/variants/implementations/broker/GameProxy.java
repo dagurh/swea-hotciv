@@ -5,11 +5,10 @@ import hotciv.framework.*;
 
 public class GameProxy implements Game {
     private final Requestor requestor;
-    private final String Game_OBJECTID;
+    private final String Game_OBJECTID = "singleton";
     private GameObserver observer;
 
-    public GameProxy(String Game_OBJECTID, Requestor requestor) {
-        this.Game_OBJECTID = Game_OBJECTID;
+    public GameProxy(Requestor requestor) {
         this.requestor = requestor;
     }
 
@@ -20,17 +19,21 @@ public class GameProxy implements Game {
 
     @Override
     public String getTileAt(Position p) {
-        return null;
+        return requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GAME_GET_TILE_AT, String.class, p);
     }
 
     @Override
     public Unit getUnitAt(Position p) {
-        return null;
+        String id = requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GAME_GET_UNIT_AT, String.class, p);
+        Unit unit = new UnitProxy(requestor, id);
+        return unit;
     }
 
     @Override
     public City getCityAt(Position position) {
-        return null;
+        String id = requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GAME_GET_CITY_AT, String.class, position);
+        City city = new CityProxy(requestor, id);
+        return city;
     }
 
     @Override

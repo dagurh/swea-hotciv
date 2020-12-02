@@ -3,10 +3,8 @@ package hotciv.variants;
 import frds.broker.ClientRequestHandler;
 import frds.broker.Invoker;
 import frds.broker.Requestor;
-import frds.broker.Servant;
 import frds.broker.marshall.json.StandardJSONRequestor;
 import hotciv.framework.*;
-import hotciv.stub.StubCity;
 import hotciv.variants.implementations.broker.*;
 import org.junit.jupiter.api.*;
 
@@ -19,13 +17,14 @@ class TestCityProxy {
 
     @BeforeEach
     void setUp() {
-        Invoker invoker = new HotCivCityInvoker();
+        NameService nameService = new HotCivNameService();
+        Invoker invoker = new HotCivCityInvoker(nameService);
 
         ClientRequestHandler crh = new LocalMethodClientRequestHandler(invoker);
 
         Requestor requestor = new StandardJSONRequestor(crh);
 
-        city = new CityProxy(requestor);
+        city = new CityProxy(requestor, null);
     }
 
     @Test
