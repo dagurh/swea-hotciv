@@ -24,6 +24,8 @@ class TestBroker {
     private GameProxy game;
     private StubGame3 servant;
     private Position pos1_1, pos1_2, pos2_0, pos5_5;
+    private CityProxy city;
+    private UnitProxy unit;
 
     @BeforeEach
     void setUp() {
@@ -37,6 +39,8 @@ class TestBroker {
         Requestor requestor = new StandardJSONRequestor(crh);
 
         game = new GameProxy(requestor);
+        city = new CityProxy(requestor, null);
+        unit = new UnitProxy(requestor, null);
         game.addObserver(nullObserver);
 
         pos1_1 = new Position(1,1);
@@ -45,6 +49,7 @@ class TestBroker {
         pos5_5 = new Position(5,5);
     }
 
+    //game tests
     @Test
     public void winnerIsYellow(){
         Player winner = game.getWinner();
@@ -112,6 +117,58 @@ class TestBroker {
         assertThat(game.getTileAt(pos1_1), is(GameConstants.PLAINS));
     }
 
+    //City tests
+    @Test
+    public void cityOwnerIsRed(){
+        assertThat(game.getCityAt(pos5_5).getOwner(), is(Player.RED));
+    }
+
+    @Test
+    public void citySizeIs3(){
+        assertThat(game.getCityAt(pos5_5).getSize(), is(3));
+    }
+
+    @Test
+    public void cityTreasureIs2(){
+        assertThat(game.getCityAt(pos5_5).getTreasury(), is(2));
+    }
+
+    @Test
+    public void productionIsArcher(){
+        assertThat(game.getCityAt(pos5_5).getProduction(), is("archer"));
+    }
+
+    @Test
+    public void workForceFocusIsApple(){
+        assertThat(game.getCityAt(pos5_5).getWorkforceFocus(), is("apple"));
+    }
+
+    //unit tests
+    @Test
+    public void UnitTypeIsArcher(){
+        assertThat(game.getUnitAt(pos2_0).getTypeString(), is("archer"));
+    }
+
+    @Test
+    public void UnitOwnerIsRed() {
+        assertThat(game.getUnitAt(pos2_0).getOwner(), is(Player.RED));
+    }
+
+    @Test
+    public void UnitMoveCountIs1(){
+        assertThat(game.getUnitAt(pos2_0).getMoveCount(), is(1));
+    }
+
+    @Test
+    public void UnitDefensiveStrengthIs0() {
+        assertThat(game.getUnitAt(pos2_0).getDefensiveStrength(), is(0));
+    }
+
+    @Test
+    public void unitAttackingStrengthIs0() {
+        assertThat(game.getUnitAt(pos2_0).getAttackingStrength(), is(0));
+    }
+
 
     public class StubGame3 implements Game, Servant {
 
@@ -121,6 +178,7 @@ class TestBroker {
         private String production = "archer";
         private GameObserver observer;
         private String Game_OBJECTID = "singleton";
+        private City city = new StubCity(Player.RED);
 
         @Override
         public String getID() {
@@ -140,7 +198,6 @@ class TestBroker {
 
         @Override
         public City getCityAt(Position p) {
-            City city = new StubCity(Player.RED);
             return city;
         }
 
