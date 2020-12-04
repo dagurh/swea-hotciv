@@ -26,6 +26,7 @@ class TestBroker {
     private Position pos1_1, pos1_2, pos2_0, pos5_5;
     private CityProxy city;
     private UnitProxy unit;
+    //Test af pipeline
 
     @BeforeEach
     void setUp() {
