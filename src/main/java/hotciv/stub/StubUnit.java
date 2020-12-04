@@ -34,6 +34,6 @@ public class StubUnit implements Unit {
 
     @Override
     public String getObjectID() {
-        return null;
+        return "unitID";
     }
 }

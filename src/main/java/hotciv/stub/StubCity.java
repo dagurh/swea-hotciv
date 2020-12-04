@@ -43,6 +43,6 @@ public class StubCity implements City {
 
     @Override
     public String getObjectID() {
-        return null;
+        return "cityID";
     }
 }
