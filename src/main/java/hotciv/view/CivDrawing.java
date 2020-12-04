@@ -213,7 +213,7 @@ public class CivDrawing
             new TextFigure("age",
                     new Point( GfxConstants.AGE_TEXT_X,
                             GfxConstants.AGE_TEXT_Y));
-    updateAgeText(game.getAge());
+    updateAgeText();
 
     moveCountTextIcon = new TextFigure("",
             new Point(GfxConstants.UNIT_COUNT_X,
@@ -234,8 +234,8 @@ public class CivDrawing
     delegate.add(refreshButton);
   }
 
-  private void updateAgeText(int age) {
-    ageTextIcon.setText("" + age);
+  private void updateAgeText() {
+    ageTextIcon.setText("" + game.getAge());
   }
 
 
@@ -250,7 +250,7 @@ public class CivDrawing
 
   public void turnEnds(Player nextPlayer, int age) {
     updateTurnShield(nextPlayer);
-    updateAgeText(age);
+    updateAgeText();
     defineCityMap();
     defineUnitMap();
   }
@@ -318,8 +318,8 @@ public class CivDrawing
     // A request has been issued to repaint
     // everything. We simply rebuild the
     // entire Drawing.
+    updateAgeText();
     defineUnitMap();
-    defineIcons();
     defineCityMap();
   }
 
