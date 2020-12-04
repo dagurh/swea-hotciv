@@ -175,7 +175,7 @@ public class CivDrawing
 
 
 
-  protected ImageFigure turnShieldIcon, unitShieldIcon, cityShieldIcon, cityProduceIcon, cityWorkforceIcon;
+  protected ImageFigure turnShieldIcon, unitShieldIcon, cityShieldIcon, cityProduceIcon, cityWorkforceIcon, refreshButton;
   protected TextFigure ageTextIcon, moveCountTextIcon;
   protected void defineIcons() {
     turnShieldIcon = 
@@ -219,6 +219,10 @@ public class CivDrawing
             new Point(GfxConstants.UNIT_COUNT_X,
                     GfxConstants.UNIT_COUNT_Y));
 
+    refreshButton = new ImageFigure(GfxConstants.REFRESH_BUTTON,
+            new Point(GfxConstants.REFRESH_BUTTON_X,
+                    GfxConstants.REFRESH_BUTTON_Y));
+
     delegate.add(unitShieldIcon);
     delegate.add(turnShieldIcon);
     delegate.add(cityShieldIcon);
@@ -226,6 +230,7 @@ public class CivDrawing
     delegate.add(cityWorkforceIcon);
     delegate.add(ageTextIcon);
     delegate.add(moveCountTextIcon);
+    delegate.add(refreshButton);
   }
 
   private void updateAgeText(int age) {

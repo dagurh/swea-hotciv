@@ -102,4 +102,17 @@ public class GameProxy implements Game {
     public void setTileFocus(Position position) {
         observer.tileFocusChangedAt(position);
     }
+
+    public void updateWorldChange(Position position) {
+        observer.worldChangedAt(position);
+    }
+
+    public void updateTurnEnds() {
+        observer.turnEnds(getPlayerInTurn(), getAge());
+    }
+
+    public void updateTileFocus(Position position) {
+        observer.tileFocusChangedAt(position);
+    }
+
 }
