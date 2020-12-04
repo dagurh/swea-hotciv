@@ -183,7 +183,7 @@ public class CivDrawing
                        new Point( GfxConstants.TURN_SHIELD_X,
                                   GfxConstants.TURN_SHIELD_Y ),
           GfxConstants.TURN_SHIELD_TYPE_STRING);
-    updateTurnShield(game.getPlayerInTurn());
+    updateTurnShield();
     // insert in delegate figure list to ensure graphical
     unitShieldIcon =
             new HotCivFigure("black",
@@ -249,13 +249,14 @@ public class CivDrawing
   }
 
   public void turnEnds(Player nextPlayer, int age) {
-    updateTurnShield(nextPlayer);
+    updateTurnShield();
     updateAgeText();
     defineCityMap();
     defineUnitMap();
   }
 
-  private void updateTurnShield(Player nextPlayer) {
+  private void updateTurnShield() {
+    Player nextPlayer = game.getPlayerInTurn();
     String playername = "red";
     if ( nextPlayer == Player.BLUE ) { playername = "blue"; }
     turnShieldIcon.set( playername+"shield",
@@ -318,6 +319,7 @@ public class CivDrawing
     // A request has been issued to repaint
     // everything. We simply rebuild the
     // entire Drawing.
+    updateTurnShield();
     updateAgeText();
     defineUnitMap();
     defineCityMap();
