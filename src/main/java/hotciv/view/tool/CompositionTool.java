@@ -57,6 +57,7 @@ public class CompositionTool extends NullTool {
     }
     if(figureBelowClickPoint.getTypeString().equals(GfxConstants.REFRESH_BUTTON)) {
       editor.drawing().requestUpdate();
+      System.out.println("Game refreshed");
     }
     state.mouseDown(e,x,y);
   }

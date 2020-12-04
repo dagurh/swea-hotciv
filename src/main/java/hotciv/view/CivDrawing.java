@@ -219,9 +219,10 @@ public class CivDrawing
             new Point(GfxConstants.UNIT_COUNT_X,
                     GfxConstants.UNIT_COUNT_Y));
 
-    refreshButton = new ImageFigure(GfxConstants.REFRESH_BUTTON,
+    refreshButton = new HotCivFigure("refresh",
             new Point(GfxConstants.REFRESH_BUTTON_X,
-                    GfxConstants.REFRESH_BUTTON_Y));
+                    GfxConstants.REFRESH_BUTTON_Y), GfxConstants.REFRESH_BUTTON);
+
 
     delegate.add(unitShieldIcon);
     delegate.add(turnShieldIcon);
