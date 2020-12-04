@@ -26,6 +26,9 @@ public class GameProxy implements Game {
     public Unit getUnitAt(Position p) {
         String id = requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GAME_GET_UNIT_AT, String.class, p);
         Unit unit = new UnitProxy(requestor, id);
+        if(id.equals("no unit found")) {
+            return null;
+        }
         return unit;
     }
 
@@ -33,6 +36,9 @@ public class GameProxy implements Game {
     public City getCityAt(Position position) {
         String id = requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GAME_GET_CITY_AT, String.class, position);
         City city = new CityProxy(requestor, id);
+        if(id.equals("no city found")){
+            return null;
+        }
         return city;
     }
 
@@ -44,7 +50,6 @@ public class GameProxy implements Game {
             if (playerInTurn.equals(p.toString())) {
                 System.out.println("PlayerInTurn was: " + p.toString());
                 return p;
-
             }
         }
         return null;
@@ -65,7 +70,7 @@ public class GameProxy implements Game {
 
     @Override
     public int getAge() {
-        return requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GAME_GET_AGE, int.class);
+        return requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GAME_GET_AGE, Integer.class);
     }
 
     @Override

@@ -4,6 +4,8 @@ import hotciv.framework.GameConstants;
 import hotciv.framework.Player;
 import hotciv.framework.Unit;
 
+import java.util.UUID;
+
 public class UnitImpl implements Unit {
 
     private final Player owner;
@@ -13,12 +15,14 @@ public class UnitImpl implements Unit {
     private int cost;
     private int moveCount;
     private boolean isFortified = false;
+    private String objectID;
 
 
     public UnitImpl(String unitType, Player owner) {
         this.owner = owner;
         this.unitType = unitType;
         setDefenceAndAttack();
+        objectID = UUID.randomUUID().toString();
     }
 
     public void setDefenceAndAttack(){
@@ -103,5 +107,9 @@ public class UnitImpl implements Unit {
 
     public void setFortified(boolean status) {
         isFortified = status;
+    }
+
+    public String getObjectID() {
+        return objectID;
     }
 }

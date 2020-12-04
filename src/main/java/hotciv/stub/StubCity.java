@@ -40,4 +40,9 @@ public class StubCity implements City {
     public String getWorkforceFocus() {
         return "apple";
     }
+
+    @Override
+    public String getObjectID() {
+        return null;
+    }
 }

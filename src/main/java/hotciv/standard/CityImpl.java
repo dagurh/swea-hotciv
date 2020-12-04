@@ -4,6 +4,8 @@ import hotciv.framework.City;
 import hotciv.framework.GameConstants;
 import hotciv.framework.Player;
 
+import java.util.UUID;
+
 public class CityImpl implements City {
 
     private Player owner;
@@ -11,9 +13,11 @@ public class CityImpl implements City {
     private String production = "archer";
     private String workForce;
     private int population = 1;
+    private String objectID;
 
     public CityImpl(Player owner) {
         this.owner = owner;
+        objectID = UUID.randomUUID().toString();
     }
 
     @Override
@@ -90,5 +94,9 @@ public class CityImpl implements City {
                 break;
         }
         return false;
+    }
+
+    public String getObjectID() {
+        return objectID;
     }
 }

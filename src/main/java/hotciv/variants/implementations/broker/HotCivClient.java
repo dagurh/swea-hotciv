@@ -26,13 +26,7 @@ public class HotCivClient {
         Game game = new GameProxy(requestor);
         game.addObserver(new NullObserver());
 
-        DrawingEditor editor =
-                new MiniDrawApplication( "Click and/or drag any item to see all game actions",
-                        new HotCivFactory4(game) );
-        editor.open();
-        editor.showStatus("Click and drag any item to see Game's proper response.");
-
-        editor.setTool(new CompositionTool(editor, game));
+        testSimpleMethods(game);
 
 
         crh.close();
@@ -43,14 +37,14 @@ public class HotCivClient {
     }
 
     private void testSimpleMethods(Game game) {
-        System.out.println("Testing simple methods ===");
-        System.out.println(" - Game age:" + game.getAge());
-        System.out.println(" - Game winner:" + game.getWinner());
-        System.out.println(" - Game PlayerInTurn" + game.getPlayerInTurn());
-        System.out.println(" - Game move (1,0) -> (2,1): " + game.moveUnit(new Position(1, 0), new Position(2, 1)));
 
-        game.endOfTurn();
-        System.out.println(" - PlayerInTurn after 1st turn: " + game.getPlayerInTurn());
+        DrawingEditor editor =
+                new MiniDrawApplication( "Click and/or drag any item to see all game actions",
+                        new HotCivFactory4(game) );
+        editor.open();
+        editor.showStatus("Click and drag any item to see Game's proper response.");
+
+        editor.setTool(new CompositionTool(editor, game));
     }
 
 }

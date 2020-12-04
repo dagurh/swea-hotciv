@@ -17,9 +17,6 @@ public class UnitProxy implements Unit {
     }
 
 
-    public String getID() {
-        return Unit_OBJECTID;
-    }
 
     @Override
     public String getTypeString() {
@@ -52,5 +49,10 @@ public class UnitProxy implements Unit {
     @Override
     public int getAttackingStrength() {
         return requestor.sendRequestAndAwaitReply(Unit_OBJECTID, OperationNames.UNIT_GET_ATTACKING_STRENGTH, int.class);
+    }
+
+    @Override
+    public String getObjectID() {
+        return Unit_OBJECTID;
     }
 }

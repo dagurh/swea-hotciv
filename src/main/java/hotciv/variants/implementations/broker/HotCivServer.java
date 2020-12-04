@@ -6,8 +6,11 @@ import frds.broker.ServerRequestHandler;
 import frds.broker.ipc.socket.SocketServerRequestHandler;
 import hotciv.framework.City;
 import hotciv.framework.Game;
+import hotciv.framework.GameObserver;
 import hotciv.framework.Unit;
+import hotciv.standard.GameImpl;
 import hotciv.stub.StubGame2;
+import hotciv.variants.factories.SemiCivFactory;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -23,11 +26,10 @@ public class HotCivServer {
         public ServerMainSocket() {
             int port = 37329;
 
-            Game servant = new StubGame2();
+            Game servant = new GameImpl(new SemiCivFactory());
 
             servant.addObserver(new NullObserver());
 
-            NameService nameService = new HotCivNameService();
             Invoker invoker = new RootInvoker(servant);
 
             ServerRequestHandler ssrh = new SocketServerRequestHandler();

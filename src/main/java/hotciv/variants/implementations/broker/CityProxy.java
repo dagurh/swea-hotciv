@@ -16,9 +16,6 @@ public class CityProxy implements City {
         this.City_OBJECTID = cityId;
     }
 
-    public String getCity_OBJECTID() {
-        return City_OBJECTID;
-    }
 
     @Override
     public Player getOwner() {
@@ -51,5 +48,10 @@ public class CityProxy implements City {
     @Override
     public String getWorkforceFocus() {
         return requestor.sendRequestAndAwaitReply(City_OBJECTID, OperationNames.CITY_GET_WORK_FORCE_FOCUS, String.class);
+    }
+
+    @Override
+    public String getObjectID() {
+        return City_OBJECTID;
     }
 }
