@@ -27,12 +27,13 @@ public class HotCivClient {
         game.addObserver(new NullObserver());
 
         DrawingEditor editor =
-                new MiniDrawApplication("Test Game", new HotCivFactory4(game));
+                new MiniDrawApplication( "Click and/or drag any item to see all game actions",
+                        new HotCivFactory4(game) );
         editor.open();
-        editor.showStatus("Test responses");
+        editor.showStatus("Click and drag any item to see Game's proper response.");
+
         editor.setTool(new CompositionTool(editor, game));
 
-        testSimpleMethods(game);
 
         crh.close();
     }

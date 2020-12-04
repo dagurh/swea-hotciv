@@ -1,5 +1,8 @@
 package hotciv.visual;
 
+import hotciv.standard.GameImpl;
+import hotciv.variants.factories.SemiCivFactory;
+import hotciv.variants.implementations.FixedDieStrategy;
 import hotciv.view.tool.CompositionTool;
 import minidraw.standard.*;
 import minidraw.framework.*;
@@ -26,7 +29,7 @@ import hotciv.stub.*;
 public class ShowComposition {
   
   public static void main(String[] args) {
-    Game game = new StubGame2();
+    Game game = new GameImpl(new SemiCivFactory());
 
     DrawingEditor editor = 
       new MiniDrawApplication( "Click and/or drag any item to see all game actions",  
