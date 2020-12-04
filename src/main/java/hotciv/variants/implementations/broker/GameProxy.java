@@ -70,12 +70,16 @@ public class GameProxy implements Game {
 
     @Override
     public boolean moveUnit(Position from, Position to) {
-        return requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GAME_MOVE_UNIT, boolean.class, from, to);
+        boolean legal = requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GAME_MOVE_UNIT, boolean.class, from, to);
+        updateWorldChange(from);
+        updateWorldChange(to);
+        return legal;
     }
 
     @Override
     public void endOfTurn() {
         requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GAME_END_OF_TURN, null);
+        updateTurnEnds();
     }
 
     @Override
@@ -91,6 +95,7 @@ public class GameProxy implements Game {
     @Override
     public void performUnitActionAt(Position p) {
         requestor.sendRequestAndAwaitReply(Game_OBJECTID, OperationNames.GAME_UNIT_ACTION, null, p);
+        updateWorldChange(p);
     }
 
     @Override
@@ -100,7 +105,7 @@ public class GameProxy implements Game {
 
     @Override
     public void setTileFocus(Position position) {
-        observer.tileFocusChangedAt(position);
+        updateTileFocus(position);
     }
 
     public void updateWorldChange(Position position) {

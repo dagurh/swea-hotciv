@@ -55,6 +55,9 @@ public class CompositionTool extends NullTool {
         state = new ActionTool(editor, game);
       }
     }
+    if(figureBelowClickPoint.getTypeString().equals(GfxConstants.REFRESH_BUTTON)) {
+      editor.drawing().requestUpdate();
+    }
     state.mouseDown(e,x,y);
   }
 
@@ -65,9 +68,6 @@ public class CompositionTool extends NullTool {
 
   @Override
   public void mouseUp(MouseEvent e, int x, int y) {
-    if(figureBelowClickPoint.getTypeString().equals(GfxConstants.REFRESH_BUTTON)){
-      editor.drawing().requestUpdate();
-    }
     state.mouseUp(e, x, y);
   }
 }
