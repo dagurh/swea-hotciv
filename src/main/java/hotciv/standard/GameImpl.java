@@ -1,5 +1,6 @@
 package hotciv.standard;
 
+import frds.broker.Servant;
 import hotciv.framework.*;
 import hotciv.utility.Utility;
 import hotciv.variants.interfaces.*;
@@ -37,7 +38,7 @@ import java.util.UUID;
 */
 
 
-public class GameImpl implements Game {
+public class GameImpl implements Game, Servant {
 
   private static Position blueCityPos;
   private static Position redCityPos;
